@@ -1,13 +1,18 @@
 # table-flip
 
+(╯ರ ~ ರ）╯︵ ┻━┻
+
 Create a game that guesses a secret word.
 
-For this first version of your game, the secret word will be "banana".
+For this first version of your game, the secret word will be "cat".
 
-(╯ರ ~ ರ）╯︵ ┻━┻
+You should simply make this an array of letters: `var secretWord = ['c','a','t'];`
 
 Each time the user guesses wrong, another character of the table flip is added to the running total.
 
+When the whole figure is completed then the user loses.
+
+===
 
 If you don't know how to get started, here is a sugessted function template:
 
