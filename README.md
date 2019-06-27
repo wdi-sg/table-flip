@@ -18,11 +18,6 @@ If you don't know how to get started, here is a sugessted function template:
 
 - for each turn, an input letter should be checked in this order:
 
-  - look through the correctly guesses letters. is the input letter there?
-  - use a value set outside the searching loop to know if the letter was found 
-
-  - if the user correctly guessed the letter before, the message is, you already guessed this number.
-  
   - look through the word to guess. is the input letter there?
   - use a value set outside the searching loop to know if the letter was found 
   
