@@ -19,7 +19,7 @@ var inputHappened = function(userInput){
     // display(wordFound);
     var correctBankWord = updateCorrectBank(userInput);
     display(correctBankWord);
-    updateSymbolBank();
+    //display(gameOver());
 };
 
 // Game Logic /////////////////
@@ -28,7 +28,7 @@ var checkForSecretWord = function (letterToSearchFor) {
     for (var i = 0; i < secretWord.length; i++ ) {
         if( secretWord[i] === letterToSearchFor ){
             valueFound = true;
-            console.log("Letter Found!");
+            //console.log("Letter Found!");
             return true;
         }
     }
@@ -45,6 +45,8 @@ var updateCorrectBank = function (correctAnswer) {
         correctBank.push(correctAnswer);
         displayMsg = correctBank.toString();
         return displayMsg;
+    } else {
+        updateSymbolBank();
     }
 };
 
@@ -56,18 +58,29 @@ var updateCorrectBank = function (correctAnswer) {
 // symbolDisplay.push(newSymbol)
 
 var updateSymbolBank = function () {
-    if ( wordFound === false ) {
+    //if ( wordFound === false ) {
         wrongCounter = wrongCounter + 1;
         var newSymbol = symbolBank.shift();
         console.log( newSymbol);
         symbolDisplay.push(newSymbol);
         document.getElementById("demo").innerHTML = symbolDisplay.join('');
-    }
+        displayMsg = "Wrong Letter";
+        return displayMsg;
+    //}
 }
 
 
 // if number of wrong guesses is 11
 // wrong guesses = secretWord.length
     // displayMsg = "Game Over";
+
+var gameOver = function() {
+    if ( wrongCounter = secretWord.length ){
+        console.log("Game Over");
+        //displayMsg = "Game Over";
+    } else {
+        console.log("Keep Trying");
+    }
+}
 
 // Display Message
