@@ -10,14 +10,20 @@
 // ------------------------------------------------------
 
 //CAT , DOGGY, ALPHABET
-let guessCat = ['c','a','t'];
+let guessCat = ['C','A','T'];
 let userAnswerCat = [];
+let fixedCat = ['C','A','T'];
+let guessingCat = ['_','_','_'];
 
-let guessDoggy = ['d','o','g','g','y'];
+let guessDoggy = ['D','O','G','G','Y'];
 let userAnswerDoggy = [];
+let fixedDoggy = ['D','O','G','G','Y'];
+let guessingDoggy = ['_','_','_','_','_'];
 
-let guessAlphabet = ['a','l','p','h','a','b','e','t'];
+let guessAlphabet = ['A','L','P','H','A','B','E','T'];
 let userAnswerAlphabet = [];
+let fixedAlphabet = ['A','L','P','H','A','B','E','T'];
+let guessingAlphabet = ['_','_','_','_','_','_','_','_'];
 
 // HANGMAN COUNTER & VALIDATION CHECKER
 let hangman = ['(','╯','ರ','~','ರ','）','╯','︵','┻','━','┻']
@@ -27,7 +33,8 @@ let validationCheck = false;
 let message = '';
 
 // MAIN FUNCTION
-let inputHappened = (currentInput) => {
+let inputHappened = (anInput) => {
+    let currentInput = anInput.toUpperCase();
     if (userAnswerCat.length === 3 && userAnswerDoggy.length === 5){
         runAlphabet(currentInput);
     } else if (userAnswerCat.length === 3){
@@ -50,6 +57,11 @@ let inputHappened = (currentInput) => {
 
 // FUNCTIONS TO ACTIVATE FOR LOOPS HERE
 let runCat = (currentInput) => {
+    for (let i = 0; i<fixedCat.length; i++){
+        if(currentInput === fixedCat[i]){
+        guessingCat[i] = currentInput;
+        }
+    }
     for (let i=0; i<guessCat.length; i++){
         if (currentInput === guessCat[i]) {
             guessCat.splice(i,1);
@@ -61,6 +73,11 @@ let runCat = (currentInput) => {
     }
 }
 let runDoggy = (currentInput) => {
+    for (let i = 0; i<fixedDoggy.length; i++){
+        if(currentInput === fixedDoggy[i]){
+        guessingDoggy[i] = currentInput;
+        }
+    }
     for (let i=0; i<guessDoggy.length; i++){
         if (currentInput === guessDoggy[i]) {
             guessDoggy.splice(i,1);
@@ -72,6 +89,11 @@ let runDoggy = (currentInput) => {
     }
 }
 let runAlphabet = (currentInput) => {
+    for (let i = 0; i<fixedAlphabet.length; i++){
+        if(currentInput === fixedAlphabet[i]){
+        guessingAlphabet[i] = currentInput;
+        }
+    }
     for (let i=0; i<guessAlphabet.length; i++){
         if (currentInput === guessAlphabet[i]) {
             guessAlphabet.splice(i,1);
@@ -93,21 +115,21 @@ let checkCatAnswer = () => {
     if (userAnswerCat.length === 3){
         message = `Congrats! You guessed CAT! You have 2 words left to guess!`
     } else {
-        message = `Nice! You guessed ${userAnswerCat.length} letter(s). ${3-userAnswerCat.length} letter(s) left!.`
+        message = `Nice! You guessed ${userAnswerCat.length} letter(s). ${3-userAnswerCat.length} letter(s) left!. ANSWER: ${guessingCat}`
     }
 }
 let checkDogAnswer = () => {
     if (userAnswerDoggy.length === 5){
         message = `Congrats! You guessed DOGGY! You have 1 word left to guess!`
     } else {
-        message = `Nice! You guessed ${userAnswerDoggy.length} letter(s). ${5-userAnswerDoggy.length} letter(s) left!.`
+        message = `Nice! You guessed ${userAnswerDoggy.length} letter(s). ${5-userAnswerDoggy.length} letter(s) left!. ANSWER: ${guessingDoggy}`
     }
 }
 let checkAlphabetAnswer = () => {
     if (userAnswerAlphabet.length === 8){
         message = `Congrats! You guessed ALPHABET! You WON!`
     } else {
-        message = `Nice! You guessed ${userAnswerAlphabet.length} letter(s). ${8-userAnswerAlphabet.length} letter(s) left!.`
+        message = `Nice! You guessed ${userAnswerAlphabet.length} letter(s). ${8-userAnswerAlphabet.length} letter(s) left!. ANSWER: ${guessingAlphabet}`
     }
 }
 let checkLoss = () => {
