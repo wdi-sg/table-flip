@@ -1,11 +1,52 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+
+body{
+  margin: 0 auto;
+  width: 100%;
+  font-family: 'Oswald', sans-serif;
+  background: #F2ACAC;
 }
 
-#output{
-  background-color:pink;
+h1{
+  font-size: 60px;
+  color: #730202;
+}
+
+h2{
+  font-size: 30px;
+  color: #730202;
+}
+.container{
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.user-input{
+  font-size: 30px;
+  padding: 20px;
+  border-radius: 3px;
+  background: #F2ACAC;
+  border: 0;
+  border-style: none;
+  border-bottom: 5px solid #730202;
+  outline:none;
+  color: #D94A4A;
+}
+
+.game-feedback{
+  height: 100px;
+  font-size: 30px;
+  margin-top: 40px;
+  color: #D94A4A;
+}
+
+#flip-table{
+  height: 100px;
+  font-size: 60px;
+  margin-top: 20px;
+  color: #D94A4A;
 }

@@ -4,11 +4,19 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Guess the Word!</h1>
+    <div class="container">
+    <h1>Guess the Secret Word</h1>
 
-    <h3>Enter a letter:</h3>
-    <input class="starter" id="input" placeholder="letter"/>
-    <p class="starter" id="output"></p>
+    <h2>Enter a letter</h2>
+    <input class="user-input" id="input"/>
+    
+    <div class="game-feedback" id="output"></div>
+    <div id="flip-table"></div>
+
+
+
+
+    </div>
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;

@@ -7,6 +7,8 @@ var letterFound = false;
 var theLetter;
 var flipTable = ["┳━┳"," (ರ ~ ರ）┳━┳", "(╯ರ ~ ರ）╯︵ ┻━┻"];
 
+var flipTableDisplay = document.getElementById('flip-table');
+
   // when user takes a turn and inputs a character
   //checkForMatch("z");
   //checkForMatch(input);
@@ -53,11 +55,13 @@ var flipTable = ["┳━┳"," (ರ ~ ರ）┳━┳", "(╯ರ ~ ರ）╯︵ 
       console.log("total wrong guesses: " + wrongGuesses);
       console.log(wrongGuesses -1);
       console.log(flipTable[(wrongGuesses-1)]);
-      display("Wrong! " + flipTable[(wrongGuesses-1)]);
+      display("Wrong!");
+      flipTableDisplay.textContent = flipTable[(wrongGuesses-1)];
     }
 
     if( wrongGuesses === flipTable.length ){
-      console.log("game ends");
+      display("Game Over!");
+      flipTableDisplay.textContent = flipTable[(wrongGuesses-1)];
       //generate a new word, or restart.
     }
   }
