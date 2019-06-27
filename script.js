@@ -9,8 +9,11 @@
 // When the whole figure is completed then the user loses.
 // ------------------------------------------------------
 
-let guessLetters = ['c','a','t'];
-let userAnswer = [];
+let guessCat = ['c','a','t'];
+let userAnswerCat = [];
+
+let guessDoggy = ['d','o','g','g','y']
+let userAnswerDoggy = [];
 
 let hangman = ['(','╯','ರ','~','ರ','）','╯','︵','┻','━','┻']
 let userHangman = [];
@@ -20,29 +23,65 @@ let message = '';
 let validationCheck = false;
 
 let inputHappened = (currentInput) => {
-    for (let i=0; i<guessLetters.length; i++){
-        if (currentInput === guessLetters[i]) {
-            guessLetters.splice(i,1);
-            userAnswer.push(currentInput);
-            addCorrectAnswer();
-            checkAnswer();
+
+    if (userAnswerCat.length === 3){
+        runDoggy(currentInput);
+    } else {
+        for (let i=0; i<guessCat.length; i++){
+            if (currentInput === guessCat[i]) {
+                guessCat.splice(i,1);
+                userAnswerCat.push(currentInput);
+                addCorrectAnswer();
+                checkCatAnswer();
+            }
         }
     }
+
     if (validationCheck === false) {
         checkLoss();
     }
     display(message)
     validationCheck = false;
+    console.log(`userAnswerCat.length: ${userAnswerCat.length}`)
+    console.log(`userAnswerDoggy.length: ${userAnswerDoggy.length}`)
 }
 
-// function to
-let checkAnswer = () => {
-    if (userAnswer.length === 3){
-        message = `Congrats! You guessed all the words. The answer is CAT.`
-    } else if (userAnswer.length === 2) {
+// FUNCTIONS TO ACTIVATE FOR LOOPS HERE
+let runDoggy = (currentInput) => {
+    console.log('currentInput in Doggy' + currentInput)
+    for (let i=0; i<guessDoggy.length; i++){
+        if (currentInput === guessDoggy[i]) {
+            guessDoggy.splice(i,1);
+            userAnswerDoggy.push(currentInput);
+            console.log('did i enter runDoggy?')
+            addCorrectAnswer();
+            checkDogAnswer();
+        }
+    }
+}
+
+// FUNCTIONS TO CHECK ANSWERS FOR EACH WORD
+let checkCatAnswer = () => {
+    if (userAnswerCat.length === 3){
+        message = `Congrats! You guessed CAT! You have 2 words left to guess!`
+    } else if (userAnswerCat.length === 2) {
         message = `Nice! You guessed 2 letters. 1 letter left!.`
-    } else if (userAnswer.length === 1) {
+    } else if (userAnswerCat.length === 1) {
         message = `Nice! You guessed 1 letter. 2 letters left!.`
+    }
+}
+
+let checkDogAnswer = () => {
+    if (userAnswerDoggy.length === 5){
+        message = `Congrats! You guessed DOGGY! You have 1 word left to guess!`
+    } else if (userAnswerDoggy.length === 4) {
+        message = `Nice! You guessed ${userAnswerDoggy.length} letter. ${5-userAnswerDoggy.length} letters left!.`
+    } else if (userAnswerDoggy.length === 3) {
+        message = `Nice! You guessed ${userAnswerDoggy.length} letter. ${5-userAnswerDoggy.length} letters left!.`
+    } else if (userAnswerDoggy.length === 2) {
+        message = `Nice! You guessed ${userAnswerDoggy.length} letters. ${5-userAnswerDoggy.length} letter left!.`
+    } else if (userAnswerDoggy.length === 1) {
+        message = `Nice! You guessed ${userAnswerDoggy.length} letter. ${5-userAnswerDoggy.length} letters left!.`
     }
 }
 
