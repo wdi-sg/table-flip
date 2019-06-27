@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<link rel="stylesheet" type="text/css" href="main.css">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <header><h1>Welcome to hang ma... I mean flip the table!</h1></header>
+    <main>
+      <div id="instructions">
+        <p>Instructions: To play, you have to type in a character that you think belongs to the hidden word and click the button. Each correct attempt will display the hidden word. Each incorrect attempt will move you one step closer to a table flip!</p>
+      </div>
+      <div id="begintext">
+        <p>Click here to begin!</p><button id="startbutton" type="button" onclick="startGame()">Click to start!</button>
+      </div>
+      <div id="inputarea">
+        <input id="textbox" placeholder="Enter a character here..." onchange="checkEntry()"/>
+      </div>
+      <div id="resultarea">
+        <output id="characters" name="output"></output>
+      </div>
+      <div id="imagearea">
+        <output id="image" name="imageoutput"></output>
+      </div>
+      <div id="adminarea">
+        <input id="admininput" placeholder="Welcome admin" onchange="addWord()"/>
+      </div>
+      <div id="funny-div">
+        <img id="funny" src="FlipTable.jpg"/>
+        </div>
+    </main>
+
+  </body>
+  <script src="script.js"></script>
+</html>
