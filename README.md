@@ -34,7 +34,7 @@ If you don't know how to get started, here is a sugessted function template:
   
   - if the guess right
     - add it to correctly guessed letters
-    - the message is you guessed right. show the letters they have so far. (no need to show them in the order they appear in the word- just show them in the order guessed)
+    - the message is "you guessed right". show the letters they have so far. (no need to show them in the order they appear in the word- just show them in the order guessed)
   - otherwise the guess is wrong
     - keep track of the number of wrongly guessed letters 
     - keep an array to display the current table flip figure. it should begin empty, and added to for every wrong answer
