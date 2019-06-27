@@ -15,6 +15,8 @@ Each time the user guesses wrong, another character of the table flip is added t
 
 When the whole figure is completed then the user loses.
 
+To get started copy the starter code files from the unit 1 template here: [https://github.com/wdi-sg/unit1-template](https://github.com/wdi-sg/unit1-template)
+
 
 # 
 #
