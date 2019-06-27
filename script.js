@@ -16,7 +16,7 @@ let hangman = ['(','╯','ರ','~','ರ','）','╯','︵','┻','━','┻']
 let hangmanCounter = 0;
 
 let message = '';
-let counter = 0;
+let validationCheck = false;
 
 let inputHappened = (currentInput) => {
 
@@ -25,22 +25,17 @@ let inputHappened = (currentInput) => {
         if (currentInput === guessLetters[i]) {
             guessLetters.splice(i,1);
             userAnswer.push(currentInput);
+            validationCheck = true;
             checkAnswer();
-        } else{
-            counter = counter + 1;
-            wrongAnswer();
-            console.log('inputHappened: wrongAnswer()');
         }
     }
-    console.log('guessLetters:' + guessLetters);
-    console.log('userAnswer:' + userAnswer);
-    console.log('counter:' + counter);
-    console.log('hangmanCounter.length:' + hangmanCounter.length);
-    // console.log('correct answer array:' + guessLetters);
-    // console.log('user answer array:' + userAnswer);
-    // console.log('hangman array:' + hangman);
-    // console.log('hangman counter:' + hangmanCounter);
+
+    if (validationCheck === false) {
+        checkLoss();
+    }
+
     display(message)
+    validationCheck = false;
 }
 
 let checkAnswer = () => {
@@ -54,16 +49,8 @@ let checkAnswer = () => {
     }
 }
 
-let wrongAnswer = () => {
-    if (counter%3 === 0) {
-        hangmanCounter = hangman.shift()
-        message = `You got it wrong, you have ${hangman.length} more tries!`
-        checkLoss()
-    }
-
-}
-
 let checkLoss = () => {
+    hangmanCounter = hangman.shift();
     if (hangman.length === 0) {
         message = '(╯ರ ~ ರ）╯︵ ┻━┻';
     } else {
