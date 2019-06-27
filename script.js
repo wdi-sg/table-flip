@@ -63,7 +63,7 @@ var inputHappened = function(currentInput) {
 
 //////////////////////////////////////////////
 // Supporting functions:                    //
-// (i) add words to word library        //
+// (i) add words to word library            //
 // (ii) get random words from word library  //
 //////////////////////////////////////////////
 
@@ -80,28 +80,22 @@ var getRandomWord = function() {
     for (var i = 0; i < secretWordLength; i++) {
         correctGuess.push('_');
     }
-    for (var i = 0; i < correctGuess.length; i++) {
+    /*for (var i = 0; i < correctGuess.length; i++) {
         console.log(correctGuess[i]);
     }
-    console.log(correctGuess);
+    console.log(correctGuess); */
 }
 
-
-var printCorrectGuess = function() {
-    var msg = "";
-    for (var i = 0; i < correctGuess.length; i++) {
-        msg = msg + correctGuess[i] + " ";
-    }
-    return msg;
-}
-
+/////////////////////////
+// ***Gaming engine*** //
+/////////////////////////
 var chkGuessedCorrectly = function(currentGuess) {
     for (var i = 0; i < secretWord.length; i++) {
         if (currentGuess === secretWord[i]) {
             correctGuess[i] = secretWord[i];
-            secretWord[i]="┻";
+            secretWord[i] = "┻";
             secretWordLength -= 1;
-            display(printCorrectGuess() + " : " + flippedMessage);
+            display("HINT: " + printCorrectGuess() + " Table : " + flippedMessage);
             return true;
         }
     }
@@ -115,11 +109,26 @@ var flipCharOnTable = function() {
     numOfGuesses += 1;
     if (numOfGuesses < 11) {
         console.log("numOfGuesses : " + numOfGuesses);
-        display(printCorrectGuess() + " : " + flippedMessage);
+        display("HINT: " + printCorrectGuess() + " Table : " + flippedMessage);
     } else {
         gameIsOver = gameOver();
     }
 };
+
+var printCorrectGuess = function() {
+    var msg = "";
+    for (var i = 0; i < correctGuess.length; i++) {
+        msg = msg + correctGuess[i] + " ";
+    }
+    return msg;
+}
+
+///////////////////////////////////////
+// End of Games Functions:           //
+// (i) declare winner                //
+// (ii) game is over                 //
+// (iii) restart game init variables //
+///////////////////////////////////////
 
 var declareWinner = function() {
     display('You have guessed the secret word!');
