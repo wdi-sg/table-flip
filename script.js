@@ -17,7 +17,7 @@ var gameOver = false;
 
 var inputHappened = function(userInput){
     if (gameOver == true ) {
-        display("Game Over");
+        display("YOU ARE DEAD ~");
     } else {
         wordFound = checkForSecretWord(userInput);
         var correctBankWord = updateCorrectBank(userInput);
@@ -46,10 +46,12 @@ var checkForSecretWord = function (letterToSearchFor) {
 var updateCorrectBank = function (correctAnswer) {
     if ( wordFound === true) {
         correctBank.push(correctAnswer);
-        displayMsg = correctBank.toString();
+        displayMsg = correctBank.join('');
         return displayMsg;
     } else {
         updateSymbolBank();
+        displayMsg = "HANGING SOON";
+        return displayMsg;
     }
 };
 
@@ -78,15 +80,5 @@ var updateSymbolBank = function () {
 // if number of wrong guesses is 11
 // wrong guesses = secretWord.length
     // displayMsg = "Game Over";
-
-// var checkGameOver = function() {
-//     if ( wrongCounter = secretWord.length ){
-//         //console.log("Game Over");
-//         return true;
-//     } else {
-//         //console.log("Keep Trying");
-//         return false;
-//     }
-// }
 
 // Display Message
