@@ -3,21 +3,22 @@ console.log("hello script js");
 var secretWord = [ 'c' , 'a', 't' ];
 var letterToSearchFor;
 
-var correctlyGuessLetter = [ ];
+var correctBank = [ ];
 var correctGuess = false;
 var wrongCounter = 0;
 var displayMsg;
+var wordFound;
 
 var symbolBank = [ '(' , '╯' , 'ರ' , '~' , 'ರ' , '）' , '╯' , '︵' , '┻' , '━' , '┻' ];
 var symbolDisplay = [ ];
 
 
 var inputHappened = function(userInput){
-    //letterToSearchFor = userInput;
-    //console.log( letterToSearchFor );
-    var wordFound = checkForSecretWord(userInput);
-    display(wordFound);
-
+    // var parsedInput = parseInt(userInput);
+    wordFound = checkForSecretWord(userInput);
+    // display(wordFound);
+    var correctBankWord = updateCorrectBank(userInput);
+    display(correctBankWord);
 };
 
 // Game Logic /////////////////
@@ -29,16 +30,22 @@ var checkForSecretWord = function (letterToSearchFor) {
             console.log("Letter Found!");
             return true;
         }
-
     }
     return false;
 };
 
 
-
 // if correct ////////////////
-    // add letter to correctlyGuessLetter.push()
-    // displayMsg = correctlyGuessLetter [ ]
+// add letter to correctBank.push()
+// displayMsg = correctBank [ ]
+
+var updateCorrectBank = function (correctAnswer) {
+    if ( wordFound === true) {
+        correctBank.push(correctAnswer);
+        displayMsg = correctBank.toString();
+        return displayMsg;
+    }
+};
 
 // if wrong /////////////////
     // add to number of wrong guesses wrongCounter = wrongCounter + 1
