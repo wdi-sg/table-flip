@@ -8,10 +8,35 @@ var letterFound = false; //by default
 
 var backupflipArray = ["(", "╯", "ರ", " ", "~", " ", "ರ", "）", "╯", "︵", " ", "┻", "━", "┻"];
 var displayflipArray = [];
+var correctGuessesArray = [];
+
 var correctCounter = 0;
 var wrongCounter = 0;
 
-var correctMessage = ""
+var wordProgress = [];
+//when true
+var setWordProgress = function(wordProgress, secretWord) {
+    i = 0;
+    while (i < secretWord.length) {
+        wordProgress.push('_')
+        i += 1;
+    }
+}
+setWordProgress(wordProgress, secretWord);
+
+var updateWordProgress = function(secretWord, letterToSearch) {
+    if (letterFound === true){
+        var correctLetterIndex = secretWord.indexOf(letterToSearch);
+        wordProgress.splice(correctLetterIndex, 0, letterToSearch);
+        wordProgress.pop();
+    }
+    display2(wordProgress);
+}
+
+
+
+//call: setWordProgress(wordProgress, secretWord)
+
 var wrongMessage = `You've guessed wrong ${wrongCounter} times!`;
 var winMessage = ""
 var loseMessage = "Game Over!"
@@ -31,9 +56,13 @@ var inputHappened = function(currentInput){
         if (secretWord[i] === letterToSearch){
         letterFound = true;
         correctCounter += 1;
+        correctGuessesArray.push(secretWord[i]);
+        console.log(correctGuessesArray);
+
         }
         i += 1;
     }
+    updateWordProgress(secretWord, letterToSearch)
 //check if letterFound is still false
 //if so, count a loss, push displayFlipArray
     if (letterFound === false){
@@ -45,7 +74,7 @@ var inputHappened = function(currentInput){
     if (displayflipArray.length <= 14) {
         display(displayflipArray);
     } else {
-        display(loseMessage);
+        display2(loseMessage);
     }
 
     console.log("Letter found :" + letterFound);
@@ -53,27 +82,3 @@ var inputHappened = function(currentInput){
     console.log("Wrong Guesses :" + wrongCounter);
     document.getElementById('input').value = null;
 };
-// on user input:
-// if user guesses wrong, add a character from table flip, so...
-
-//function to look for input in secretWord array
-
-
-
-
-
-//     then cycle through secretword array
-//     i = 0
-//     while i < secretword.length,
-//     if secretword[i] === lettertosearch, letterfound === true,
-//                 i += 1
-
-//     else...
-
-
- // displayflipArray.push(backupflipArray[wrongCounter]);
- //            wrongCounter += 1;
-//push from backup to display []
-//     show display []
-//     check if game has ended
-//         if yes, end the game and -m
