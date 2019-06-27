@@ -12,14 +12,17 @@ var wordFound;
 var symbolBank = [ '(' , '╯' , 'ರ' , '~' , 'ರ' , '）' , '╯' , '︵' , '┻' , '━' , '┻' ];
 var symbolDisplay = [ ];
 
+var gameOver = false;
+
 
 var inputHappened = function(userInput){
-    // var parsedInput = parseInt(userInput);
-    wordFound = checkForSecretWord(userInput);
-    // display(wordFound);
-    var correctBankWord = updateCorrectBank(userInput);
-    display(correctBankWord);
-    //display(gameOver());
+    if (gameOver == true ) {
+        display("Game Over");
+    } else {
+        wordFound = checkForSecretWord(userInput);
+        var correctBankWord = updateCorrectBank(userInput);
+        display(correctBankWord);
+    }
 };
 
 // Game Logic /////////////////
@@ -58,29 +61,32 @@ var updateCorrectBank = function (correctAnswer) {
 // symbolDisplay.push(newSymbol)
 
 var updateSymbolBank = function () {
-    //if ( wordFound === false ) {
+
+    if ( wrongCounter == 11 ) {
+        gameOver = true;
+    } else {
+        gameOver = false;
         wrongCounter = wrongCounter + 1;
         var newSymbol = symbolBank.shift();
-        console.log( newSymbol);
         symbolDisplay.push(newSymbol);
         document.getElementById("demo").innerHTML = symbolDisplay.join('');
-        displayMsg = "Wrong Letter";
-        return displayMsg;
-    //}
-}
+    }
+};
+
 
 
 // if number of wrong guesses is 11
 // wrong guesses = secretWord.length
     // displayMsg = "Game Over";
 
-var gameOver = function() {
-    if ( wrongCounter = secretWord.length ){
-        console.log("Game Over");
-        //displayMsg = "Game Over";
-    } else {
-        console.log("Keep Trying");
-    }
-}
+// var checkGameOver = function() {
+//     if ( wrongCounter = secretWord.length ){
+//         //console.log("Game Over");
+//         return true;
+//     } else {
+//         //console.log("Keep Trying");
+//         return false;
+//     }
+// }
 
 // Display Message
