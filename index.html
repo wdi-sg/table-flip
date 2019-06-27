@@ -6,6 +6,8 @@
   <body>
     <input class="starter" id="input" placeholder="input"/>
     <p class="starter" id="output"></p>
+    <p class="starter" id="demo"></p>
+
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
@@ -16,6 +18,7 @@
         var output = document.querySelector('#output');
         output.innerText = data;
       }
+
     </script>
     <script src="script.js"></script>
   </body>
