@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="top_container">
+        <input class="starter" id="input" placeholder="input" />
+        <p class="hints">Enter letter(s) to start guessing. Key in "restart" for newGame.</p>
+        <p class="starter" id="output"></p>
+    </div>
+    <script>
+        document.querySelector('#input').addEventListener('change', function(event) {
+            var currentInput = event.target.value;
+            inputHappened(currentInput)
+        });
+
+        var display = function(data) {
+            var output = document.querySelector('#output');
+            output.innerText = data;
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
