@@ -81,3 +81,9 @@ h2{
 #correct-count, #wrong-count{
   font-size: 70;
 }
+
+.letters{
+  font-size: 40px;
+  margin: 30px;
+  color: #444;
+}

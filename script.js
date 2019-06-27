@@ -6,12 +6,15 @@ var correctGuesses = 0;
 var letterFound = false;
 var theLetter;
 var flipTable = ["┳━┳"," (ರ ~ ರ）┳━┳", "(╯ರ ~ ರ）╯︵ ┻━┻"];
+var lettersGuessed = "";
 
 var flipTableDisplay = document.getElementById('flip-table');
 var wrongGuessesDisplay = document.getElementById('wrong-count');
 var correctGuessesDisplay = document.getElementById('correct-count');
 wrongGuessesDisplay.textContent = "0";
 correctGuessesDisplay.textContent = "0";
+
+var lettersGuessedDisplay = document.getElementById('letters-guessed');
 
   // when user takes a turn and inputs a character
   //checkForMatch("z");
@@ -25,6 +28,11 @@ correctGuessesDisplay.textContent = "0";
     var i = 0;
     while ( i < secretWord.length){
       console.log( `${i} ${secretWord[i]}`);
+      theLetter = input;
+
+      //check if input is valid;
+      
+
       // if the guess right
       if(secretWord[i] === input){
         // add it to correctly guessed numbers
@@ -37,7 +45,6 @@ correctGuessesDisplay.textContent = "0";
         // if it has include in the message the game is over
         // show the output to the user
         console.log("match");
-        theLetter = input;
         letterFound = true;
       } else {
         console.log("no match");
@@ -53,6 +60,7 @@ correctGuessesDisplay.textContent = "0";
       display("1 point for the letter " + theLetter);
       correctGuessesDisplay.textContent = correctGuesses;
       document.querySelector('#input').value="";
+
       //turn this switch back;
       letterFound = false;
       }else{
@@ -72,4 +80,8 @@ correctGuessesDisplay.textContent = "0";
       flipTableDisplay.textContent = flipTable[(wrongGuesses-1)];
       //generate a new word, or restart.
     }
+
+    lettersGuessed = theLetter + " " + lettersGuessed;
+    console.log(lettersGuessed);
+    lettersGuessedDisplay.textContent = lettersGuessed;
   }
