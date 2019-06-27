@@ -2,6 +2,9 @@
 
 # (╯ರ ~ ರ）╯︵ ┻━┻
 
+
+##### instructions
+
 Create a game that guesses a secret word.
 
 For this first version of your game, the secret word will be "cat".
@@ -12,7 +15,11 @@ Each time the user guesses wrong, another character of the table flip is added t
 
 When the whole figure is completed then the user loses.
 
-===
+
+# 
+#
+
+
 
 If you don't know how to get started, here is a sugessted function template:
 
