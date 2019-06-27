@@ -1,18 +1,17 @@
 console.log("hello script js");
 
-words = [];
-wordsToGuess = ["cat","doggy","alphabet"];
+var wordsArray = [];
+var wordsToGuess = ["cat","doggy","alphabet"];
 
-//loop wordsToGuess, split them and put into words
+//loop wordsToGuess, split them and put into wordsArray
 for(var i = 0; i <wordsToGuess.length; i++){
-    words.push(wordsToGuess[i].split(''));
-}
+    wordsArray.push(wordsToGuess[i].split(''));
+}//wordsArray = [['c','a','t'],['d','o','g','g','y'],['a','l','p','h','a','b','e','t']]
 
-
-var secretWord = words[0];
+var secretWord = wordsArray[0];
 var winCount = 0;//any wins increase this value, then use it to move on the words array
 var tableFlip = ["┳━┳","(ರ ~ ರ）┳━┳","(╯ರ ~ ರ）╯︵ ┻━┻"];
-var guessWrongSymbol = ''; //to hold the tableflip symboles
+var guessWrongSymbol = ''; //to hold the tableflip symbols
 var guessWrongCount = 10;
 var correctGuess = [];
 var correctGuessCount = secretWord.length; //to count number of letters in secretWord, any correct guess will minus this value
@@ -36,10 +35,10 @@ var inputHappened = function(currentInput){
     }else if(adminMode === true){
         wordsToGuess.push(currentInput);
 
-        //empty the words variable and reloop wordsToGuess with split to include new words
-        words = [];
+        //empty the wordsArray variable and reloop wordsToGuess with split to include new words
+        wordsArray = [];
         for(var i = 0; i <wordsToGuess.length; i++){
-            words.push(wordsToGuess[i].split(''));
+            wordsArray.push(wordsToGuess[i].split(''));
         }
         display("Processed, please enter next word");
 
@@ -93,7 +92,7 @@ var inputHappened = function(currentInput){
 
 var initialize = function(){
     winCount +=1;
-    secretWord = words[winCount];
+    secretWord = wordsArray[winCount];
     correctGuessCount = secretWord.length;
     guessWrongSymbol = '';
     guessWrongCount = 10;
