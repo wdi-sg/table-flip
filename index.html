@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <input class="starter" id="input" placeholder="input"/>
+    <p class="starter" id="output"></p>
+    <p class="starter" id="output2"></p>
+    <script>
+      document.querySelector('#input').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        inputHappened(currentInput)
+      });
+
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      }
+
+      var display2 = function( data ){
+        var output2 = document.querySelector('#output2');
+        output2.innerText = data;
+      }
+
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
