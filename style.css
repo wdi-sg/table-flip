@@ -1,0 +1,31 @@
+.top_container {
+	width: 80vh;
+	height: 400px;
+	background-color: grey;
+	padding-top: 20px;
+	border-radius: 15px;
+  box-shadow: 5px 5px #404040;
+}
+
+.starter {
+	font-size: 30px;
+	padding: 10px;
+	display: block;
+	margin: 0 auto;
+	background-color: #d3d3d3;
+	border-radius: 10px;
+	padding-left: 15px;
+}
+
+#input {
+	width: 75vh;
+	margin-bottom: 20px;
+}
+
+#output {
+	background-color: #bfbfbf;
+	width: 71vh;
+	height: 270px;
+	padding: 15px;
+	border-radius: 10px;
+}
