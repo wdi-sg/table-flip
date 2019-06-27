@@ -1,0 +1,60 @@
+header {
+	text-align: center;
+}
+
+h1 {
+	display: inline;
+}
+
+#input {
+	display: inline;
+}
+
+.wrapper {
+	text-align: center;
+	padding-top: 50px;
+}
+
+.correct-guesses {
+	margin-top: 80px;
+}
+
+.wrong-guesses {
+	margin-top: 80px;
+}
+
+.starter{
+  font-size:30px;
+  padding:10px;
+  display:block;
+  margin: 0 auto;
+  border:3px solid blue;
+  text-align: center;
+  width: 100px;
+  height: 80px;
+}
+
+/*#output{
+  background-color:pink;
+}*/
+.container {
+	margin-top: 50px;
+}
+
+.chosenWord {
+	font-size: 100px;
+	letter-spacing: 15px;
+}
+
+.wrongGuess {
+	color: red;
+}
+
+.correctGuess {
+	color: green;
+}
+
+.emoji {
+	margin-top: 150px;
+	font-size: 50px;
+}
