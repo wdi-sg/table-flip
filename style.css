@@ -1,0 +1,83 @@
+header {
+	text-align: center;
+	margin: 0 200px 0 0;
+}
+body {
+}
+div.content {
+	display: grid;
+	grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 70% 30%;
+  justify-content: center;
+  background-color: dodgerblue;
+  margin: 0 200px 0 0;
+  height: 400px;
+	border: 10px outset #1C6EA4;
+	border-radius: 0px 20px 0px 20px;
+}
+div.display {
+	grid-column: 1 / span 4;
+  grid-row: 1;
+	background-color: lightsteelblue;
+	margin: 20px;
+	-webkit-box-shadow: 5px 5px 15px 5px #000000;
+	box-shadow: 5px 5px 15px 5px #000000;
+	border-radius: 10px;
+	grid-row: 1fr 1fr 1fr;
+}
+div.input {
+	grid-column: 1 / span 3;
+  grid-row: 2 ;
+  background-color: lightsteelblue;
+	margin: 20px;
+	-webkit-box-shadow: 5px 5px 15px 5px #000000;
+	box-shadow: 5px 5px 15px 5px #000000;
+	border-radius: 10px;
+	text-align: center;
+}
+
+div.control {
+	grid-column: 4;
+  grid-row: 2 ;
+	background-color: lightsteelblue;
+	margin: 20px;
+	-webkit-box-shadow: 5px 5px 15px 5px #000000;
+	box-shadow: 5px 5px 15px 5px #000000;
+	border-radius: 10px;
+}
+
+
+h1 {
+	text-align: center;
+}
+h2 {
+	text-align: center;
+}
+p {
+	text-align: center;
+	font-size: 30px;
+}
+p.notifications {
+	margin: 0;
+}
+p.start {
+
+	text-align: center;
+	font-size: 25px;
+}
+.words {
+
+
+}
+.table {
+}
+.userinput {
+	display: inline-block;
+	text-align: center;
+	font-size: 30px;
+	background-color: lightsteelblue;
+	height: 70px;
+	display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
