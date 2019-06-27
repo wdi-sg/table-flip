@@ -8,6 +8,10 @@ var theLetter;
 var flipTable = ["┳━┳"," (ರ ~ ರ）┳━┳", "(╯ರ ~ ರ）╯︵ ┻━┻"];
 
 var flipTableDisplay = document.getElementById('flip-table');
+var wrongGuessesDisplay = document.getElementById('wrong-count');
+var correctGuessesDisplay = document.getElementById('correct-count');
+wrongGuessesDisplay.textContent = "0";
+correctGuessesDisplay.textContent = "0";
 
   // when user takes a turn and inputs a character
   //checkForMatch("z");
@@ -46,17 +50,21 @@ var flipTableDisplay = document.getElementById('flip-table');
       console.log("1 point for the letter " + theLetter);
       correctGuesses = correctGuesses + 1;
       console.log("total points: " + correctGuesses);
-      display("1 point for the letter " + theLetter + ",  total points: " + correctGuesses);
+      display("1 point for the letter " + theLetter);
+      correctGuessesDisplay.textContent = correctGuesses;
+      document.querySelector('#input').value="";
       //turn this switch back;
       letterFound = false;
       }else{
       console.log("NOT FOUND");
       wrongGuesses = wrongGuesses + 1;
       console.log("total wrong guesses: " + wrongGuesses);
+      wrongGuessesDisplay.textContent = wrongGuesses;
       console.log(wrongGuesses -1);
       console.log(flipTable[(wrongGuesses-1)]);
       display("Wrong!");
       flipTableDisplay.textContent = flipTable[(wrongGuesses-1)];
+      document.querySelector('#input').value="";
     }
 
     if( wrongGuesses === flipTable.length ){

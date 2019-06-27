@@ -3,21 +3,22 @@
 body{
   margin: 0 auto;
   width: 100%;
+  height: 100%;
   font-family: 'Oswald', sans-serif;
-  background: #F2ACAC;
+  background: #EDE6E3;
 }
 
 h1{
   font-size: 60px;
-  color: #730202;
+  color: #04395E;
 }
 
 h2{
+  margin-top: -20px;
   font-size: 30px;
-  color: #730202;
+  color: #04395E;
 }
 .container{
-  max-width: 1280px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,27 +27,57 @@ h2{
 }
 
 .user-input{
+  width: 100px;
+  text-align: center;
   font-size: 30px;
   padding: 20px;
   border-radius: 3px;
-  background: #F2ACAC;
+  background: #EDE6E3;
   border: 0;
   border-style: none;
-  border-bottom: 5px solid #730202;
+  border-bottom: 5px solid #031D44;
   outline:none;
-  color: #D94A4A;
+  color: #031D44;
 }
 
 .game-feedback{
   height: 100px;
-  font-size: 30px;
-  margin-top: 40px;
+  font-size: 50px;
+  margin-top: 60px;
   color: #D94A4A;
 }
 
 #flip-table{
   height: 100px;
   font-size: 60px;
-  margin-top: 20px;
+  margin-bottom: 50px;
   color: #D94A4A;
+}
+
+.score{
+  display: flex;
+  font-size: 30px;
+  margin-top: 10px;
+  flex-direction: row;
+  color: #444;
+  background: #bcb8b7;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.correct, .wrong{
+  margin: 20px;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+#correct-count, #wrong-count{
+  font-size: 70;
 }
