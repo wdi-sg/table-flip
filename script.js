@@ -19,6 +19,7 @@ var inputHappened = function(userInput){
     // display(wordFound);
     var correctBankWord = updateCorrectBank(userInput);
     display(correctBankWord);
+    updateSymbolBank();
 };
 
 // Game Logic /////////////////
@@ -48,11 +49,22 @@ var updateCorrectBank = function (correctAnswer) {
 };
 
 // if wrong /////////////////
-    // add to number of wrong guesses wrongCounter = wrongCounter + 1
-    // take first letter of symbol bank & put it into end of symbolDisplay
-    // var newSymbol = symbolBank.shift()
-    // Display this updated array of symbolDisplay
-    // symbolDisplay.push(newSymbol)
+// add to number of wrong guesses wrongCounter = wrongCounter + 1
+// take first letter of symbol bank & put it into end of symbolDisplay
+// var newSymbol = symbolBank.shift()
+// Display this updated array of symbolDisplay
+// symbolDisplay.push(newSymbol)
+
+var updateSymbolBank = function () {
+    if ( wordFound === false ) {
+        wrongCounter = wrongCounter + 1;
+        var newSymbol = symbolBank.shift();
+        console.log( newSymbol);
+        symbolDisplay.push(newSymbol);
+        document.getElementById("demo").innerHTML = symbolDisplay;
+    }
+}
+
 
 // if number of wrong guesses is 11
 // wrong guesses = secretWord.length
