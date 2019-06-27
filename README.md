@@ -25,6 +25,8 @@ To get started copy the starter code files from the unit 1 template here: [https
 
 If you don't know how to get started, here is a sugessted function template:
 
+- keep an array of all the table flip characters
+
 - for each turn, an input letter should be checked in this order:
 
   - look through the word to guess. is the input letter there?
@@ -34,9 +36,10 @@ If you don't know how to get started, here is a sugessted function template:
     - add it to correctly guessed letters
     - the message is you guessed right. show the letters they have so far. (no need to show them in the order they appear in the word- just show them in the order guessed)
   - otherwise the guess is wrong
-    - keep track of the number of wrongly guessed letters
-    - take one character off the table flip and add it to the current characters
-    - the message includes the current table flip characters
+    - keep track of the number of wrongly guessed letters 
+    - keep an array to display the current table flip figure. it should begin empty, and added to for every wrong answer
+    - take one character off the table flip characters and add it to the current table flip figure 
+    - the message shows current table flip figure
     - see if the game has ended because of too many wrong guesses
         - if it has include in the message the game is over
     
