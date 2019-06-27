@@ -1,23 +1,18 @@
 console.log("hello script js");
 
-var inputHappened = function(currentInput){
-  console.log( currentInput );
-  display( currentInput );
-}
-
-  var secretWord = ["c","a","t"];
-  var wrongGuesses = 0;
-  var correctGuesses = 0;
-  var letterFound = false;
-  var theLetter;
-  var flipTable = ["┳━┳"," (ರ ~ ರ）┳━┳", "(╯ರ ~ ರ）╯︵ ┻━┻"];
+var secretWord = ["c","a","t"];
+var wrongGuesses = 0;
+var correctGuesses = 0;
+var letterFound = false;
+var theLetter;
+var flipTable = ["┳━┳"," (ರ ~ ರ）┳━┳", "(╯ರ ~ ರ）╯︵ ┻━┻"];
 
   // when user takes a turn and inputs a character
   //checkForMatch("z");
   //checkForMatch(input);
 
   var checkForMatch = function(input){
-
+    display(input);
   // look through the word to guess. is the input letter there?
   // use a value set outside the searching loop to know if the letter was found
 
@@ -49,6 +44,7 @@ var inputHappened = function(currentInput){
       console.log("1 point for the letter " + theLetter);
       correctGuesses = correctGuesses + 1;
       console.log("total points: " + correctGuesses);
+      display("1 point for the letter " + theLetter + ",  total points: " + correctGuesses);
       //turn this switch back;
       letterFound = false;
       }else{
@@ -57,9 +53,11 @@ var inputHappened = function(currentInput){
       console.log("total wrong guesses: " + wrongGuesses);
       console.log(wrongGuesses -1);
       console.log(flipTable[(wrongGuesses-1)]);
+      display("Wrong! " + flipTable[(wrongGuesses-1)]);
     }
 
     if( wrongGuesses === flipTable.length ){
       console.log("game ends");
+      //generate a new word, or restart.
     }
   }
