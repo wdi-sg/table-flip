@@ -5,17 +5,34 @@
     <link rel="stylesheet" href="style.css">
     <title>Flip-Table Hangman</title>
   </head>
-  <body>
-    <input type="text" class="input" id="alphabet" placeholder="Input an alphabet"/>
-    <button class="input" id="button" onclick="checkAlphabet()">Play!</button>
 
-    <h2>Output</h2>
-    <p class="output" id="level">Game Level: 1</p>
-    <p class="output" id="lives"></p>
-    <p class="output" id="warning">Warning Level: -</p>
-    <p class="output" id="guessed-character"></p>
-    <p class="output" id="word-guessed"></p>
-    <p class="output" id="game-message"></p>
+  <body>
+    <h1> Flip-Table Hangman </h1>
+
+    <div class = "start">
+        <h2 id="level">Level: 1</h2>
+        <h2 class = "start" id = "header-start"> Press the button to start the game!</h2><br>
+        <button class = "start" id = "input-start" onclick="startGame()">Start Game!</button>
+    </div>
+
+    <div class = "main">
+        <div class = "word" id = "word">
+            <h3> Guess the following word!</h3>
+            <p id="word-guessed"></p>
+        </div>
+
+        <div class = "hang" id = "hangman">
+            <h3>Table Flip Area</h3>
+            <p id="warning">Warning Level: Low</p>
+            <p id="lives"></p>
+        </div>
+    </div>
+
+    <div class="input">
+        <p id="game-message"></p><br>
+        <input type="text" id="alphabet" placeholder="Input an alphabet"/ ><br>
+        <button  id="button" onclick="checkAlphabet()">Enter!</button>
+    </div>
 
     <script src="script.js"></script>
   </body>
