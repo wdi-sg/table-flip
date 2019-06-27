@@ -23,5 +23,14 @@ var symbolDisplay = [ ];
     // displayMsg = correctlyGuessLetter [ ]
 
 // if wrong /////////////////
-    // wrongCounter = wrongCounter + 1
+    // add to number of wrong guesses wrongCounter = wrongCounter + 1
+    // take first letter of symbol bank & put it into end of symbolDisplay
     // var newSymbol = symbolBank.shift()
+    // Display this updated array of symbolDisplay
+    // symbolDisplay.push(newSymbol)
+
+// if number of wrong guesses is 11
+// wrong guesses = secretWord.length
+    // displayMsg = "Game Over";
+
+// Display Message
