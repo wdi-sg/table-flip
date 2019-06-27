@@ -1,5 +1,10 @@
 //variable description
 
+var words = [['c','a','t'],['d','o','g','g','y'],['a','l','p','h','a','b','e','t']];
+
+var words0 = words.toString();          //coverts words array into string and assign to words0
+var words1 = words0.split("");          //coverts words0 string into array and assign to words1
+
 var secretWord = ['c', 'a', 't'];       //secret word array
 var tableFlip = ["(","╯","ರ ","~"," ರ","）","╯","︵"," ┻","━","┻"]; //table flip array
 var showTableFlip = [];                 //table flip array to show when guess is wrong
@@ -16,7 +21,6 @@ var inputHappened = function(currentInput){
         //If matched, push letter into show array & up guess correct counter
         if (currentInput === secretWord[i]) {
             console.log("match");
-
             showCorrectLetter.push(currentInput);
             i = i + 1;
         }
