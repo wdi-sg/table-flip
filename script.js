@@ -1,11 +1,7 @@
 console.log("hello script js");
 
-var inputHappened = function(currentInput){
-  console.log( currentInput );
-  display( "WOW SOMETHING HAPPENED" );
-};
-
 var secretWord = [ 'c' , 'a', 't' ];
+var letterToSearchFor;
 
 var correctlyGuessLetter = [ ];
 var correctGuess = false;
@@ -15,8 +11,30 @@ var displayMsg;
 var symbolBank = [ '(' , '╯' , 'ರ' , '~' , 'ರ' , '）' , '╯' , '︵' , '┻' , '━' , '┻' ];
 var symbolDisplay = [ ];
 
+
+var inputHappened = function(userInput){
+    //letterToSearchFor = userInput;
+    //console.log( letterToSearchFor );
+    var wordFound = checkForSecretWord(userInput);
+    display(wordFound);
+
+};
+
 // Game Logic /////////////////
 // check for user input //////////////////
+var checkForSecretWord = function (letterToSearchFor) {
+    for (var i = 0; i < secretWord.length; i++ ) {
+        if( secretWord[i] === letterToSearchFor ){
+            valueFound = true;
+            console.log("Letter Found!");
+            return true;
+        }
+
+    }
+    return false;
+};
+
+
 
 // if correct ////////////////
     // add letter to correctlyGuessLetter.push()
