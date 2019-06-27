@@ -88,6 +88,13 @@ If you don't know how to get started, here is a sugessted function template:
   var word = 'rat';
   var letterArray = word.split(''); // ['r','a','t']
   ```
+  ### further
+  Format the output of the message. Use array join to join the array characters of the table flip figure.
+  ```js
+  var word = ['c','a','t'];
+  
+  word.join() // outputs 'cat'
+  ```
   
   ### further
   If the user guesses a letter correctly, show the letters in their place in the word.
