@@ -13,13 +13,13 @@ let guessLetters = ['c','a','t'];
 let userAnswer = [];
 
 let hangman = ['(','╯','ರ','~','ರ','）','╯','︵','┻','━','┻']
+let userHangman = [];
 let hangmanCounter = 0;
 
 let message = '';
 let validationCheck = false;
 
 let inputHappened = (currentInput) => {
-
     for (let i=0; i<guessLetters.length; i++){
         if (currentInput === guessLetters[i]) {
             guessLetters.splice(i,1);
@@ -35,6 +35,7 @@ let inputHappened = (currentInput) => {
     validationCheck = false;
 }
 
+// function to
 let checkAnswer = () => {
     if (userAnswer.length === 3){
         message = `Congrats! You guessed all the words. The answer is CAT.`
@@ -45,16 +46,16 @@ let checkAnswer = () => {
     }
 }
 
-// functions to modify array, when either true or false
 let addCorrectAnswer = () => {
     validationCheck = true;
 }
 
 let checkLoss = () => {
+    userHangman.push(hangman[0]);
     hangmanCounter = hangman.shift();
     if (hangman.length === 0) {
-        message = '(╯ರ ~ ರ）╯︵ ┻━┻';
+        message = '(╯ರ ~ ರ）╯︵ ┻━┻ TABLE FLIPPED!!!';
     } else {
-        message = `Keep trying. You have ${hangman.length} tries left!.`
+        message = `Keep trying! ${userHangman.join('')}`
     }
 }
