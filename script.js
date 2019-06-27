@@ -21,25 +21,21 @@ let validationCheck = false;
 let inputHappened = (currentInput) => {
 
     for (let i=0; i<guessLetters.length; i++){
-
         if (currentInput === guessLetters[i]) {
             guessLetters.splice(i,1);
             userAnswer.push(currentInput);
-            validationCheck = true;
+            addCorrectAnswer();
             checkAnswer();
         }
     }
-
     if (validationCheck === false) {
         checkLoss();
     }
-
     display(message)
     validationCheck = false;
 }
 
 let checkAnswer = () => {
-    console.log('userAnswer.length:' + userAnswer.length);
     if (userAnswer.length === 3){
         message = `Congrats! You guessed all the words. The answer is CAT.`
     } else if (userAnswer.length === 2) {
@@ -47,6 +43,11 @@ let checkAnswer = () => {
     } else if (userAnswer.length === 1) {
         message = `Nice! You guessed 1 letter. 2 letters left!.`
     }
+}
+
+// functions to modify array, when either true or false
+let addCorrectAnswer = () => {
+    validationCheck = true;
 }
 
 let checkLoss = () => {
