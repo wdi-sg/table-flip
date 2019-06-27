@@ -1,6 +1,6 @@
 # table-flip
 
-(╯ರ ~ ರ）╯︵ ┻━┻
+# (╯ರ ~ ರ）╯︵ ┻━┻
 
 Create a game that guesses a secret word.
 
