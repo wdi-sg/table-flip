@@ -61,7 +61,7 @@ var updateSymbolBank = function () {
         var newSymbol = symbolBank.shift();
         console.log( newSymbol);
         symbolDisplay.push(newSymbol);
-        document.getElementById("demo").innerHTML = symbolDisplay;
+        document.getElementById("demo").innerHTML = symbolDisplay.join('');
     }
 }
 
