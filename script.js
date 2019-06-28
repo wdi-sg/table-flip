@@ -13,15 +13,27 @@ var symbolBank = [ '(' , '╯' , 'ರ' , '~' , 'ರ' , '）' , '╯' , '︵' , '
 var symbolDisplay = [ ];
 
 var gameOver = false;
+var valueFound = false;
 
 
 var inputHappened = function(userInput){
     if (gameOver == true ) {
         display("YOU ARE DEAD ~");
-    } else {
+    }
+    else {
+        // update valueFound if correct letter
         wordFound = checkForSecretWord(userInput);
+        // check if valueFound, yes, update bank
         var correctBankWord = updateCorrectBank(userInput);
-        display(correctBankWord);
+        // if player has guessed all the required letters, display "you did it"
+        if (correctBank.length === secretWord.length) {
+            display("you win!!!");
+            correctBank = [ ];
+        }
+        else {
+            // else, just display the correctly guessed letters so far
+            display(correctBankWord);
+        };
     }
 };
 
@@ -32,10 +44,9 @@ var checkForSecretWord = function (letterToSearchFor) {
         if( secretWord[i] === letterToSearchFor ){
             valueFound = true;
             //console.log("Letter Found!");
-            return true;
         }
     }
-    return false;
+    return valueFound;
 };
 
 
@@ -44,10 +55,14 @@ var checkForSecretWord = function (letterToSearchFor) {
 // displayMsg = correctBank [ ]
 
 var updateCorrectBank = function (correctAnswer) {
-    if ( wordFound === true) {
-        correctBank.push(correctAnswer);
-        displayMsg = correctBank.join('');
-        return displayMsg;
+    if ( wordFound === true ) {
+        if (correctBank.includes(correctAnswer)) {
+            return displayMsg;
+        } else {
+            correctBank.push(correctAnswer);
+            displayMsg = correctBank.join('');
+            return displayMsg;
+        }
     } else {
         updateSymbolBank();
         displayMsg = "HANGING SOON";
