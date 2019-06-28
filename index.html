@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h2>Flip Table Game</h2>
+    <p class="starter" id="characterOutput"></p>
+
+    <h3>Please enter your guess letter</h3>
+    <input class="starter" id="input" onfocus="this.value=''" placeholder="Enter value"/>
+
+    <!-- <input class="starter" id="input2" placeholder="Fahrenheit / Celsius / Kelvin"/> -->
+
+    <h2>Output:</h2>
+    <p class="starter" id="output"></p>
+    <h3>Wrong guesses</h3>
+    <p class="starter" id="output2"></p>
+    <script>
+      document.querySelector('#input').addEventListener('change', function(event){
+        var guessLetter = event.target.value;
+        inputHappened(guessLetter)
+      });
+
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      };
+
+            var display2 = function( data ){
+        var output2 = document.querySelector('#output2');
+        output2.innerText = data;
+      };
+
+      var characterDisplay = function( data ){
+        var characterOutput = document.querySelector('#characterOutput');
+        characterOutput.innerText = data;
+      };
+
+
+    </script>
+    <script src="main.js"></script>
+  </body>
+</html>
