@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Table Flip</h1>
+    <p>Word Guessing Game</p>
+    <p>Clue: A Pet Animal.</p>
+    <input class="starter" id="input" placeholder="input"/>
+    <p class="starter" id="output1">Correct Letters:</p>
+    <p class="starter" id="output2">Wrong Letters:</p>
+    <p>By LTY</p>
+    <script>
+      document.querySelector('#input').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        inputHappened(currentInput);
+      });
+
+      var displayOne = function( data ){
+        var output = document.querySelector('#output1');
+        output.innerText = data;
+      }
+      var displayTwo = function (data) {
+            var output = document.querySelector('#output2');
+            output.innerText = data;
+        }
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
