@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Guess the word!</h1>
+        <input id="input" placeholder="Type a letter" maxlength="1"/>
+        <div id="secret-word">
+        </div>
+        <div class="output-box">
+            <p id="message">Let's start the game! </p>
+            <p id="letter-guessed">Letter(s) guessed: </p>
+            <p id="guess-count">Guesses: 0 correct, 0 wrong</p>
+            <p id="table-flip"></p>
+        </div>
+        <script>
+        document.querySelector('#input').addEventListener('change', function(event){
+            var currentInput = event.target.value;
+            inputHappened(currentInput)
+        });
+        var displayMessage = function( data ){
+            var output = document.querySelector('#message');
+            output.innerText = data;
+        }
+        var displayLettersGuessed = function(data){
+            var output = document.querySelector("#letter-guessed");
+            output.innerText = data;
+        }
+        var displayGuessCount = function( data ){
+            var output = document.querySelector('#guess-count');
+            output.innerText = data;
+        }
+        var displayTableFlip = function( data ){
+            var output = document.querySelector('#table-flip');
+            output.innerText = data;
+        }
+        </script>
+        <script src="script.js"></script>
+    </body>
+</html>
