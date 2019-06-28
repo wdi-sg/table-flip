@@ -1,14 +1,4 @@
 
-// ------------------------------------------------------
-// For this first version of your game, the secret word will be "cat".
-
-// You should simply make this an array of letters: `var secretWord = ['c','a','t'];`
-
-// Each time the user guesses wrong, another character of the table flip is added to the running total.
-
-// When the whole figure is completed then the user loses.
-// ------------------------------------------------------
-
 //CAT , DOGGY, ALPHABET
 let guessCat = ['C','A','T'];
 let userAnswerCat = [];
@@ -30,6 +20,7 @@ let hangman = ['(','╯','ರ','~','ರ','）','╯','︵','┻','━','┻']
 let userHangman = [];
 let hangmanCounter = 0;
 let validationCheck = false;
+let currentQuestion = 0;
 let message = '';
 
 // MAIN FUNCTION
@@ -45,13 +36,12 @@ let inputHappened = (anInput) => {
     if (validationCheck === false) {
         checkLoss();
     }
+    if(currentInput === 'HINT') {
+        runHint();
+    }
+    checkHangman();
     display(message)
     validationCheck = false;
-    console.log(`userAnswerCat.length: ${userAnswerCat.length}`)
-    console.log(`userAnswerDoggy.length: ${userAnswerDoggy.length}`)
-    console.log(`userAnswerDoggy: ${userAnswerDoggy}`)
-    console.log(`userAnswerAlphabet.length: ${userAnswerAlphabet.length}`)
-    console.log(`userAnswerAlphabet: ${userAnswerAlphabet}`)
     event.target.value = '';
 }
 
@@ -104,40 +94,77 @@ let runAlphabet = (currentInput) => {
         }
     }
 }
-
-// FUNCTION TO TOGGLE VALIDATION
-let addCorrectAnswer = () => {
-    validationCheck = true;
+let runHint = () => {
+    if (currentQuestion === 0){
+        message = '3 Letter Animal';
+        hint = guessingCat.join('');
+    } else if (currentQuestion === 1){
+        message = "Rhymes with 'happy'";
+        hint = guessingDoggy.join('');
+    } else if(currentQuestion === 2){
+        message = 'Letters';
+        hint = guessingAlphabet.join('');
+    }
 }
 
 // FUNCTIONS TO RETURN A MESSAGE TO THE USER
 let checkCatAnswer = () => {
     if (userAnswerCat.length === 3){
         message = `Congrats! You guessed CAT! You have 2 words left to guess!`
+        currentQuestion +=1;
     } else {
-        message = `Nice! You guessed ${userAnswerCat.length} letter(s). ${3-userAnswerCat.length} letter(s) left!. ANSWER: ${guessingCat}`
+        message = `Nice! You guessed ${userAnswerCat.length} letter(s). ${3-userAnswerCat.length} letter(s) left!`
     }
 }
 let checkDogAnswer = () => {
     if (userAnswerDoggy.length === 5){
         message = `Congrats! You guessed DOGGY! You have 1 word left to guess!`
+        currentQuestion +=1;
     } else {
-        message = `Nice! You guessed ${userAnswerDoggy.length} letter(s). ${5-userAnswerDoggy.length} letter(s) left!. ANSWER: ${guessingDoggy}`
+        message = `Nice! You guessed ${userAnswerDoggy.length} letter(s). ${5-userAnswerDoggy.length} letter(s) left!`
     }
 }
 let checkAlphabetAnswer = () => {
     if (userAnswerAlphabet.length === 8){
         message = `Congrats! You guessed ALPHABET! You WON!`
     } else {
-        message = `Nice! You guessed ${userAnswerAlphabet.length} letter(s). ${8-userAnswerAlphabet.length} letter(s) left!. ANSWER: ${guessingAlphabet}`
+        message = `Nice! You guessed ${userAnswerAlphabet.length} letter(s). ${8-userAnswerAlphabet.length} letter(s) left!`
     }
 }
 let checkLoss = () => {
-    userHangman.push(hangman[0]);
-    hangmanCounter = hangman.shift();
+    userHangman.unshift(hangman[hangman.length-1]);
+    hangmanCounter = hangman.pop();
     if (hangman.length === 0) {
-        message = '(╯ರ ~ ರ）╯︵ ┻━┻ TABLE FLIPPED!!!';
+        message = 'TABLE FLIPPED!!!';
     } else {
-        message = `Keep trying! ${userHangman.join('')}`
+        message = `Keep trying!`
     }
 }
+
+// FUNCTIONS FOR STICKY COUNTERS & VALIDATION
+let checkHangman = () => {
+    if (currentQuestion === 0){
+        let joined = guessingCat.join('')
+        display3(joined);
+    } else if (currentQuestion === 1){
+        let joined = guessingDoggy.join('')
+        display3(joined);
+    } else if(currentQuestion === 2){
+        let joined = guessingAlphabet.join('')
+        display3(joined);
+    }
+    let tableman = userHangman.join('');
+    console.log(tableman);
+    display2(tableman);
+}
+
+
+let addCorrectAnswer = () => {
+    validationCheck = true;
+}
+//------------------------CHECK LOGS OF DIFFERENT PARTS
+console.log(`userAnswerCat.length: ${userAnswerCat.length}`)
+console.log(`userAnswerDoggy.length: ${userAnswerDoggy.length}`)
+console.log(`userAnswerDoggy: ${userAnswerDoggy}`)
+console.log(`userAnswerAlphabet.length: ${userAnswerAlphabet.length}`)
+console.log(`userAnswerAlphabet: ${userAnswerAlphabet}`)
