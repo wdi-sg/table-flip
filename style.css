@@ -1,0 +1,31 @@
+body {
+	text-align: center;
+}
+#input {
+	padding:8px 16px;
+	font-size:18px;
+}
+.output-box{
+	font-size:18px;
+	padding:10px;
+	display:block;
+	border:3px solid teal;
+	max-width: 960px;
+	width: 100%;
+	box-sizing: border-box;
+	margin: 40px auto;
+}
+
+#output{
+	background-color:#eee;
+}
+
+#table-flip {
+	color: red;
+	font-size: 24px;
+	font-weight: bold;
+}
+#secret-word {
+	font-size: 36px;
+	margin: 0 80px;
+}
