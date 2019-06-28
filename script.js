@@ -3,6 +3,10 @@ var secretWord =["C","A","T"];
 var answerFound = false;
 var i = 0;
 
+
+var inputHappened = function(currentInput){
+  console.log( currentInput );
+
 while( i<alphabets.length){
     console.log("i is: "+ i);
     console.log("array value: "+alphabets[i] );
@@ -17,3 +21,6 @@ if(answerFound === true){
 } else {
     console.log("Not found!")
 }
+
+  display( "WOW SOMETHING HAPPENED" );
+};
