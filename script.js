@@ -3,6 +3,10 @@ console.log("start log");
 
 var secretWord = ["c", "a", "t"]
 var secretWordsDB = []
+var hiddenWords = []
+var currentWord = []
+
+var gameRunning = false;
 
 var attempts = ["(","╯","ರ","","~","","ರ","）","╯","︵","┻━┻"]
 var attempts = ["┳━┳", "(ರ ~ ರ）┳━┳", "(╯ರ ~ ರ）╯︵ ┻━┻"]
@@ -30,6 +34,19 @@ var displayW = function(input){
     output.innerHTML = input;
 };
 
+var loadGame= function() {
+    var mysteryWord = hideSecretWord(secretWord);
+    displayW("asdfda")
+    displayW(mysteryWord);
+    displayN("Enter a letter and guess the correct word.")
+
+    startCount();
+ }
+
+ var switchState = function(){
+
+ }
+
 var checkInput = function(input){
     if (typeof input === 'string'){
         checkForMatch(input);
@@ -43,27 +60,40 @@ var errorMsg = function(){
 var checkForMatch = function(input){
     var i = 0;
     console.log(input)
+    var numMatch = false;
 
     while(i < secretWord.length ){
-        if(input === secretWord[i]){
-            console.log(i);
-            correctGuess(i);
-            break;
+        if (secretWord[i] === input){
+            numMatch = true
         }
-        console.log("NO")
         i = i + 1;
     }
-    wrongGuess();
+    if(numMatch){
+        console.log(i);
+        correctGuess(i);
+    } else {
+        console.log(numMatch);
+        wrongGuess();
+    }
 }
 var hideSecretWord = function(secretWord) {
-    var hidden = "";
+
     var i = 0;
 
-    while( i<secretWord.length ){
-        hidden = hidden + "_ "
+    while( i<hiddenWords.length ){
+        hiddenWords.push("_ ");
         i++;
     }
-    return hidden
+    return hiddenWords
+}
+var wordToGuess = function(secretWord){
+    var i = 0;
+
+    while( i<currentWord.length ){
+        currentWord.push(secretWord[i]);
+        i++;
+    }
+    return currentWord
 }
 
 var startCount = function() {
@@ -71,13 +101,7 @@ var startCount = function() {
     console.log(attCount + " attempts")
  }
 
-var loadGame= function() {
-    var mysteryWord = hideSecretWord(secretWord);
-    displayW(mysteryWord);
-    displayN("Enter a letter and guess the correct word.")
 
-    startCount();
- }
 
 var resetGame= function() {
  }
