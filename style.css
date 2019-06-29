@@ -11,7 +11,8 @@ div.content {
   justify-content: center;
   background-color: dodgerblue;
   margin: 0 200px 0 0;
-  height: 400px;
+  /*height: 400px;
+  width: 800px;*/
 	border: 10px outset #1C6EA4;
 	border-radius: 0px 20px 0px 20px;
 }
@@ -23,8 +24,9 @@ div.display {
 	-webkit-box-shadow: 5px 5px 15px 5px #000000;
 	box-shadow: 5px 5px 15px 5px #000000;
 	border-radius: 10px;
-	/*display: grid;
-	grid-template: none | 1fr | 1fr 1fr 1fr;*/
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
 }
 div.input {
 	grid-column: 1 / span 3;
@@ -34,18 +36,24 @@ div.input {
 	-webkit-box-shadow: 5px 5px 15px 5px #000000;
 	box-shadow: 5px 5px 15px 5px #000000;
 	border-radius: 10px;
-	text-align: center;
+	display: flex;
+	flex-flow: column nowrap;
 }
 
 div.control {
 	grid-column: 4;
   grid-row: 1/span 2;
-	background-color: lightsteelblue;
+	background-color: dodgerblue;
 	margin: 20px;
 	-webkit-box-shadow: 5px 5px 15px 5px #000000;
 	box-shadow: 5px 5px 15px 5px #000000;
 	border-radius: 10px;
-}.myButton {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	text-align: center;
+}
+.myButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
 	box-shadow:inset 0px 1px 0px 0px #97c4fe;
@@ -59,20 +67,18 @@ div.control {
 	background-color:#3d94f6;
 	-moz-border-radius:6px;
 	-webkit-border-radius:6px;
-	border-radius:6px;
+	border-radius:10px;
 	border:1px solid #337fed;
-	display:block;
+	display: block;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:20px;
+	font-size:25px;
 	font-weight:bold;
-	padding:48px 20px;
-	margin: 0 auto;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #1570cd;
-	text-align: center;
-	word-wrap: break-word;
+	padding: 20px;
+	margin: 10px;
 }
 .myButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6));
@@ -88,11 +94,6 @@ div.control {
 	position:relative;
 	top:1px;
 }
-div.mybutton {
-	margin: 0;
-}
-
-
 
 h1 {
 	text-align: center;
@@ -103,19 +104,10 @@ h2 {
 p {
 	text-align: center;
 	font-size: 25px;
-
-
-	ba
 }
 p.notifications {
-	margin: 0;
-}
-p.start {
 
-	text-align: center;
-	font-size: 28px;
-	margin: auto;
-	padding: auto;
+}
 }
 p.words {
 	background-color: green;
@@ -127,12 +119,10 @@ p.notifications {
 	background-color: orange;
 }
 .userinput {
-	display: block;
-	text-align: center;
-	font-size: 30px;
+	font-size: 25px;
 	background-color: lightsteelblue;
-	height: 70px;
-  margin-right: auto;
-  margin-left: auto;
-  width: auto;
+	padding: 10px;
+	border-radius: 10px;
+	margin: 10px;
+	text-align: center;
 }
