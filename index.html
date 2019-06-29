@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>HangMan</title>
+</head>
+<body>
+<header>
+    <h1>Hangman</h1>
+</header>
+<main>
+    <div class="content">
+
+    <div class="display">
+        <p class="words" id="output" style="flex-grow: 1">the secret word will go here</p>
+        <p class="table" id="output" style="flex-grow: 1">heres the table</p>
+        <p class="notifications" id="output" style="flex-grow: 1">any system message will be here</p>
+    </div>
+    <div class="input">
+        <input class="userinput" id="input" placeholder="input" onfocus="this.value=''" maxlength="1" style="flex-grow: 1"/>
+    </div>
+    <div class="control" onclick="" onreset="">
+        <!-- <p class="start" onclick="loadGame()" cursor = "pointer">START</p> -->
+        <a href="#" class="myButton" style="flex-grow: 1">START</a>
+        <a href="#" class="myButton" style="flex-grow: 1">RESET</a>
+        <a href="#" class="myButton" style="flex-grow: 1">NONE</a>
+
+    </div>
+    </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
