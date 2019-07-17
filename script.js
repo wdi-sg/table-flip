@@ -31,7 +31,7 @@ var lettersGuessedDisplay = document.getElementById('letters-guessed');
       theLetter = input;
 
       //check if input is valid;
-      
+
 
       // if the guess right
       if(secretWord[i] === input){
@@ -85,3 +85,8 @@ var lettersGuessedDisplay = document.getElementById('letters-guessed');
     console.log(lettersGuessed);
     lettersGuessedDisplay.textContent = lettersGuessed;
   }
+
+//need to store the correct letters and the wrong letters separately.
+//when correct letters all guessed before gameEnd === true , win game. display correct word. 
+
+//need to set a gameEnd boolean.
