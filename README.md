@@ -23,13 +23,13 @@ To get started copy the starter code files from the unit 1 template here: [https
 
 
 
-If you don't know how to get started, here is a sugessted function template:
+If you don't know how to get started, here is a suggested function template:
 
 - keep an array of all the table flip characters
 
 - for each turn, an input letter should be checked in this order:
 
-  - look through the word to guess. is the input letter there?
+  - look through the word to guess (a loop). is the input letter there?
   - use a value set outside the searching loop to know if the letter was found 
   
   - if the guess right
