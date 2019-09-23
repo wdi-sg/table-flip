@@ -47,16 +47,17 @@ Here is a sugessted function template:
 
 - for each turn, an input letter should be checked in this order:
 
-  - look through the word to guess. is the input letter there?
+  - look through the word to guess (a loop). is the input letter there?
   - use a value set outside the searching loop to know if the letter was found 
 
   - if the guess right
-    - add it to correctly guessed numbers
-    - the message is you guessed right. show the letters they have so far. (no need to show them in the order they appear in the word- just show them in the order guessed)
+    - add it to correctly guessed letters
+    - the message is "you guessed right". show the letters they have so far. (no need to show them in the order they appear in the word- just show them in the order guessed)
   - otherwise the guess is wrong
-    - keep track of the number of wrongly guessed letters
-    - take one character off the table flip and add it to the current characters
-    - the message includes the current table flip characters
+    - keep track of the number of wrongly guessed letters 
+    - keep an array to display the current table flip figure. it should begin empty, and added to for every wrong answer
+    - take one character off the table flip characters and add it to the current table flip figure 
+    - the message shows current table flip figure
     - see if the game has ended because of too many wrong guesses
         - if it has include in the message the game is over
 
@@ -126,6 +127,13 @@ Begin putting in the table flip code.
   ```
   var word = 'rat';
   var letterArray = word.split(''); // ['r','a','t']
+  ```
+  ### further
+  Format the output of the message. Use array join to join the array characters of the table flip figure.
+  ```js
+  var word = ['c','a','t'];
+  
+  word.join() // outputs 'cat'
   ```
   
 ### further
