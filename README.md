@@ -15,26 +15,6 @@ For each wrong guess one character of the table flip is added to the running tot
 
 When the whole figure is completed then the user loses.
 
-### Display with DOM
-
-Put *real* HTML into your pink square. When the user completes an action, use the data you pass to the `display` function to build the DOM.
-
-Change `style.css` as you see fit.
-
-```HTML
-<div class="table-flip-container">
-  <div id="table-flip">
-    (╯ರ ~ ರ）╯︵ ┻━┻
-  </div>
-  <div class="letter-container">
-    letters guessed: <span id="guessed">c a g w e r y u q</span>
-  </div>
-  <div id="message">
-    You guessed wrong, you lose!
-  </div>
-</div>
-```
-
 ### Getting Started
 
 To get started use the starter code files in this repo.
@@ -42,6 +22,8 @@ To get started use the starter code files in this repo.
 In the first version the word to guess is the hard-coded word "cat". You should simply make this an array of letters: `var secretWord = ['c','a','t'];`
 
 Each time the user guesses wrong, another character of the table flip is added to the running total.
+
+Use these characters: `(╯ರ ~ ರ）╯︵ ┻━┻` - you can paste them directly into your code. Just like the secret word, make this word into an array of characters as well.
 
 Here is a sugessted function template:
 
@@ -111,6 +93,7 @@ Begin putting in the table flip code.
   - show the user when they have lost
 
 ### further
+
   Make a list of words to guess. It will be in increasing difficulty. It will be an array of arrays:
 
   ```
@@ -122,13 +105,15 @@ Begin putting in the table flip code.
   ```
   
 ### further
+
   Replace all the arrays of letters with `split('')`
   
   ```
   var word = 'rat';
   var letterArray = word.split(''); // ['r','a','t']
   ```
-  ### further
+### further
+
   Format the output of the message. Use array join to join the array characters of the table flip figure.
   ```js
   var word = ['c','a','t'];
@@ -137,6 +122,7 @@ Begin putting in the table flip code.
   ```
   
 ### further
+
   If the user guesses a letter correctly, show the letters in their place in the word.
   
   For example:
@@ -149,6 +135,7 @@ Begin putting in the table flip code.
   var word = ['c','a','t'];
   var correctGuesses = [];
   var userGuess = 't';
+
   
   /*
     search through the word and 
@@ -160,6 +147,7 @@ Begin putting in the table flip code.
   ```
   
 ### further
+
   Make the game more lenient.
   
   The wrong guesses will first make this emoticon: ┳━┳
@@ -171,6 +159,7 @@ Begin putting in the table flip code.
   Then the game ends.
   
 ### further
+
   The user can type 'admin' to get to an admin mode.
   
   Here they will be able to enter in words, one at a time to add to the list of words to guess.
