@@ -19,8 +19,13 @@ user types in single letter.
     - see if the game has ended because of too many wrong guesses
         - if it has include in the message the game is over
 */
+var words = [
+  ['c','a','t'],
+  ['d','o','g','g','y'],
+  ['a','l','p','h','a','b','e','t']];
+var gameLevel = 0;
 
-var secretWord = ['c','a','t'];
+var secretWord = words[gameLevel];
 
 var tableFlip = ["(", "╯", "ರ", " ", "~", " ", "ರ", "）", "╯", "︵", " ", "┻", "━", "┻"];
 var tableFlipResult = [];
@@ -35,13 +40,30 @@ var outputToPlayer = "";
 
 var gameOver = false;
 
+var restartString = "restart";
+
+var resetGame = function() {
+    secretWord = words[gameLevel];
+    tableFlip = ["(", "╯", "ರ", " ", "~", " ", "ರ", "）", "╯", "︵", " ", "┻", "━", "┻"];
+    tableFlipResult = [];
+    incorrectGuesses = [];
+    correctGuesses = [];
+    gameOver = false;
+}
+
 var checkWinState = function() {
     /*
     if letters found = secret Word length you win the game
     if not, carry on. */
-    if (correctGuesses.length === secretWord.length){
-        outputToPlayer += "\nYou win!";
-        gameOver = true;
+    if (correctGuesses.length === secretWord.length) {
+        gameLevel++;
+        if (gameLevel === words.length) {
+            outputToPlayer += "You've completed the game! Please type " + restartString + " to play again.";
+            gameOver = true;
+        } else {
+            outputToPlayer += "\nYou win! Onto level " + (gameLevel + 1);
+            resetGame();
+        }
     }
 }
 
@@ -49,7 +71,7 @@ var checkLoseState = function() {
     /* if incorrect Guesses = length of table flip. You lose the game.
     */
     if (tableFlip.length === 0) {
-        outputToPlayer += ("\nyou lose!");
+        outputToPlayer += ("\nyou lose! Type " + restartString + " to try again.");
         gameOver = true;
     }
 }
@@ -90,12 +112,11 @@ var checkGuess = function(letterToCheck) {
         if (secretWord[i] === letterToCheck) {
             letterFound = true;
             outputToPlayer += 'letter ' + letterToCheck + ' found!';
+            correctLetter(letterToCheck);
         }
     }
 
-    if (letterFound) {
-        correctLetter(letterToCheck);
-    } else {
+    if (!letterFound) {
         wrongLetter(letterToCheck);
     }
 }
@@ -129,12 +150,20 @@ var wrongLetter = function(guessedLetter) {
 }
 
 var inputHappened = function(currentInput){
-    if (gameOver) {
-        return "Game is over please reload.";
-    }
     outputToPlayer = "";
     currentInput = currentInput.toLowerCase().trim();
     document.querySelector('#input').value = "" // Reset the input box to be empty.
+
+    if (gameOver) {
+        if (currentInput === restartString) {
+            gameLevel = 0;
+            resetGame();
+            return "restarting. Please enter your first guess for a new game.";
+        }
+
+        return "Game is over please type " + restartString + " to restart";
+    }
+
     console.log( "Input character: " + currentInput );
     checkGuess(currentInput);
     return outputToPlayer;
