@@ -14,7 +14,7 @@ let words = {
     wrongTries: ["(", "╯", "ರ", " ",  "~", " ", "ರ", "）", "╯", "︵", " ", "┻", "━", "┻"],
     secretWord1: {
         secretArray: ["c", "a", "t"],
-        secretWord: [0, 0, 0],
+        secretWord: ["_", "_", "_"],
     }
 }
 
@@ -53,7 +53,6 @@ var chacSearch = function(currentInput) {
     while( i<words.secretWord1.secretArray.length ){
         if( words.secretWord1.secretArray[i] === currentInput){
             letterPosition(currentInput);
-/*            words.secretWord1.secretArray.splice(i, 1,)*/// Might be useful for reference.
             console.log(words.secretWord1.secretArray)
             return;} i++}
             tableFlipping();
@@ -72,7 +71,7 @@ var inputHappened = function(currentInput){
     if (correctLetter === 3) {
         win();
     }
-    return currentInput + "\n" + words.secretWord1.secretWord + "\n" + failFlips;
+    return currentInput + "\n" + words.secretWord1.secretWord + "\n" + failFlips + "\n" + "You have " + (14 - wordAttempts) + " attempts left.";
 };
 
 
@@ -91,6 +90,7 @@ var inputHappened = function(currentInput){
     }
 }*/
 
+/*            words.secretWord1.secretArray.splice(i, 1,)*/ // would result in errors due to messing up word order
 
 /* else {
                 tableFlipping();
