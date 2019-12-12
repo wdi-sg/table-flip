@@ -7,6 +7,7 @@ let wrongTries = ["(", "╯", "ರ", " ",  "~", " ", "ರ", "）", "╯", "︵",
 let i = 0;
 let correctLetter = 0;
 let wordFound = 0;
+let noMoreAlertsPlease = false; //to help stop alerts from spawning too much
 let wordAttempts = 0;
 let failFlips = "";
 let words = {
@@ -37,7 +38,7 @@ var letterPosition = function(currentInput) {
 
 
 var tableFlipping = function() {
-    if (wordAttempts < 14) {
+    if (wordAttempts < 14 && correctLetter < 3) {
         failFlips = failFlips + words.wrongTries[wordAttempts];
     }
     return failFlips;
@@ -45,7 +46,7 @@ var tableFlipping = function() {
 
 var win = function() {
     alert("Congrats you won!");
-    correctLetter = 0;
+    noMoreAlertsPlease = true;
 }
 
 var gameOver = function() {
@@ -59,10 +60,11 @@ var chacSearch = function(currentInput) {
             console.log(words.secretWord1.secretArray)
             return;} i++}
             tableFlipping();
-            wordAttempts++;
             if (wordAttempts >= 14) {
                 gameOver();
-                return wordAttempts;
+                return
+            } else if (noMoreAlertsPlease === false){
+                wordAttempts++;
             }
         }
 
@@ -71,7 +73,7 @@ var inputHappened = function(currentInput){
     i = 0;
     chacSearch(currentInput);
     document.querySelector('#input').value = ""
-    if (correctLetter === 3) {
+    if (correctLetter === 3 && noMoreAlertsPlease === false) {
         win();
     }
     return currentInput + "\n" + words.secretWord1.secretWord + "\n" + failFlips + "\n" + "You have " + (14 - wordAttempts) + " attempts left.";
