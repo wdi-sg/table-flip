@@ -9,24 +9,27 @@ let correctLetter = 0;
 let wordFound = 0;
 let wordAttempts = 0;
 let failFlips = "";
-let foundLetters = "";
 let words = {
     wrongTries: ["(", "╯", "ರ", " ",  "~", " ", "ರ", "）", "╯", "︵", " ", "┻", "━", "┻"],
     secretWord1: {
         secretArray: ["c", "a", "t"],
         secretWord: ["_", "_", "_"],
+        foundLetters: [false, false, false]
     }
 }
 
 var letterPosition = function(currentInput) {
-    if (currentInput === "c") {
+    if (currentInput === "c" && words.secretWord1.foundLetters[0] === false) {
         words.secretWord1.secretWord[0] = "c";
+        words.secretWord1.foundLetters[0] = true;
         correctLetter++;
     } else if (currentInput === "a") {
         words.secretWord1.secretWord[1] = "a";
+        words.secretWord1.foundLetters[1] = true;
         correctLetter++;
     } else if (currentInput === "t") {
         words.secretWord1.secretWord[2] = "t";
+        words.secretWord1.foundLetters[2] = true;
         correctLetter++;} else {
             return;
         }
