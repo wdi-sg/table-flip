@@ -1,16 +1,22 @@
 console.log("hello script js");
-var secretWord = ['c','a','t'];
+var words = [
+    ['c','a','t'],
+    ['d','o','g','g','y'],
+    ['a','l','p','h','a','b','e','t']
+    ];
+var whichWord = 0;
 var correctGuess = [];
 var wrong = true;
-var notify = "You have guessed wrong.";
+var notify;
 var hangmanAll = ["(","╯","ರ"," ~ ","ರ","）","╯","︵"," ┻","━","┻"];
 var hangmanTrack = [];
 
 var inputHappened = function(currentInput){
+  notify = "You have guessed wrong.";
   console.log( currentInput );
-  for (i=0; i<secretWord.length; i++) {
-  	if (currentInput==secretWord[i]) {
-  		correctGuess.push(secretWord[i]);
+  for (i=0; i<words[whichWord].length; i++) {
+  	if (currentInput==words[whichWord][i]) {
+  		correctGuess.push(words[whichWord][i]);
   		notify = "You have guessed right.";
   		wrong = false;
   		console.log(wrong);
@@ -25,11 +31,16 @@ var inputHappened = function(currentInput){
   console.log(wrong);
   wrong = true;
   document.querySelector('#input').value = ""
-  if (correctGuess.length<secretWord.length && hangmanTrack.length<hangmanAll.length) {
-  	return notify + "So far you have guessed " + correctGuess.length + " letters correctly. " + correctGuess +". Hangman: " + hangmanTrack;
-  } else if (correctGuess.length==secretWord.length){
-  	return "You win!"
+  if (correctGuess.length<words[whichWord].length && hangmanTrack.length<hangmanAll.length) {
+  	return notify + " So far you have guessed " + correctGuess.length + " letters correctly. " + correctGuess +". Hangman: " + hangmanTrack;
+  } else if (correctGuess.length==words[whichWord].length && whichWord<2){
+  	whichWord++;
+  	correctGuess = [];
+  	console.log(whichWord);
+  	return "You guessed the word! Guess the next word."
+  } else if (correctGuess.length==words[whichWord].length && whichWord==2){
+  	return "You win!";
   } else {
-  	return "You lose!"
+  	return "You lose!";
   }
 }
