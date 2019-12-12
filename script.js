@@ -17,16 +17,16 @@ let words = {
 }
 
 var letterPosition = function(currentInput) {
-    if (currentInput === "c" && words.secretWord1.foundLetters[0] === false) {
-        words.secretWord1.secretWord[0] = "c";
+    if (currentInput === words.secretWord1.secretArray[0] && words.secretWord1.foundLetters[0] === false) {
+        words.secretWord1.secretWord[0] = words.secretWord1.secretArray[0];
         words.secretWord1.foundLetters[0] = true;
         correctLetter++;
-    } else if (currentInput === "a" && words.secretWord1.foundLetters[1] === false) {
-        words.secretWord1.secretWord[1] = "a";
+    } else if (currentInput === words.secretWord1.secretArray[1] && words.secretWord1.foundLetters[1] === false) {
+        words.secretWord1.secretWord[1] = words.secretWord1.secretArray[1];
         words.secretWord1.foundLetters[1] = true;
         correctLetter++;
-    } else if (currentInput === "t" && words.secretWord1.foundLetters[2] === false) {
-        words.secretWord1.secretWord[2] = "t";
+    } else if (currentInput === words.secretWord1.secretArray[2] && words.secretWord1.foundLetters[2] === false) {
+        words.secretWord1.secretWord[2] = words.secretWord1.secretArray[2];
         words.secretWord1.foundLetters[2] = true;
         correctLetter++;} else {
             return;
@@ -78,7 +78,7 @@ var inputHappened = function(currentInput){
             } else {
         chacSearch(currentInput);
         document.querySelector('#input').value = ""
-        if (correctLetter === 3 && gameIsOver === false) {
+        if (correctLetter === words.secretWord1.secretArray.length && gameIsOver === false) {
             win(); }
             return currentInput + "\n" + words.secretWord1.secretWord + "\n" + failFlips + "\n" + "You have " + (14 - wordAttempts) + " attempts left."; }
 };
