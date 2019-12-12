@@ -81,6 +81,8 @@ var inputHappened = function (currentInput) {
       correctLetter = correctLetter + currentInput
       // if all letters = secretword, win. if not, right guess
       if (correctGuesses.join("") === secretWord.join("")) {
+        document.querySelector('#input').disabled = true
+        document.querySelector('#input').value = "Refresh for retry"
         return `You win!`
       }
       document.querySelector('#input').value = ""
