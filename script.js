@@ -16,8 +16,8 @@ for (i=0; i<words[whichWord].length; i++) {
 }
 var wrong = true;
 var notify;
-var hangmanAll = ["(","╯","ರ"," ~ ","ರ","）","╯","︵"," ┻","━","┻"];
 var hangmanTrack = [];
+var incorrects = 0;
 
 var inputHappened = function(currentInput){
   notify = "You have guessed wrong.";
@@ -34,14 +34,20 @@ var inputHappened = function(currentInput){
   }
   console.log(wrong);
   if (wrong) {
-  	var a = hangmanTrack.length;
-  	hangmanTrack.push(hangmanAll[a]);
+  	incorrects++
+  }
+  if (incorrects==1) {
+	hangmanTrack = "┳━┳";
+	} else if (incorrects==2) {
+	hangmanTrack = "(ರ ~ ರ）┳━┳";
+	} else if (incorrects==3) {
+	hangmanTrack = "(╯ರ ~ ರ）╯︵ ┻━┻";
   }
   console.log(wrong);
   wrong = true;
   document.querySelector('#input').value = ""
-  if (correctGuess.length<words[whichWord].length && hangmanTrack.length<hangmanAll.length) {
-  	return notify + " So far you have guessed " + correctGuess.length + " letters correctly. " + guessing.join('') +". Table-flip: " + hangmanTrack.join('');
+  if (correctGuess.length<words[whichWord].length && incorrects<3) {
+  	return notify + " So far you have guessed " + correctGuess.length + " letters correctly. " + guessing.join('') +". Table-flip: " + hangmanTrack;
   } else if (correctGuess.length==words[whichWord].length && whichWord<2){
   	whichWord++;
   	correctGuess = [];
@@ -51,8 +57,8 @@ var inputHappened = function(currentInput){
 	}
 	return "You guessed the word "+ words[whichWord-1].join('')+"! Guess the next word."
   } else if (correctGuess.length==words[whichWord].length && whichWord==2){
-  	return "You won by guessing the last word "+words[whichWord].join('')+"! Table-flip: " + hangmanTrack.join('');
+  	return "You won by guessing the last word "+words[whichWord].join('')+"! Table-flip: " + hangmanTrack;
   } else {
-  	return "You lose! Table-flipped!: " + hangmanTrack.join('');
+  	return "You lose! Table-flipped!: " + hangmanTrack;
   }
 }
