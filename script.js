@@ -28,17 +28,10 @@ var gameOver = function() {
 
 var chacSearch = function(currentInput) {
     while( i<words.secretWord1.secretArray.length ){
-        if( words.secretWord1.secretArray[i] === currentInput ){
-            wordFound = true;
-            return wordFound;
-            i = i+1; } else {
-                tableFlipping();
-                wordAttempts++
-                if (wordAttempts === 14) {
-                    gameOver(); }
-                return wordAttempts;
-            }
-} }
+        if( words.secretWord1.secretArray[i] === currentInput){
+            wordFound++;
+            return wordFound;} i++}}
+
 
 var inputHappened = function(currentInput){
     chacSearch(currentInput);
@@ -58,3 +51,13 @@ var inputHappened = function(currentInput){
     return word;
     }
 }*/
+
+
+/* else {
+                tableFlipping();
+                wordAttempts++
+                if (wordAttempts === 14) {
+                    gameOver(); }
+                return wordAttempts;
+            }
+} */
