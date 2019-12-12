@@ -27,7 +27,7 @@ var secretWord = words[gameLevel].split('');
 
 var tableFlipWord = "(╯°□°）╯︵ ┻━┻"
 var tableFlip = tableFlipWord.split('');
-var tableFlipResult = [];
+var tableFlipRevealed = [];
 
 // store incorrectly guessed letters in here:
 var incorrectGuesses = [];
@@ -41,10 +41,12 @@ var gameOver = false;
 
 var restartString = "restart";
 
+var letter = /^[a-z]+$/;
+
 var resetGame = function() {
     secretWord = words[gameLevel];
     tableFlip = tableFlipWord.split('');
-    tableFlipResult = [];
+    tableFlipRevealed = [];
     incorrectGuesses = [];
     correctGuesses = [];
     gameOver = false;
@@ -122,10 +124,9 @@ var checkGuess = function(letterToCheck) {
 
 var validateGuess = function(guessedLetter) {
     if (guessedLetter.length === 1) {
-        if (isNaN(guessedLetter)) {
-            console.log(guessedLetter + " is a valid guess");
+        if (letter.test(guessedLetter)) { // test for the 1 character to be a letter using Regular Expressions.
+            // console.log(guessedLetter + " is a valid guess");
             return true;
-            // TODO: Also check if it is a symbol. argh.
         }
     }
     return false;
@@ -140,10 +141,10 @@ var correctLetter = function(guessedLetter) {
 
 var wrongLetter = function(guessedLetter) {
     /* Guess is wrong! */
-    tableFlipResult.push(tableFlip.shift());
+    tableFlipRevealed.push(tableFlip.shift());
     incorrectGuesses.push(guessedLetter);
     outputToPlayer += guessedLetter + " is a wrong guess! \n";
-    outputToPlayer += tableFlipResult.join('');
+    outputToPlayer += tableFlipRevealed.join('');
     console.log('Incorrect Guesses so far: ');
     checkLoseState();
 }
