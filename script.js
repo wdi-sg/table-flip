@@ -2,16 +2,16 @@ console.log("hello script js");
 
 //Setting the global variables, which are the arrays
 var secretWord = ["c", "a", "t"]
-//error Characters to show user when
-var errorChar = "(╯ರ ~ ರ）╯︵ ┻━┻".split("");
-//max tries = errorChar.length
-var maxTries = errorChar.length;
+//keep one data structure for the complete table flip (an array of all of its characters)
+var errorCharacters = "(╯ರ ~ ರ）╯︵ ┻━┻".split("");
 
+  // when the user guesses wrong, take one thing out of the array and add it to a global state variable string (pop) on the array
+var remainingCharacters = errorCharacters.pop();
+var runningTotal = [];
 var statement;
 
 //once user keys in input, check if :
     //check if input is correct,
-        // use a for loop
     //log running total number of tries,
 
 var inputHappened = function(currentInput){
@@ -21,16 +21,22 @@ var inputHappened = function(currentInput){
       for (var i = 0; i < secretWord.length; i++) {
             if(currentInput === secretWord[i]) {
              letterfound = true;
+                }
             }
+            console.log(letterfound);
+            if (letterfound){
+                statement = "Good job!";
+
+            }
+            else if (remainingCharacters.length === 0){
+                statement = "Game over!";
+
+            }
+            else{
+            statement = "Try again!" + errorCharacters.pop();
         }
-        console.log(letterfound);
-        if (letterfound) {
-             statement = "Good job!";
-        // if user input is wrong, have to show the characters
-        }else{
-            statement = "Try again";
+
             console.log(statement);
-        }
-                //return output to exit function
-        return statement;
-    };
+
+            return statement;
+        };
