@@ -36,15 +36,15 @@ var inputHappened = function(currentInput){
   wrong = true;
   document.querySelector('#input').value = ""
   if (correctGuess.length<words[whichWord].length && hangmanTrack.length<hangmanAll.length) {
-  	return notify + " So far you have guessed " + correctGuess.length + " letters correctly. " + correctGuess +". Hangman: " + hangmanTrack;
+  	return notify + " So far you have guessed " + correctGuess.length + " letters correctly. " + correctGuess.join('') +". Table-flip: " + hangmanTrack.join('');
   } else if (correctGuess.length==words[whichWord].length && whichWord<2){
   	whichWord++;
   	correctGuess = [];
   	console.log(whichWord);
   	return "You guessed the word! Guess the next word."
   } else if (correctGuess.length==words[whichWord].length && whichWord==2){
-  	return "You win!";
+  	return "You win! Table-flip: " + hangmanTrack.join('');
   } else {
-  	return "You lose!";
+  	return "You lose! Table-flipped!: " + hangmanTrack.join('');
   }
 }
