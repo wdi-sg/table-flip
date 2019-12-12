@@ -17,6 +17,7 @@ let words = {
     }
 }
 
+
 var letterPosition = function(currentInput) {
     if (currentInput === words.secretWord1.secretArray[0] && words.secretWord1.foundLetters[0] === false) {
         words.secretWord1.secretWord[0] = words.secretWord1.secretArray[0];
@@ -35,6 +36,9 @@ var letterPosition = function(currentInput) {
     }
 
 
+/*var storeWrong = function() {}*/ // Potential function to develop when theres time.
+
+
 var tableFlipping = function() {
     if (wordAttempts < 14 && gameIsOver === false) {
         failFlips = failFlips + words.wrongTries[wordAttempts];
@@ -42,21 +46,23 @@ var tableFlipping = function() {
     return failFlips;
 }
 
+
 var win = function() {
     alert("Congrats you won!");
     gameIsOver = true;
 }
 
+
 var gameOver = function() {
     alert("(╯ರ ~ ರ）╯︵ ┻━┻" + "\n" + "You Lose!");
 }
 
+
 var chacSearch = function(currentInput) {
     var i = 0;
     while( i<words.secretWord1.secretArray.length ){
-        if( words.secretWord1.secretArray[i] === currentInput){
-            letterPosition(currentInput);
-            console.log(words.secretWord1.secretArray)
+        if( words.secretWord1.secretArray[i] === currentInput.toLowerCase()){
+            letterPosition(currentInput.toLowerCase());
             return;}
         i++}
     if (gameIsOver === true) {
