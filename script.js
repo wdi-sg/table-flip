@@ -1,9 +1,13 @@
 console.log("hello script js");
-var words = [
-    ['c','a','t'],
-    ['d','o','g','g','y'],
-    ['a','l','p','h','a','b','e','t']
-    ];
+
+var presplitWords = ['cat','doggy','alphabet'];
+var words=[];
+for (i=0; i<presplitWords.length; i++) {
+	console.log(i);
+	s=presplitWords[i].split('');
+	words.push(s);
+}
+
 var whichWord = 0;
 var correctGuess = [];
 var wrong = true;
