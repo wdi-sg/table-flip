@@ -10,11 +10,11 @@ let numberOfCorrectlyGuessedLetters = 0;
 let numberOfWronglyGuessedLetters = 0;
 let flipTableFigure = "";
 const numberOfArrayLetters = words[0].length + words[1].length + words[2].length;
+
 const input = document.querySelector("#input");
 const outputBox = document.querySelector("#output");
-outputBox.textContent = `Welcome to table flip! Input a character.`
 
-console.log("hello script js");
+outputBox.textContent = `Welcome to Table Flip! Input a character.`
 
 const inputHappened = function(currentInput) {
   for (i = 0; i < words.length; i++) {
@@ -53,3 +53,5 @@ const inputHappened = function(currentInput) {
               (╯ರ ~ ರ）╯︵ ┻━┻`;
   }
 };
+
+
