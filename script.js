@@ -98,17 +98,11 @@ var chacSearch = function(currentInput) {
 
 
 var inputHappened = function(currentInput){
-    if (currentInput.length > 1) {
-        document.querySelector('#input').value = ""
-        return "Please only input one letter at a time." + "\n" + imptStuff.words.first.secretWord + "\n" + failFlips + "\n" + "You have " + (14 - wordAttempts) + " attempts left."
-    } else if (currentInput.match(/[a-z]/i) === null) {
-        document.querySelector('#input').value = ""
-        return "Please input a valid character." + "\n" + imptStuff.words.first.secretWord + "\n" + failFlips + "\n" + "You have " + (14 - wordAttempts) + " attempts left."
-    } else {
-        chacSearch(currentInput.toLowerCase());
-        document.querySelector('#input').value = ""
-        if (imptStuff.words.first.correctLetter === 3 && noMoreAlertsPlease === false) {
-            win();
-        }
-        return currentInput + "\n" + imptStuff.words.first.secretWord + "\n" + failFlips + "\n" + "You have " + (14 - wordAttempts) + " attempts left.";}
+    i = 0;
+    chacSearch(currentInput);
+    document.querySelector('#input').value = ""
+    if (imptStuff.words.first.correctLetter === 3 && noMoreAlertsPlease === false) {
+        win();
+    }
+    return currentInput + "\n" + imptStuff.words.first.secretWord + "\n" + failFlips + "\n" + "You have " + (14 - wordAttempts) + " attempts left.";
 };
