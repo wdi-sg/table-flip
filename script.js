@@ -1,11 +1,10 @@
 console.log("Jiayous");
 
-/*let secretWord = [["c", "a", "t"],[]];
-let wrongTries = ["(", "╯", "ರ", " ",  "~", " ", "ರ", "）", "╯", "︵", " ", "┻", "━", "┻"]
-(╯ರ ~ ರ）╯︵ ┻━┻*/
+// (╯ರ ~ ರ）╯︵ ┻━┻*
 
 let wordFound = 0;
 let noMoreAlertsPlease = false; //to help stop alerts from spawning too much
+let wordSelection; //not in use yet but for selecting which secret word
 let wordAttempts = 0;
 let failFlips = "";
 let imptStuff = {
@@ -107,30 +106,3 @@ var inputHappened = function(currentInput){
     }
     return currentInput + "\n" + imptStuff.words.first.secretWord + "\n" + failFlips + "\n" + "You have " + (14 - wordAttempts) + " attempts left.";
 };
-
-
-//code that is discarded but good to look at to reflect
-
-/*printArray(secretWord[0]);*/
-
-//experimental function
-/*var printArray = function(arrays) {
-    while (i <= arrays.length) {
-        word + arrays[i];
-        if (i > 15) {
-            debugger;
-        };
-    return word;
-    }
-}*/
-
-/*            imptStuff.words.first.secretArray.splice(i, 1,)*/ // would result in errors due to messing up word order
-
-/* else {
-                tableFlipping();
-                wordAttempts++
-                if (wordAttempts === 14) {
-                    gameOver(); }
-                return wordAttempts;
-            }
-} */
