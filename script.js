@@ -19,15 +19,14 @@ user types in single letter.
     - see if the game has ended because of too many wrong guesses
         - if it has include in the message the game is over
 */
-var words = [
-  ['c','a','t'],
-  ['d','o','g','g','y'],
-  ['a','l','p','h','a','b','e','t']];
+var words = ['cat','rat','doggy','armadillo']
+
 var gameLevel = 0;
 
-var secretWord = words[gameLevel];
+var secretWord = words[gameLevel].split('');
 
-var tableFlip = ["(", "╯", "ರ", " ", "~", " ", "ರ", "）", "╯", "︵", " ", "┻", "━", "┻"];
+var tableFlipWord = "(╯°□°）╯︵ ┻━┻"
+var tableFlip = tableFlipWord.split('');
 var tableFlipResult = [];
 
 // store incorrectly guessed letters in here:
@@ -44,7 +43,7 @@ var restartString = "restart";
 
 var resetGame = function() {
     secretWord = words[gameLevel];
-    tableFlip = ["(", "╯", "ರ", " ", "~", " ", "ರ", "）", "╯", "︵", " ", "┻", "━", "┻"];
+    tableFlip = tableFlipWord.split('');
     tableFlipResult = [];
     incorrectGuesses = [];
     correctGuesses = [];
@@ -158,7 +157,7 @@ var inputHappened = function(currentInput){
         if (currentInput === restartString) {
             gameLevel = 0;
             resetGame();
-            return "restarting. Please enter your first guess for a new game.";
+            return "┬──┬◡ﾉ(° -°ﾉ)\nrestarting. Please enter your first guess for a new game.";
         }
 
         return "Game is over please type " + restartString + " to restart";
