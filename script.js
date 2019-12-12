@@ -19,7 +19,7 @@ user types in single letter.
     - see if the game has ended because of too many wrong guesses
         - if it has include in the message the game is over
 */
-var words = ['cat','rat','doggy','armadillo']
+var words = ['big dog','rat','doggy','armadillo', 'general assembly']
 
 var gameLevel = 0;
 
@@ -46,6 +46,8 @@ var restartString = "restart";
 
 // regular expression to filter out letters.
 var letter = /^[a-z]+$/;
+// and filter out being naughty by adding numbers and symbols in admin mode.
+var letterOrSpace = /^[a-z\s]+$/;
 
 var gameRevealedLettersString = "";
 
@@ -55,9 +57,13 @@ var happyEmoticons = ["(*＾▽＾)／ Go you!", "d=(´▽｀)=b So happy!", "(�
 
 var sadEmoticons = ["( ._.)", "( ⚆ _ ⚆ )", "⊙﹏⊙", "T_T", "⊂(⊙д⊙)つ", "(^^;)"];
 
+var adminMode = false;
+var endAdminKeyword = 'endadmin';
+var startAdminKeyword = 'admin';
 
-var randomEmoticon = function(happy){
-    if (happy){
+    // Just for fun, show a random smiley face from the arrays of emoticons.
+var randomEmoticon = function(happy) {
+    if (happy) {
         return happyEmoticons[Math.floor(Math.random() * happyEmoticons.length)];
     } else {
         return sadEmoticons[Math.floor(Math.random() * sadEmoticons.length)];
@@ -69,10 +75,17 @@ var resetGame = function() {
     secretWord = words[gameLevel];
     incorrectLetters = [];
     correctLetters = [];
-    for (var i = secretWord.length - 1; i >= 0; i--) {
-        correctLetters.push("_")
+    for (var i = 0; i < secretWord.length; i++) {
+        if (secretWord[i] === " ") {
+            correctLetters.push(" "); // This allows for simple phrases rather than just words.
+        } else {
+            correctLetters.push("_");
+        };
     }
     gameRevealedLettersString = correctLetters.join(" ");
+    // when trying to set tableFlipArray to tableFlipArrayRef, it seems that actions on tableFlipArray
+    // also act on tableFlipArrayRef. It's not making a copy but instead is referencing the same array.
+    // hard coding the tableFlipArray here means it won't get overwritten.
     tableFlipArray = ["┳━┳", "(ರ ~ ರ）┳━┳" , "(╯°□°）╯︵ ┻━┻"];
     tableFlipGuyString = "";
     tableFlipElement = tableFlipArray.shift();
@@ -82,8 +95,7 @@ var resetGame = function() {
 }
 
 var checkWinState = function() {
-    /*
-    if letters found = secret Word length you win the game
+    /* if letters found = secret Word length you win the game
     if not, carry on. */
     if (correctLetters.join('') === secretWord) {
         gameLevel++;
@@ -99,8 +111,7 @@ var checkWinState = function() {
 
 
 var checkLoseState = function() {
-    /* if incorrect Guesses = length of table flip. You lose the game.
-    */
+    // If incorrect Guesses = length of table flip. You lose the game.
     if (tableFlip.length === 0 && tableFlipArray.length === 0) {
         outputToPlayer += ("\nyou lose! Type " + restartString + " to try again.");
         gameOver = true;
@@ -110,15 +121,14 @@ var checkLoseState = function() {
 
 var isGuessedAlready = function(letterToCheck) {
 
-    // if a letter is in the correct Guesses or incorrect Guesses then return True:
-
+    // if a letter is in the correct Guesses or incorrect Guesses then return true:
     for (var i = 0; i < correctLetters.length; i++) {
         if (correctLetters[i] === letterToCheck) {
             return true;
         }
     }
     for (var i = 0; i < incorrectLetters.length; i++) {
-    if (incorrectLetters[i] === letterToCheck) {
+        if (incorrectLetters[i] === letterToCheck) {
             return true;
         }
     }
@@ -194,19 +204,48 @@ var wrongLetter = function(guessedLetter) {
 }
 
 
+var adminMain = function(currentInput) {
+    if (!adminMode) {
+        adminMode = true;
+    }
+    if (currentInput === endAdminKeyword) {
+        adminMode = false;
+        resetGame();
+        return "Exiting admin mode."
+    }
+    for (var i = 0; i < currentInput.length; i++) {
+        if (!letterOrSpace.test(currentInput[i])){
+            return "Words entered must be letters or spaces only.";
+        }
+    }
+    if (currentInput !== startAdminKeyword) {
+        words.push(currentInput);
+    }
+    var adminOutputMessage = "";
+    adminOutputMessage += "Current words in puzzle:\n"
+    adminOutputMessage += words.join("\n");
+    adminOutputMessage += "\nEnter a word to add to the list of words.\nEnter " + endAdminKeyword + " to exit admin mode.";
+    return adminOutputMessage;
+}
+
+
 var inputHappened = function(currentInput){
     outputToPlayer = "";
     currentInput = currentInput.toLowerCase().trim();
     document.querySelector('#input').value = "" // Reset the input box to be empty.
 
+    if (adminMode || (currentInput === startAdminKeyword)) {
+        return adminMain(currentInput);
+    }
+
     if (gameOver) {
         if (currentInput === restartString) {
             gameLevel = 0;
             resetGame();
-            return gameRevealedLettersString + "\n┬──┬◡ﾉ(° -°ﾉ)\nrestarting. Please enter your first guess for a new game.";
+            return gameRevealedLettersString + "\n┬─┬◡ﾉ(° -°ﾉ) Putting the table back.\nRestarting. Please enter your first letter for a new game.";
         }
 
-        return "Game is over please type " + restartString + " to restart";
+        return "Game is over please type " + restartString + " to restart.";
     }
 
     console.log( "Input character: " + currentInput );
@@ -214,5 +253,5 @@ var inputHappened = function(currentInput){
     return gameRevealedLettersString + "\n" + tableFlipGuyString + "\n" + outputToPlayer;
 };
 
-document.querySelector('#output').innerText = "Make a guess to begin the game.";
+document.querySelector('#output').innerText = "Input a letter to begin the game.";
 resetGame();
