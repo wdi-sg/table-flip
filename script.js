@@ -3,6 +3,7 @@ console.log("Jiayous");
 //(╯ರ ~ ರ）╯︵ ┻━┻
 
 let correctLetter = 0;
+let wrongLetters = []; //store wrong letters so you know which ones you've tried
 let gameIsOver = false; // help track the state of the game
 let wordFound = 0;
 let wordAttempts = 0;
@@ -56,16 +57,17 @@ var chacSearch = function(currentInput) {
         if( words.secretWord1.secretArray[i] === currentInput){
             letterPosition(currentInput);
             console.log(words.secretWord1.secretArray)
-            return;} i++}
-            if (gameIsOver === true) {
-                return; }
-            tableFlipping();
-            wordAttempts++;
-            if (wordAttempts >= 14 && gameIsOver === false) {
-                gameOver();
-                return wordAttempts;
-            }
-        }
+            return;}
+        i++}
+    if (gameIsOver === true) {
+        return; }
+    tableFlipping();
+    wordAttempts++;
+    if (wordAttempts >= 14 && gameIsOver === false) {
+        gameOver();
+        return wordAttempts;
+    }
+}
 
 
 var inputHappened = function(currentInput){
@@ -75,7 +77,7 @@ var inputHappened = function(currentInput){
     } else if (currentInput.match(/[a-z]/i) === null) {
                 document.querySelector('#input').value = ""
                 return "Please input a valid character" + "\n" + words.secretWord1.secretWord + "\n" + failFlips + "\n" + "You have " + (14 - wordAttempts) + " attempts left.";
-            } else {
+    } else {
         chacSearch(currentInput);
         document.querySelector('#input').value = ""
         if (correctLetter === words.secretWord1.secretArray.length && gameIsOver === false) {
