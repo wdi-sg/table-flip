@@ -27,11 +27,16 @@ var letterPosition = function(currentInput) {
         correctLetter++;
     } else if (currentInput === "t") {
         words.secretWord1.secretWord[2] = "t";
-        correctLetter++;}
+        correctLetter++;} else {
+            return;
+        }
     }
 
+
 var tableFlipping = function() {
-    failFlips = failFlips + words.wrongTries[wordAttempts];
+    if (wordAttempts < 14) {
+        failFlips = failFlips + words.wrongTries[wordAttempts];
+    }
     return failFlips;
 }
 
@@ -48,9 +53,8 @@ var chacSearch = function(currentInput) {
     while( i<words.secretWord1.secretArray.length ){
         if( words.secretWord1.secretArray[i] === currentInput){
             letterPosition(currentInput);
-/*            words.secretWord1.secretArray.splice(i, 1,)*/
+/*            words.secretWord1.secretArray.splice(i, 1,)*/// Might be useful for reference.
             console.log(words.secretWord1.secretArray)
-            i = 0;
             return;} i++}
             tableFlipping();
             wordAttempts++;
@@ -62,6 +66,7 @@ var chacSearch = function(currentInput) {
 
 
 var inputHappened = function(currentInput){
+    i = 0;
     chacSearch(currentInput);
     document.querySelector('#input').value = ""
     if (correctLetter === 3) {
@@ -69,6 +74,9 @@ var inputHappened = function(currentInput){
     }
     return currentInput + "\n" + words.secretWord1.secretWord + "\n" + failFlips;
 };
+
+
+//code that is discarded but good to look at to reflect
 
 /*printArray(secretWord[0]);*/
 
