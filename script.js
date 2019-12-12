@@ -72,7 +72,7 @@ if (currentInput === 'admin'){
 		}
 
 		return (lenientArray.length - chanceCount)+" lives left!  "+showOutput.join("");
-		
+
 	} else {
 		console.log(showOutput)
 		return "Wrong letter!   "+showOutput.join("");
@@ -115,6 +115,8 @@ if (currentInput === 'admin'){
 		whichWord++
 
 		if(whichWord >= words.length){
+			output.length = 0;
+			whichWord = 0;
 			return "Grand Champion!"
 		}
 
