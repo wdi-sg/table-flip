@@ -1,4 +1,10 @@
-let secretWord = ['c', 'a', 't']
+let word = [
+  ['c','a','t'],
+  ['d','o','g','g','y'],
+  ['a','l','p','h','a','b','e','t']
+];
+
+let secretWord = word[Math.floor(Math.random() * ((word.length - 1) - 0 + 1) ) + 0]
 
 let tableFlip = ["(", "╯", "ರ", " ", "~", " ", "ರ", ")", " ", "╯", "︵", " ", "┻", "━", "┻"]
 const gameLength = tableFlip.length
@@ -14,6 +20,9 @@ var inputHappened = function (currentInput) {
   for (let i = 0; i < secretWord.length; i++) {
     if (currentInput === secretWord[i]) {
         correctLetter = correctLetter + currentInput
+        if (correctLetter.length === secretWord.length) {
+          return `You win!`
+        }
         return `You guessed it RIGHT! - Your correct guesses: ${correctLetter}`
     }
   }
