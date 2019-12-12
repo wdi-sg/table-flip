@@ -25,8 +25,10 @@ var gameLevel = 0;
 
 var secretWord = words[gameLevel];
 
-var tableFlipWord = "(╯°□°）╯︵ ┻━┻"
-var tableFlip = tableFlipWord.split('');
+var tableFlipArrayRef = ["┳━┳", "(ರ ~ ರ）┳━┳" , "(╯°□°）╯︵ ┻━┻"]
+var tableFlipArray = tableFlipArrayRef;
+var tableFlipElement = "";
+var tableFlip = tableFlipElement.split('');
 var tableFlipRevealed = [];
 
 // store incorrectly guessed letters in here:
@@ -65,18 +67,20 @@ var randomEmoticon = function(happy){
 
 var resetGame = function() {
     secretWord = words[gameLevel];
-    tableFlip = tableFlipWord.split('');
-    tableFlipRevealed = [];
     incorrectLetters = [];
     correctLetters = [];
     for (var i = secretWord.length - 1; i >= 0; i--) {
         correctLetters.push("_")
     }
     gameRevealedLettersString = correctLetters.join(" ");
+    debugger;
+    tableFlipArray = ["┳━┳", "(ರ ~ ರ）┳━┳" , "(╯°□°）╯︵ ┻━┻"];
     tableFlipGuyString = "";
+    tableFlipElement = tableFlipArray.shift();
+    tableFlip = tableFlipElement.split('');
+    tableFlipRevealed = [];
     gameOver = false;
 }
-
 
 var checkWinState = function() {
     /*
@@ -98,7 +102,7 @@ var checkWinState = function() {
 var checkLoseState = function() {
     /* if incorrect Guesses = length of table flip. You lose the game.
     */
-    if (tableFlip.length === 0) {
+    if (tableFlip.length === 0 && tableFlipArray.length === 0) {
         outputToPlayer += ("\nyou lose! Type " + restartString + " to try again.");
         gameOver = true;
     }
@@ -174,11 +178,20 @@ var correctLetter = function(guessedLetter, indexInWord) {
 var wrongLetter = function(guessedLetter) {
     /* Guess is wrong! */
     tableFlipRevealed.push(tableFlip.shift());
+    if(tableFlip[0] === " ") { // push an additional space.
+        tableFlipRevealed.push(tableFlip.shift());
+    }
     incorrectLetters.push(guessedLetter);
     outputToPlayer += guessedLetter + " is a wrong guess! " + randomEmoticon(false) + "\n";
     tableFlipGuyString = tableFlipRevealed.join('');
-    // console.log('Incorrect Guesses so far: ');
     checkLoseState();
+    if (tableFlip.length === 0) {
+        if (gameOver) {return};
+        tableFlipElement = tableFlipArray.shift();
+        tableFlip = tableFlipElement.split('');
+        tableFlipRevealed = [];
+    }
+    // console.log('Incorrect Guesses so far: ');
 }
 
 
