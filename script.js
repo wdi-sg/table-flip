@@ -1,6 +1,40 @@
 console.log("hello script js");
 
+var secretWord = ['c','a','t'];
+
+var livesLeft = "(╯ರ ~ ರ）╯︵ ┻━┻"
+var livesLeftString = livesLeft.split('');
+var livesArray = [];
+var livesCount = 0
+var output = [];
+
 var inputHappened = function(currentInput){
-  console.log( currentInput );
-  return "WOW SOMETHING HAPPEND";
+  
+if(secretWord.indexOf(currentInput) == -1){
+	
+	livesArray.push(livesLeftString[livesCount]);
+	livesCount++;
+
+	if(livesCount >= livesLeftString.length){
+		return "You have run out of lives! You lose!"+livesArray.join("")
+	} else {
+		console.log("you were here")
+		return "Wrong letter!   "+livesArray.join("");
+	}
+
+	
+
+} else {
+	output.push(currentInput);
+	console.log(output)
+
+	if(output.length == secretWord.length){
+		return "You win! "+"The word is: "+secretWord;
+	}
+
+	return "You guessed a letter correctly!"+"  Correct letters guessed:  "+output;
+}
+
+
+  
 };
