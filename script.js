@@ -1,8 +1,17 @@
 let word = [
   ['c','a','t'],
   ['d','o','g','g','y'],
-  ['a','l','p','h','a','b','e','t']
+  ['a','l','p','h','a','b','e','t'],
+  ["hello"],
+  ["bathing"]
 ];
+
+for (let i = 0; i < word.length; i++) {
+  if (word[i].length === 1) {
+    word [i][0] = word[i][0].split("")
+  }
+}
+
 
 let secretWord = word[Math.floor(Math.random() * ((word.length - 1) - 0 + 1) ) + 0]
 
