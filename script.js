@@ -6,8 +6,6 @@ var secretWord = ["c", "a", "t"]
 var errorCharacters = "(╯ರ ~ ರ）╯︵ ┻━┻".split("");
 
   // when the user guesses wrong, take one thing out of the array and add it to a global state variable string (pop) on the array
-var remainingCharacters = errorCharacters.pop();
-var runningTotal = [];
 var statement;
 
 //once user keys in input, check if :
@@ -27,13 +25,11 @@ var inputHappened = function(currentInput){
             if (letterfound){
                 statement = "Good job!";
 
-            }
-            else if (remainingCharacters.length === 0){
+            } else if (errorCharacters.length < 1){
                 statement = "Game over!";
-
             }
             else{
-            statement = "Try again!" + errorCharacters.pop();
+            statement = "Try again!" + " " + errorCharacters.pop();
         }
 
             console.log(statement);
