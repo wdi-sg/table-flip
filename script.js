@@ -1,16 +1,30 @@
 console.log("hello script js");
 
 var secretWord = ['c','a','t'];
-
 var livesLeft = "(╯ರ ~ ರ）╯︵ ┻━┻"
 var livesLeftString = livesLeft.split('');
 var livesArray = [];
 var livesCount = 0
 var output = [];
+var currentAnswer = [];
+
+//Step2
+
+var words = [
+  ['c','a','t'],
+  ['d','o','g','g','y'],
+  ['a','l','p','h','a','b','e','t']
+];
+
+var whichWord = 0
+
+
+
+
 
 var inputHappened = function(currentInput){
   
-if(secretWord.indexOf(currentInput) == -1){
+if(words[whichWord].indexOf(currentInput) == -1){
 	
 	livesArray.push(livesLeftString[livesCount]);
 	livesCount++;
@@ -28,11 +42,33 @@ if(secretWord.indexOf(currentInput) == -1){
 	output.push(currentInput);
 	console.log(output)
 
-	if(output.length == secretWord.length){
-		return "You win! "+"The word is: "+secretWord;
+	if(output.length == words[whichWord].length){
+		
+		
+		whichWord++
+
+		if(whichWord >= words.length){
+			return "Grand Champion!"
+		}
+
+		output.length = 0;
+
+		return "You win! "+"The word is: "+words[whichWord - 1];
 	}
 
-	return "You guessed a letter correctly!"+"  Correct letters guessed:  "+output;
+
+	currentAnswer = [];
+	
+	for (let i =0; i < words[whichWord].length ; i++){
+		if(output.indexOf(words[whichWord][i]) >= 0 ){
+			currentAnswer.push(words[whichWord][i]);
+		} else {
+			currentAnswer.push(" ");
+		}
+
+	}
+
+	return "You guessed a letter correctly!"+"  Correct letters guessed:  "+currentAnswer;
 }
 
 
