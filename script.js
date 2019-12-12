@@ -30,7 +30,15 @@ var chacSearch = function(currentInput) {
     while( i<words.secretWord1.secretArray.length ){
         if( words.secretWord1.secretArray[i] === currentInput){
             wordFound++;
-            return wordFound;} i++}}
+            console.log(wordFound);
+            return wordFound;} i++}
+            tableFlipping();
+            wordAttempts++;
+            if (wordAttempts >= 14) {
+                gameOver();
+                return wordAttempts;
+            }
+        }
 
 
 var inputHappened = function(currentInput){
