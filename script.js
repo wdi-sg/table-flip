@@ -73,7 +73,6 @@ var resetGame = function() {
         correctLetters.push("_")
     }
     gameRevealedLettersString = correctLetters.join(" ");
-    debugger;
     tableFlipArray = ["┳━┳", "(ರ ~ ರ）┳━┳" , "(╯°□°）╯︵ ┻━┻"];
     tableFlipGuyString = "";
     tableFlipElement = tableFlipArray.shift();
