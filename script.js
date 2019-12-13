@@ -57,3 +57,19 @@ var inputHappened = function(currentInput){
 //    errorCharacters.pop(currentInput);
 
 // Then, put the wrong letter into a new array
+
+
+/*// SECTION TWO
+// Make a list of words to guess. It will be in increasing difficulty. It will be an array of arrays:
+var words = [
+  ['c','a','t'],
+  ['d','o','g','g','y'],
+  ['a','l','p','h','a','b','e','t']
+];
+
+Replace all the arrays of letters with split('')
+
+var word = 'rat';
+var letterArray = word.split(''); // ['r','a','t']
+
+*/
