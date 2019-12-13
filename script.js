@@ -3,12 +3,12 @@ console.log("Jiayous");
 //(╯ರ ~ ರ）╯︵ ┻━┻
 
 let correctLetter = 0; // tracks guess progress
+let wrongTries = ["(", "╯", "ರ", " ",  "~", " ", "ರ", "）", "╯", "︵", " ", "┻", "━", "┻"];
 let wordSelection = 0;
 let gameIsOver = false; // help track the state of the game
 let wordAttempts = 0; // track fail progress
 let failFlips = ""; // to help print (╯ರ ~ ರ）╯︵ ┻━┻
 let words = {
-    wrongTries: ["(", "╯", "ರ", " ",  "~", " ", "ರ", "）", "╯", "︵", " ", "┻", "━", "┻"],
     secretWord1: {
         secretArray: ["c", "a", "t"],
         secretWord: ["_", "_", "_"],
@@ -71,7 +71,7 @@ var letterPosition2 = function(currentInput) {
 
 var tableFlipping = function() {
     if (wordAttempts < 14 && gameIsOver === false) {
-        failFlips = failFlips + words.wrongTries[wordAttempts];
+        failFlips = failFlips + wrongTries[wordAttempts];
     }
     return failFlips;
 }
