@@ -129,7 +129,7 @@ var counter = 0;
 var checkWin = function() {
     if (correctGuesses.length === songs.length) {
         console.log("You win!");
-        outputToPlayer += "\nYou win!";
+        outputToPlayer += "\nYou win! The word is " + songs.join('');
         gameOver = true;
     }
 }
