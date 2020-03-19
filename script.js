@@ -32,7 +32,7 @@ var round=0;
 var blankyBracket=[];
 var correctLetters=[];
 var maxGamePenalty= ["(", "╯", "ರ", "~", "ರ", "）", "╯", "︵", "┻", "━", "┻"];
-var PenaltyMultiplier=3;
+var PenaltyMultiplier=2;
 var maxRight;
 var rightPoints=0;
 var gamePenalty=[];
@@ -89,9 +89,29 @@ if(userGuess[round].length===0){
 }
 else
 if(gamePenalty.length===maxGamePenalty.length){
+    switch( PenaltyMultiplier){
+            case 0:
+            output='(╯ರ ~ ರ）╯︵ ┻━┻ You have lost. Try again';
+            reinitialised();
+            break;
+            case 1:
+            output='(ರ ~ ರ）┳━┳. The goddess shine on you. Never give up';
+            gamePenalty=[];
+            PenaltyMultiplier--;
+             penaltyCount=0;
+            break;
+            case 2:
+            output='Everyone makes mistakes. Move on.┳━┳';
+                        gamePenalty=[];
+            PenaltyMultiplier--;
+             penaltyCount=0;
+            break;
+            default:
+            break;
 
-    output='You have lost. Try again'
-    reinitialised();
+    }
+
+
 }
 else{
 
