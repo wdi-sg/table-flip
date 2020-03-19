@@ -41,7 +41,18 @@ let deleteString = function(string, array){
 	array.splice(i, 1)
 }
 
+//hint function showing correct guesses, returns _ for each unknown letter in the word
+let hint = function(word, guess){
+	for (i = 0, i < word.length < i++){
+		if (word[i] !== guess) {
+			word[i] = '_';
+		}
+	}
+}
 
+
+
+//userInput function
 var inputHappened = function(currentInput){
   	if (letterCheck(currentInput, secretWord)){
 	  	correctEntries.push(currentInput);
