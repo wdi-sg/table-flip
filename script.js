@@ -138,7 +138,7 @@ var inputHappened = function(currentInput){
 
     else {
         initialize();
-        return `${currentTable}, you have made ${wrongGuesses} wrong guesses.`
+        return `${currentTable.join("")}, you have made ${wrongGuesses} wrong guesses.`
     }
 
 };
