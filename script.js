@@ -41,12 +41,42 @@ var correctGuessTimes=0;
 var correctLetters;
 var correctCount=0;
 var correctWord="cat"
+var responseCount=0;
+var responseType;
+
+
 var inputHappened = function(currentInput){
-createBlanky();
+if(responseCount===0)
+{
+    responseType=currentInput;
+
+    output="admin mode. Key words to enter into game. Type endadmin to end";
+    responseCount++;
+}
+console.log(responseType);
+if(responseType==='admin')
+{
+    if(currentInput!=='endadmin'){
+        var newKeyWord=currentInput.split("");
+        userGuess.push(newKeyWord);
+        console.log(userGuess);
+
+    }
+    else
+    {
+        responseType='endadmin';
+        responseCount++;
+    }
+}
+    createBlanky();
+
+
 
 //maxRight=userGuess[round].length;
 //console.log(maxRight);
-currentInput=currentInput.toLowerCase();
+if((responseCount>1&&responseType==='endadmin')||responseType==='play')
+{
+    currentInput=currentInput.toLowerCase();
 for(var i=0;i<userGuess[round].length;i++)
 {
 
@@ -137,7 +167,7 @@ else{
     console.log(blankyBracket);
     output=`You have guessed the letters "${blankyBracket.join(' ')}"correctly. \n You have ${userGuess[round].length} letters left.  \n Current penalty table is ${gamePenalty}. \n  You have ${maxGamePenalty.length-gamePenalty.length} tries left.`;
     blankyBracket=[];
-}
+}}
 
 
 //        console.log(gamePenalty);
@@ -145,7 +175,7 @@ else{
 
   return output;
 };
-
+alert("Type admin to key in words. Else play to play.");
 
 var createBlanky=function(){
 
