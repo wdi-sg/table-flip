@@ -1,16 +1,19 @@
 console.log("hello script js");
-
-var secretWord = [
-  ['c','a','t'],
-  ['d','o','g','g','y'],
-  ['a','l','p','h','a','b','e','t']
-];
-var tableFlip = ['(', '╯', 'ರ',  '~',  'ರ', '╯', '︵',  '┻', '━', '┻'];
+var word1 = "cat";
+var word2 = "doggy";
+var word3 = "alphabet";
+var tableFlipFull = "(╯ರ ~ ರ）╯︵ ┻━┻"
+var secretWord = [];
+var tableFlip = tableFlipFull.split("");
 var rightCounter = 0;
 var wrongCounter = 0;
 var currentTableFlip = [];
 var guessedRightLetters = [];
 var tableFlipLength = tableFlip.length;
+
+secretWord[0] = word1.split("");
+secretWord[1] = word2.split("");
+secretWord[2] = word3.split("");
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
