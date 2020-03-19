@@ -15,9 +15,20 @@ When the whole figure is completed then the user loses.
 */
 
 console.log("hello script js");
+word1='cat';
+array1=word1.split('');
+word2='doggy';
+array2=word2.split('');
+word3='alphabet';
+array3=word3.split('');
+var secretWord= [array1,
+    array2,
+    array3];
 
-var secretWord= [ 'c', 'a', 't'];
-var userGuess = ['c', 'a', 't'];
+var userGuess = [array1,
+    array2,
+    array3];
+var round=0;
 var correctLetters=[];
 var maxGamePenalty= ["(", "╯", "ರ", "~", "ರ", "）", "╯", "︵", "┻", "━", "┻"];
 var gamePenalty=[];
@@ -27,15 +38,18 @@ var correctLetters;
 var correctCount=0;
 
 var inputHappened = function(currentInput){
+
 currentInput=currentInput.toLowerCase();
 for(var i=0;i<userGuess.length;i++)
 {
 
-    if(userGuess[i]===currentInput)
+    if(userGuess[round][i]===currentInput)
     {
+        console.log(userGuess[round][i]);
 
-            correctGuess=userGuess[i];
-            userGuess.splice(i,1);
+            correctGuess=userGuess[round][i];
+
+            userGuess[round].splice(i,1);
             correctLetters.push(correctGuess);
 
             correctCount=1;
@@ -47,9 +61,18 @@ penaltyCheck();
 
 
 correctCount=0;
-if(userGuess.length===0){
-        output=`You have guessed all the letters correctly. Well done. Try again`;
-        reinitialised();
+if(userGuess[round].length===0){
+    round++;
+    if (round<userGuess.length)
+    {
+        output=`Round ${round}. \n  You have ${maxGamePenalty.length-gamePenalty.length} tries left.`
+            correctLetters=[];
+    }
+
+        else
+        {
+            output=`You have guessed all the letters correctly. Well done. Try again`;
+                reinitialised();}
 
 }
 else
@@ -58,7 +81,7 @@ if(gamePenalty.length===maxGamePenalty.length){
     reinitialised();
 }
 else{
-    output=`You have guessed the letters "${correctLetters.join(' ')}"correctly.  \n Current penalty table is ${gamePenalty}. \n  You have ${maxGamePenalty.length-gamePenalty.length} tries left.`;
+    output=`You have guessed the letters "${correctLetters.join('')}"correctly. \n You have ${userGuess[round].length} letters left.  \n Current penalty table is ${gamePenalty}. \n  You have ${maxGamePenalty.length-gamePenalty.length} tries left.`;
 }
 
         console.log(userGuess);
@@ -86,4 +109,5 @@ var reinitialised=function(){
             userGuess=secretWord;
         gamePenalty=[];
         penaltyCount=0;
+        round=0;
 }
