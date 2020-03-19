@@ -1,13 +1,15 @@
 console.log("hello script js");
 
 //Setting up variables to use
-var secretWord = ['c','a','t'];
+var secretWords = [['c','a','t'], ['d','o','g','g','y'], ['a','l','p','h','a','b','e','t']]
+var currentLevel = 0;
+var secretWord = secretWords[currentLevel];
 var tableFlip = ['(', '╯', 'ರ', '~', 'ರ',')', '╯', '︵', ' ', '┻', '━', '┻'];
 var currentTableFlip = [];
 var correctlyGuessedLetters = [];
 var wronglyGuessedLetters = 0;
 
-document.querySelector('#output').innerText = "Please pick a letter";
+document.querySelector('#output').innerText = `Please pick a letter. You cannot guess the same letter twice.\n\nThere are three levels to this game.\n\nYou are on level ${currentLevel + 1}`;
 //function to check if letter is correct
 //could alternatively use a loop, but this seems more concise
 var letterCheck = function(letter){
@@ -45,7 +47,14 @@ var inputHappened = function(currentInput){
     }
 //if letter is correct, and game is won
     else if (letterIsCorrect && secretWord.length === 0){
-        output = `You have won! Congratulations! The secret word was.... \n\n cat!`;
+        if (currentLevel !== 2){
+            output = `You have won! Congratulations! The secret word was.... \n\n${secretWords[currentLevel].join("")}! \n\nOnto level ${currentLevel + 2}`;
+            currentLevel++;
+            secretWord = secretWords[currentLevel];
+            correctlyGuessedLetters = [];
+        } else {
+            output = `You have won the final level! Congratulations! The secret word was.... \n\n ${secretWords[currentLevel].join("")}!`
+        }
     }
 //if letter is wrong, but game is not lost
     else if (!letterIsCorrect && currentTableFlip.length < tableFlip.length){
