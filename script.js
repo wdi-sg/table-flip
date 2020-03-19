@@ -17,20 +17,21 @@ var inputHappened = function(currentInput){
         if(flip != 0){
             if(secretWord != 0){
                 for (x = 0; x < secretWord.length ; x++){
-                    if(currentInput === secretWord[x]){
+                    console.log(secretWord.length);
+                    if(currentInput == secretWord[x]){
                         correctWord = correctWord + secretWord[x];
                         secretWord.splice(x,1);
                         console.log(correctWord);
                         console.log(secretWord);
                         return "Congratulations! You found " + correctWord ;
                     }
-                    else{
+                }
+                if(currentInput != secretWord[x]){
                         wrongWord = wrongWord + flip.shift();
                         console.log(flip + 'flip');
                         console.log(wrongWord);
                         return wrongWord;
                     }
-                }
             }
             else if (secretWord == 0){
                     return 'Congratulations! You found them all! The word is ' + correctWord + '!';
