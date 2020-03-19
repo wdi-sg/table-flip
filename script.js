@@ -1,7 +1,11 @@
 console.log("hello script js");
 
 //Setting up variables to use
-var secretWords = [['c','a','t'], ['d','o','g','g','y'], ['a','l','p','h','a','b','e','t']]
+var wordLevelOne = "cat";
+var wordLevelTwo = "doggy";
+var wordLevelThree = "alphabet";
+
+var secretWords = [wordLevelOne.split(''), wordLevelTwo.split(''), wordLevelThree.split('')]
 var currentLevel = 0;
 var secretWord = secretWords[currentLevel];
 var tableFlip = ['(', '╯', 'ರ', '~', 'ರ',')', '╯', '︵', ' ', '┻', '━', '┻'];
@@ -53,7 +57,7 @@ var inputHappened = function(currentInput){
             secretWord = secretWords[currentLevel];
             correctlyGuessedLetters = [];
         } else {
-            output = `You have won the final level! Congratulations! The secret word was.... \n\n ${secretWords[currentLevel].join("")}!`
+            output = `You have won the final levels! Congratulations! The secret word was.... \n\n ${secretWords[currentLevel].join("")}!`
         }
     }
 //if letter is wrong, but game is not lost
