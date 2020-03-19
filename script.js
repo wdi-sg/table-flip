@@ -10,10 +10,12 @@ var currentLevel = 0;
 var secretWord = secretWords[currentLevel];
 var tableFlip = ['(', '╯', 'ರ', '~', 'ರ',')', '╯', '︵', ' ', '┻', '━', '┻'];
 var currentTableFlip = [];
-var correctlyGuessedLetters = [];
-var wronglyGuessedLetters = 0;
+var correctlyGuessedLetters = new Array(secretWord.length).fill('_');
 
-document.querySelector('#output').innerText = `Please pick a letter. You cannot guess the same letter twice.\n\nThere are three levels to this game.\n\nYou are on level ${currentLevel + 1}`;
+var wrongLetterCounter = 0;
+var correctLetterCounter = 0;
+
+document.querySelector('#output').innerText = `Please pick a letter.\n\nThere are three levels to this game.\n\nYou are on level ${currentLevel + 1}`;
 //function to check if letter is correct
 //could alternatively use a loop, but this seems more concise
 var letterCheck = function(letter){
@@ -38,26 +40,32 @@ var inputHappened = function(currentInput){
 
 //if letter is correct, or not
     if (letterIsCorrect){
-        correctlyGuessedLetters.push(currentInput);
-        secretWord = secretWord.filter(letter => letter !== currentInput);
+        //iterate over secretWord again
+        for (let i = 0; i < secretWord.length; i++){
+            if (secretWord[i] === currentInput){
+                correctlyGuessedLetters[i] = currentInput;
+                correctLetterCounter++;
+            }
+        }
     } else {
-        currentTableFlip.push(tableFlip[wronglyGuessedLetters])
-        wronglyGuessedLetters++;
+        currentTableFlip.push(tableFlip[wrongLetterCounter])
+        wrongLetterCounter++;
     }
 
  //if letter is correct, but game is not won
-    if (letterIsCorrect && secretWord.length > 0){
+    if (letterIsCorrect && correctLetterCounter < secretWord.length){
         output = `You guessed right! These are the letters you have guessed right so far \n ${correctlyGuessedLetters.join(' ')}`;
     }
 //if letter is correct, and game is won
-    else if (letterIsCorrect && secretWord.length === 0){
+    else if (letterIsCorrect && correctLetterCounter === secretWord.length){
         if (currentLevel !== 2){
-            output = `You have won! Congratulations! The secret word was.... \n\n${secretWords[currentLevel].join("")}! \n\nOnto level ${currentLevel + 2}`;
+            output = `You have won! Congratulations! The secret word was.... \n\n${correctlyGuessedLetters.join("")}! \n\nOnto level ${currentLevel + 2}`;
             currentLevel++;
             secretWord = secretWords[currentLevel];
-            correctlyGuessedLetters = [];
+            correctlyGuessedLetters = new Array(secretWord.length).fill('_');
+            correctLetterCounter = 0;
         } else {
-            output = `You have won the final levels! Congratulations! The secret word was.... \n\n ${secretWords[currentLevel].join("")}!`
+            output = `You have won the final levels! Congratulations! The secret word was.... \n\n ${correctlyGuessedLetters.join("")}!`
         }
     }
 //if letter is wrong, but game is not lost
@@ -66,11 +74,11 @@ var inputHappened = function(currentInput){
     }
 //if letter is wrong, and game is lost
     else if (!letterIsCorrect && currentTableFlip.length === tableFlip.length) {
-        output = `${currentTableFlip.join('')} \n Game Over!`
+        output = `${currentTableFlip.join('')} \n Game Over!`;
     }
 //error catch
     else {
-        output = "error in main function"
+        output = "error in main function";
     }
 
     clearInput();
