@@ -165,7 +165,7 @@ else{
         }
     }
     console.log(blankyBracket);
-    output=`You have guessed the letters "${blankyBracket.join(' ')}"correctly. \n You have ${userGuess[round].length} letters left.  \n Current penalty table is ${gamePenalty}. \n  You have ${maxGamePenalty.length-gamePenalty.length} tries left.`;
+    output=`You have guessed the letters "${correctLetters}" correctly.\n " This is a clue where the letter is positioned: ${blankyBracket.join(' ')}. \n You have ${userGuess[round].length} letters left.  \n Current penalty table is ${gamePenalty}. \n  You have ${maxGamePenalty.length-gamePenalty.length} tries left.`;
     blankyBracket=[];
 }}
 
