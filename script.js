@@ -44,7 +44,7 @@ var inputHappened = function(currentInput){
         if(wrongCounter < tableFlipLength){
             wrongCounter = wrongCounter + 1;
             currentTableFlip.push(tableFlip.shift());
-            return currentTableFlip;
+            return currentTableFlip.join('');
 
     }
     return "Game is over";
