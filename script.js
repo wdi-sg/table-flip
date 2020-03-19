@@ -8,7 +8,9 @@ var wordLevelThree = "alphabet";
 var secretWords = [wordLevelOne.split(''), wordLevelTwo.split(''), wordLevelThree.split('')]
 var currentLevel = 0;
 var secretWord = secretWords[currentLevel];
-var tableFlip = ['(', '╯', 'ರ', '~', 'ರ',')', '╯', '︵', ' ', '┻', '━', '┻'];
+var tableFlip = ['┳','━','┳',
+                 '(','ರ', '~', 'ರ', '）', '┳', '━', '┳',
+                 '(', '╯', 'ರ', '~', 'ರ',')', '╯', '︵', ' ', '┻', '━', '┻'];
 var currentTableFlip = [];
 var correctlyGuessedLetters = new Array(secretWord.length).fill('_');
 
@@ -48,6 +50,9 @@ var inputHappened = function(currentInput){
             }
         }
     } else {
+        if (wrongLetterCounter === 3 || wrongLetterCounter === 11){
+            currentTableFlip =[];
+        }
         currentTableFlip.push(tableFlip[wrongLetterCounter])
         wrongLetterCounter++;
     }
@@ -69,16 +74,16 @@ var inputHappened = function(currentInput){
         }
     }
 //if letter is wrong, but game is not lost
-    else if (!letterIsCorrect && currentTableFlip.length < tableFlip.length){
+    else if (!letterIsCorrect && currentTableFlip.length < 12){
         output = currentTableFlip.join('');
     }
 //if letter is wrong, and game is lost
-    else if (!letterIsCorrect && currentTableFlip.length === tableFlip.length) {
+    else if (!letterIsCorrect && currentTableFlip.length === 12) {
         output = `${currentTableFlip.join('')} \n Game Over!`;
     }
 //error catch
     else {
-        output = "error in main function";
+        output = "Try Again?";
     }
 
     clearInput();
