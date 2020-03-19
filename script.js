@@ -17,6 +17,8 @@ var correctlyGuessedLetters = new Array(secretWord.length).fill('_');
 var wrongLetterCounter = 0;
 var correctLetterCounter = 0;
 
+var adminMode = false;
+
 document.querySelector('#output').innerText = `Please pick a letter.\n\nThere are three levels to this game.\n\nYou are on level ${currentLevel + 1}`;
 //function to check if letter is correct
 //could alternatively use a loop, but this seems more concise
@@ -36,6 +38,23 @@ var inputHappened = function(currentInput){
     console.log( currentInput );
 
     var output;
+
+//admin mode functionality
+    if (currentInput === "admin"){
+        adminMode = true;
+        clearInput();
+        return "You are now in admin mode. Key in words to add different levels"
+    }
+    if (adminMode === true){
+        if (currentInput === "endadmin"){
+            adminMode = false;
+            clearInput();
+            return "Left admin mode";
+        }
+        secretWords.push(currentInput.split(''))
+        clearInput();
+        return `Feel free to key in more words. There are ${secretWords.length} levels now`;
+    }
 
 //checking if letter is correct
     var letterIsCorrect = letterCheck(currentInput);
@@ -63,14 +82,14 @@ var inputHappened = function(currentInput){
     }
 //if letter is correct, and game is won
     else if (letterIsCorrect && correctLetterCounter === secretWord.length){
-        if (currentLevel !== 2){
+        if (currentLevel !== secretWords.length - 1){
             output = `You have won! Congratulations! The secret word was.... \n\n${correctlyGuessedLetters.join("")}! \n\nOnto level ${currentLevel + 2}`;
             currentLevel++;
             secretWord = secretWords[currentLevel];
             correctlyGuessedLetters = new Array(secretWord.length).fill('_');
             correctLetterCounter = 0;
         } else {
-            output = `You have won the final levels! Congratulations! The secret word was.... \n\n ${correctlyGuessedLetters.join("")}!`
+            output = `You have won the final level! Congratulations! The secret word was.... \n\n ${correctlyGuessedLetters.join("")}!\n\nRefresh the page to reset the game`
         }
     }
 //if letter is wrong, but game is not lost
