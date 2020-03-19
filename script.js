@@ -14,7 +14,7 @@ When the whole figure is completed then the user loses.
 
 */
 
-console.log("hello script js");
+//console.log("hello script js");
 word1='cat';
 array1=word1.split('');
 word2='doggy';
@@ -24,42 +24,50 @@ array3=word3.split('');
 var secretWord= [array1,
     array2,
     array3];
-
+var wordOfTheRound;
 var userGuess = [array1,
     array2,
     array3];
 var round=0;
+var blankyBracket=[];
 var correctLetters=[];
 var maxGamePenalty= ["(", "╯", "ರ", "~", "ರ", "）", "╯", "︵", "┻", "━", "┻"];
+var PenaltyMultiplier=3;
+var maxRight;
+var rightPoints=0;
 var gamePenalty=[];
 var penaltyCount=0;
-var correctGuess;
+var correctGuessTimes=0;
 var correctLetters;
 var correctCount=0;
-
+var correctWord="cat"
 var inputHappened = function(currentInput){
+createBlanky();
 
+//maxRight=userGuess[round].length;
+//console.log(maxRight);
 currentInput=currentInput.toLowerCase();
-for(var i=0;i<userGuess.length;i++)
+for(var i=0;i<userGuess[round].length;i++)
 {
 
     if(userGuess[round][i]===currentInput)
     {
-        console.log(userGuess[round][i]);
+
 
             correctGuess=userGuess[round][i];
-
             userGuess[round].splice(i,1);
             correctLetters.push(correctGuess);
-
+//            console.log(correctGuess);
+//            console.log(userGuess.round);
             correctCount=1;
+            //correctGuessTimes++;
     }
 
 
 }
 penaltyCheck();
 
-
+//console.log(correctGuessTimes);
 correctCount=0;
 if(userGuess[round].length===0){
     round++;
@@ -67,6 +75,10 @@ if(userGuess[round].length===0){
     {
         output=`Round ${round}. \n  You have ${maxGamePenalty.length-gamePenalty.length} tries left.`
             correctLetters=[];
+            correctGuessTimes=0;
+            blankyBracket=[];
+            correctWord=userGuess[round].join("");
+            console.log(correctWord);
     }
 
         else
@@ -77,19 +89,50 @@ if(userGuess[round].length===0){
 }
 else
 if(gamePenalty.length===maxGamePenalty.length){
+
     output='You have lost. Try again'
     reinitialised();
 }
 else{
-    output=`You have guessed the letters "${correctLetters.join('')}"correctly. \n You have ${userGuess[round].length} letters left.  \n Current penalty table is ${gamePenalty}. \n  You have ${maxGamePenalty.length-gamePenalty.length} tries left.`;
+
+
+    console.log(correctWord);
+    console.log(correctLetters);
+    var LetterArray=correctWord.split('');
+    console.log(LetterArray);
+    for(var m=0;m<correctLetters.length;m++)
+    {
+        for(var n=0;n<LetterArray.length;n++)
+        {
+            if(correctLetters[m]===LetterArray[n])
+            {
+                blankyBracket[n]=LetterArray[n];
+            }
+            else
+            {
+                blankyBracket[n]="_";
+            }
+        }
+    }
+    console.log(blankyBracket);
+    output=`You have guessed the letters "${blankyBracket.join(' ')}"correctly. \n You have ${userGuess[round].length} letters left.  \n Current penalty table is ${gamePenalty}. \n  You have ${maxGamePenalty.length-gamePenalty.length} tries left.`;
+    blankyBracket=[];
 }
 
-        console.log(userGuess);
-        console.log(gamePenalty);
-        console.log(penaltyCount);
+
+//        console.log(gamePenalty);
+//        console.log(penaltyCount);
 
   return output;
 };
+
+
+var createBlanky=function(){
+
+}
+
+
+
 
 var penaltyCheck=function(){
     if(correctCount!==1){
@@ -110,4 +153,6 @@ var reinitialised=function(){
         gamePenalty=[];
         penaltyCount=0;
         round=0;
+        correctGuess=0;
+        PenaltyMultiplier=3;
 }
