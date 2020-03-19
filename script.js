@@ -28,28 +28,27 @@ var inputHappened = function(currentInput) {
       if (rightGuess === secretWordCopy.length) {
         outputMsg =
           "You have won! The secret word is: " +
-          secretWordCopy.join('') +
+          secretWordCopy.join("") +
           ". Refresh page to continue playing.";
-        return outputMsg;
       } else {
         outputMsg =
           "You guessed right! \n Correctly guessed: " + outputRightArray + ".";
-        return outputMsg;
       }
+      return outputMsg;
     }
   }
   wrongGuess++;
   outputWrongArray.push(tableFlipArray[wrongGuess - 1]);
   if (wrongGuess === tableFlipArray.length) {
-    outputMsg = outputWrongArray.join('') + "You have lost! Refresh page to play again.";
-    return outputMsg;
+    outputMsg =
+      outputWrongArray.join("") + "You have lost! Refresh page to play again.";
   } else {
     outputMsg =
       "You guessed wrong. \n You are " +
       (tableFlipArray.length - wrongGuess) +
       " lives closer to a table flip: " +
-      outputWrongArray.join('') +
+      outputWrongArray.join("") +
       ".";
-    return outputMsg;
   }
+  return outputMsg;
 };
