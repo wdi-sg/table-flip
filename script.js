@@ -10,16 +10,17 @@ let flippedCharacters = [];
 let gameBoard = [];
 let gameBoardStr = "";
 
+String.prototype.replaceAt=function(index, replacement) {
+  return this.substr(-1, index) + replacement+ this.substr(index + replacement.length);
+};
 const sanitizeInput = input => input.trim();
 const isGameOver = lifePoints => lifePoints === 0;
-
 const isUserWon = (guessedWords, secretWords) => correctGuesses.length === secretWords.flat()
   .reduce((totalLength, word) => totalLength = totalLength + word.length, 0);
-
 const getCurrentGuessChar = userGuess => userGuess.charAt(userGuess.length - 1);
-const madeAcorrectGuess = (userGuess, secretWords) => secretWords.some(word => word.includes(userGuess));
+const madeCorrectGuess = (userGuess, secretWords) => secretWords.some(word => word.includes(userGuess));
 /* === long version ===
-* function makeAcorrectGuess (userGuess, secretWords) {
+* function makeCorrectGuess (userGuess, secretWords) {
 *   for (let i = 0; i < secretWords.length; i++ ) {
 *     let word = secretWords[i]
 *     for (let j = 0; j <  word.length; j++) {
@@ -28,8 +29,7 @@ const madeAcorrectGuess = (userGuess, secretWords) => secretWords.some(word => w
 *     }
 *   }
 * */
-const isWrongGuess = (userGuess, secretWords) => !madeAcorrectGuess(userGuess, secretWords);
-
+const isWrongGuess = (userGuess, secretWords) => !madeCorrectGuess(userGuess, secretWords);
 // displays letter place holders at start of game
 const formatGameBoard = gameBoard => gameBoard.join("<br>");
 const replaceBrByNewLine = gameBoardStr => gameBoardStr.replace(/<br>/g,"\n");
@@ -41,11 +41,8 @@ const initGameBoard = secretWordsArr => {
 const isAdminMode = input => input === "admin";
 const isEndAdminMode = input=> input === "endadmin";
 
-String.prototype.replaceAt=function(index, replacement) {
-  return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
-};
 const updateOutput = (outputStr => document.getElementById('output').textContent = outputStr);
-const resetInputBox = input => document.getElementById('input').value="";
+const resetInputBox = () => document.getElementById('input').value="";
 
 /* update gamebaord to replace correct guesses with the right letter */
 const updateGameBoard = userGuess => {
@@ -73,6 +70,12 @@ const updateGameBoard = userGuess => {
 
 initGameBoard(secretWordsArr);
 
+const updateSecretWords= userInput => {
+  secretWordsArr.concat(',', userInput);
+  secretWordsArr = secretWordsStr.split(',');
+  SECRET_WORDS = secretWordsArr.map(word => word.split(''));
+};
+
 const inputHappened = function (currentInput) {
   // assumptions:
   // - user types one letter at a time | guess character is always last letter of input
@@ -82,9 +85,7 @@ const inputHappened = function (currentInput) {
 
   if (isAdminMode(userInput)) {
     while(!isEndAdminMode(userInput)) {
-      secretWordsArr.concat(',', userInput);
-      secretWordsArr = secretWordsStr.split(',');
-      SECRET_WORDS = secretWordsArr.map(word => word.split(''));
+      updateSecretWords(userInput);
       userInput = "";
       updateOutput(`Admin Mode:\\n
             Your current secret words: ${secretWordsArr}\\n
@@ -101,7 +102,7 @@ const inputHappened = function (currentInput) {
   if (isGameOver(numGuessChancesLeft)) return "Game Over!\n" + gameBoardStr;
   if (isUserWon(correctGuesses, SECRET_WORDS)) return "You Won!\n" + gameBoardStr;
 
-  if (madeAcorrectGuess(userGuess, SECRET_WORDS)) {
+  if (madeCorrectGuess(userGuess, SECRET_WORDS)) {
     correctGuesses.push(userGuess);
     updateGameBoard(userGuess);
     return `You made a correct guess\n ${flippedCharacters.join('')} \n ${gameBoardStr}`;
