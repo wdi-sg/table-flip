@@ -57,7 +57,6 @@ const updateGameBoard = userGuess => {
     }
   }
   if (wordIndex!==null && letterIndex !== null) {
-    console.log(wordIndex,letterIndex);
     gameBoard[wordIndex][letterIndex] = userGuess;
   }
 
