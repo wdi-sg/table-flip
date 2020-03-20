@@ -76,9 +76,10 @@ for (var i=0; i<secretWord.length; i++){
     }
 }
 
-var correctLetters = []
+var correctLetters = [[],[],[]];
+
 var flipTable = ['(', '╯', 'ರ', ' ~', ' ರ', '）', '╯', '︵', ' ┻', '━', '┻'];
-var currentTable = []
+var currentTable = [];
 var wrongGuesses = 0;
 
 var initialize = function(){
@@ -94,17 +95,24 @@ var inputHappened = function(currentInput){
 
         for (var e=0; e<secretWord[i].length; e++){
 
-            console.log(secretWord[i][e]);
+            //if letter correct but currentTable already has that letter
+            if (secretWord[i][e] === currentInput && secretWord[i][e] === correctLetters[i][e]) {
+                continue;
+            }
+
 
             //if letter correct
-            if(secretWord[i][e] === currentInput){
+            else if(secretWord[i][e] === currentInput){
 
                 //remove letter from secretWord
-                secretWord[i].splice(e, 1);
-                console.log(secretWord);
+                // secretWord[i].splice(e, 1);
+                // console.log(secretWord);
 
-                //add letter to array and print array
-                correctLetters.push(currentInput);
+                //add letter to array in exact order and prin t array
+                console.log('i is: ' + i);
+                console.log('e is: ' + e);
+                correctLetters[i][e] = currentInput;
+                console.log(correctLetters);
 
                 //check if player won
                 if (correctLetters.length === totalLetters) {
@@ -115,7 +123,8 @@ var inputHappened = function(currentInput){
                 else{
                 // print message
                     initialize();
-                    return `you guessed right! your correct letters are ${correctLetters}`
+                    console.log(correctLetters);
+                    return `you guessed right! your correct letters are ${correctLetters.join()}`
                 }
 
             }
