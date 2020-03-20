@@ -13,6 +13,7 @@ var secretWordBackup = arrayBackup(secretWord);
 var tableFlip = ['(', '╯', 'ರ', '~', 'ರ', ')', '╯', '︵', '┻', '━', '┻'];
 var tableFlipBackup = arrayBackup(tableFlip);
 var correctGuessDisplay = new Array(secretWordBackup.length).fill("_");
+var tableFlipDisplay = [];
 
 var pickSecretWord = () => {
     secretWord = secretWords[(Math.floor(Math.random() * secretWords.length))];
@@ -37,21 +38,21 @@ var inputHappened = function(currentInput){
        return guessValue;
     }
 
-    var resetUponWinLose = (arr, arr2) => {
+    var resetUponWinLose = (arr) => {
             arr.length = 0;
             for (var i = 0; i < secretWordBackup.length; i++) {
                 arr.push(secretWordBackup[i]);
             }
 
-            arr2.length = 0;
-            for (var i = 0; i < tableFlipBackup.length; i++) {
-                arr2.push(tableFlipBackup[i]);
-            }
-
-            // gameEnd = false;
             correctlyGuessed.length = 0;
             wronglyGuessed.length = 0;
-        }
+            tableFlipDisplay.length = 0;
+
+            tableFlip.length = 0;
+            for (i = 0; i < tableFlipBackup.length; i++) {
+                tableFlip.push(tableFlipBackup[i]);
+            }
+    }
 
     var gameHandler = arr => {
         if (guessValue) {
@@ -74,29 +75,30 @@ var inputHappened = function(currentInput){
 
             if (correctGuessDisplay.indexOf("_") === -1) {
                 gameEnd = true;
-                resetUponWinLose(secretWord, tableFlip);
+                resetUponWinLose(secretWord);
                 return `Congratulations! You've guessed the secret word ${secretWord.join('')}!`;
             } else {
                 return `Good guess!` +
                 `\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')} `;
             }
 
-        } else if (tableFlip.length > 1) {
-            tableFlip.length--;
+        } else if ((tableFlipBackup.length - wronglyGuessed.length) > 1) {
             wronglyGuessed.push(currentInput.toLowerCase());
-            return `┳━┳\nWrong. Guess again. ${tableFlip.length} guesses left.` +
-            `\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')} `;
+            tableFlipDisplay.push(tableFlip.shift());
+            return `┳━┳\nWrong. Guess again. ${tableFlipBackup.length - wronglyGuessed.length} guesses left.` +
+            `\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')}\n${tableFlipDisplay.join(' ')}`;
 
-        } else if (tableFlip.length === 1) {
+        } else if ((tableFlipBackup.length - wronglyGuessed.length) === 1) {
             tableFlip.length--;
             wronglyGuessed.push(currentInput.toLowerCase());
-            return `(ರ ~ ರ）┳━┳\nFinal guess. ` + `\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')} `;
+            tableFlipDisplay.push(tableFlip.shift());
+            return `(ರ ~ ರ）┳━┳\nFinal guess. ` + `\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')} \n${tableFlipDisplay.join(' ')}`;
 
         } else {
             wronglyGuessed.push(currentInput.toLowerCase());
             gameEnd = true;
-            resetUponWinLose(secretWord, tableFlip);
-            return `(╯ರ ~ ರ）╯︵ ┻━┻\nOut of guesses, you suck at this. ` + `\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')} `;
+            resetUponWinLose(secretWord);
+            return `(╯ರ ~ ರ）╯︵ ┻━┻\nOut of guesses, you suck at this. ` + `\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')} \n${tableFlipDisplay.join(' ')}`;
         }
 
     }
@@ -106,6 +108,7 @@ var inputHappened = function(currentInput){
         gameEnd = false;
         refresh = false;
         return `Guess the word: ${correctGuessDisplay.join(' ')}`;
+
     } else if (regex.test(currentInput) === false) {
         return `Please enter only alphabets.\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')} `
 
