@@ -1,38 +1,40 @@
 const secretWord = ["c", "a", "t"];
 const wrongAnswerCaracter = ["(╯", "ರ~", "ರ）", "╯︵", "┻━┻"];
+const correctLetters = [];
+const wrongLetters = [];
 
-// let valueWronLetters = parseInt(wrongLetters.length)
+let correctAnswer = function(letterUser) {
+  return (
+    "You have guessed correct, there is" +
+    " " +
+    letterUser +
+    " in the secret word"
+  );
+};
+let wrongAnswer = function(letterUser) {
+  return (
+    "Sorry, there is no" + " " + letterUser + " in the secret word, try again"
+  );
+};
 
-var inputHappened = function(currentInput) {
-  const correctLetters = [];
-  const wrongLetters = [];
-  let findLetter = function(array, letterUser) {
-    for (i = 0; i < array.length; i++) {
-      if (array[i] === letterUser) {
-        return i;
-             
-      } else {
-        return -1;
-      }
+let findLetter = function(array, letterUser) {
+  for (i = 0; i < array.length; i++) {
+    if (array[i] === letterUser) {
+      correctLetters.pop();
+      return correctAnswer(letterUser);
     }
-  };
-  //     document.getElementById("input").value = "";
-  if (wrongLetters.length <= wrongAnswerCaracter.length) {
-    findLetter(secretWord, currentInput);
-  } else {
-    return "Sorry you lost" + wrongAnswerCaracter;
+    wrongLetters.pop();
+    return wrongAnswer(letterUser);
   }
 };
-let correctAnswer = function(currentInput) {
-  return (
-    "You have guessed correct, there is a" +
-    " " +
-    currentInput +
-    "in the secret word"
-  );
-};
-let wrongAnswer = function(currentInput) {
-  return (
-    "Sorry, there is no" + " " + currentInput + "in the secret word, try again"
-  );
+
+var inputHappened = function(currentInput) {
+  if (wrongLetters.length < wrongAnswerCaracter.length) {
+    // if ((correctLetters.length === secretWord.length)) {
+    //   return "You Have won" + secretWord;
+    // }
+    return findLetter(secretWord, currentInput);
+  } else {
+    "sorry, you lost" + wrongAnswerCaracter;
+  }
 };
