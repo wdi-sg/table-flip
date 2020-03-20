@@ -8,6 +8,7 @@ var guess;
 var x, y;
 var control = false;
 var temp;
+var incorrectWord = [];
 var totalLength = secretWord[0].length + secretWord[1].length + secretWord[2].length;
 console.log(totalLength);
 
@@ -34,10 +35,11 @@ var inputHappened = function(currentInput){
                     }
                 }
                 if(currentInput != secretWord[x]){
+                        incorrectWord += currentInput;
                         wrongWord = wrongWord + flip.shift();
                         console.log(flip + 'flip');
                         console.log(wrongWord);
-                        return wrongWord;
+                        return incorrectWord + ' is not one of the letters. Try again. \n' + wrongWord;
                     }
             }
             else if (totalLength == 0){
