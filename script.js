@@ -50,13 +50,15 @@ function searchArray(enteredChar, array) {
         uniquePush(enteredChar, correctGuesses);
         console.log(`good guess ${correctGuesses}`);
         result = true;
-        outputMsg = (`${enteredChar} is correct.\nCorrect guesses so far: ${correctGuesses}.`)
+        var reactEmoji = partialWordBuilder(resultChar, (incorrectCounter-1));
+        outputMsg = (`${enteredChar} is correct.\nCorrect guesses so far: ${correctGuesses}\n Wrong guesses so far: ${wrongGuesses}\n${reactEmoji}`);
     } else {
         uniquePush(enteredChar, wrongGuesses);
         console.log(`wrong guess ${wrongGuesses}`);
         incorrectCounter = incorrectCounter + 1;
         if (incorrectCounter <= resultChar.length) {
-            outputMsg = partialWordBuilder(resultChar, (incorrectCounter-1));
+            var reactEmoji = partialWordBuilder(resultChar, (incorrectCounter-1));
+            outputMsg = (`${enteredChar} is wrong.\nCorrect guesses so far: ${correctGuesses}\n Wrong guesses so far: ${wrongGuesses}\n${reactEmoji}`);
         } else if (incorrectCounter > resultChar.length) {
             outputMsg = "Game Over!";
         }
