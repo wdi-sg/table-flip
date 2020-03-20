@@ -1,16 +1,16 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <div class="starter" id="output"></div>
-    <script>
-      var display = function(data){
-        var displayElement = document.querySelector('#output');
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h3>DOM Manipulation Template</h3>
+  <input class="starter" id="input" placeholder="input"/>
+  <h2>output:</h2>
+  <div class="starter" id="output"></div>
+  <script>
+    var display = function(data){
+      var displayElement = document.querySelector('#output');
 
         // get rid of the entire contents
         displayElement.innerHtml = "";
@@ -27,4 +27,4 @@
     </script>
     <script src="script.js" charset="utf-8"></script>
   </body>
-</html>
+  </html>
