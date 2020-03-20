@@ -44,8 +44,10 @@ const isEndAdminMode = input=> input === "endadmin";
 String.prototype.replaceAt=function(index, replacement) {
   return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
 };
+const updateOutput = (outputStr => document.getElementById('output').textContent = outputStr);
+const resetInputBox = input => document.getElementById('input').value="";
 
-// update gamebaord to replace correct guesses with the right letter
+/* update gamebaord to replace correct guesses with the right letter */
 const updateGameBoard = userGuess => {
   let wordIndex = null;
   let letterIndex = null;
@@ -67,7 +69,7 @@ const updateGameBoard = userGuess => {
   gameBoardStr = formatGameBoard(gameBoard);
   gameBoardStr = replaceBrByNewLine(gameBoardStr);
 };
-const resetInputBox = input => document.getElementById('input').value="";
+
 
 initGameBoard(secretWordsArr);
 
@@ -84,6 +86,9 @@ const inputHappened = function (currentInput) {
       secretWordsArr = secretWordsStr.split(',');
       SECRET_WORDS = secretWordsArr.map(word => word.split(''));
       userInput = "";
+      updateOutput(`Admin Mode:\\n
+            Your current secret words: ${secretWordsArr}\\n
+            You have added new word: ${userInput}\\n\``);
       resetInputBox();
     }
   }else {
