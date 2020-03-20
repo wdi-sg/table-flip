@@ -4,30 +4,29 @@ var secretWord = ["c", "a", "t"];
 
 var tableFlip = ["(", "╯", "ರ", " ~ ", "ರ", "）", "╯", "︵", "┻", "━", "┻"];
 
-array = [];
+checkArr = [];
 
 function userGuess(letter) {
     if (isNaN(letter)) {
         var i = 0;
         while (i<secretWord.length) {
-            if (letter === secretWord[i]) {
-                array.push(letter);
-                secretWord.splice(i, 1);
-                console.log(letter);
+            if (letter === secretWord[i] && !checkArr.includes(secretWord[i])) {
+                checkArr.push(secretWord[i]);
+                console.log(secretWord[i]);
             }
             i++;
         };
-    } else {
+        console.log(checkArr);
+        // return checkArr;
 
+    } else {
         return "not a letter."
 
     };
-    console.log(secretWord);
-    return array;
 };
 
 
 var inputHappened = function(currentInput){
-  output = userGuess(currentInput);
-  return output;
+  userGuess(currentInput);
+
 };
