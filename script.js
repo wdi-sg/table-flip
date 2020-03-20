@@ -5,12 +5,17 @@ var inputHappened = function(currentInput){
   return output;
 };
 
+var wordsStringRat = 'cat';
+var wordsArrayRat = wordsStringRat.split('');
 
-var words = [
-  ['c','a','t'],
-  ['d','o','g','g','y'],
-  ['a','l','p','h','a','b','e','t']
-];
+var wordsStringDoggy = 'doggy';
+var wordsArrayDoggy = wordsStringDoggy.split('');
+
+var wordsStringAlphabet = 'alphabet';
+var wordsArrayAlphabet = wordsStringAlphabet.split('');
+
+var words = [wordsArrayRat, wordsArrayDoggy, wordsArrayAlphabet];
+
 var tableFlip = ['(','╯','ರ',' ~',' ರ','）','╯','︵',' ┻','━','┻'];
 var removedLetterCat = [];
 var removedLetterDoggy = [];
@@ -39,7 +44,7 @@ var letterChecker = function (currentInput) {
                 case (i = 1):
                     for (var j = 0; j < words[1].length; j++) {
                         var wordsDoggy = words[1];
-                        if (words[1][j] === currentInput) {
+                        if (wordsDoggy[j] === currentInput) {
                             letterFoundDoggy = true;
                             wordsDoggy.splice(j,1);
                         }
