@@ -1,54 +1,45 @@
-const INPUT_FORMAT_ERR_MSG = "Please enter one letter at a time";
-
-const SECRET_WORD = "cat";
+const SECRET_WORDS = [
+  ['c', 'a', 't'],
+  ['d', 'o', 'g', 'g', 'y'],
+  ['a', 'l', 'p', 'h', 'a', 'b', 'e', 't']
+];
 let tableFlipCharacters = "(╯ರ ~ ರ）╯︵ ┻━┻".split(' ');
-
 let numGuessChancesLeft = tableFlipCharacters.length;
-let currentRound = 0;
-
-let userGuesses = [];
+let correctGuesses = [];
 let flippedCharacters = [];
 
 
 const sanitizeInput = input => input.trim();
+const isGameOver = lifePoints => lifePoints === 0;
 
-function isGameOver(lifePoints) {
-  return lifePoints === 0;
-}
+const isUserWon = (guessedWords, secretWords) => correctGuesses.length === secretWords.flat()
+  .reduce((totalLength, word) => totalLength = totalLength + word.length, 0);
 
-function isUserWon(userGuesses, secretWord) {
-  return secretWord === userGuesses.join('')
-}
-
-function madeAcorrectGuess(currentInput, secretWord) {
-  return secretWord.includes(currentInput);
-}
-
-function isWrongGuess(currentInput, secretWord) {
-  return !madeAcorrectGuess(currentInput, secretWord);
-}
-
-function getCurrentGuessChar(userGuess) {
-  return userGuess.charAt(userGuess.length - 1);
-}
+const getCurrentGuessChar = userGuess => userGuess.charAt(userGuess.length - 1);
+const madeAcorrectGuess = (userGuess, secretWords) => secretWords.some(word => word.includes(userGuess))
+const isWrongGuess = (userGuess, secretWords) => !madeAcorrectGuess(userGuess, secretWords);
 
 const inputHappened = function (currentInput) {
   // assumptions:
   // - user types in one letter at a time | guess character is always last letter of input
   // - user does not press backspace key to delete a typed character
+  // - letters in secret word do not repeat
 
   let userInput = sanitizeInput(currentInput);
   let userGuess = getCurrentGuessChar(userInput);
 
   if (isGameOver(numGuessChancesLeft)) return "Game Over!";
-  if (isUserWon(userGuesses, SECRET_WORD)) return "You Won!";
+  if (isUserWon(correctGuesses, SECRET_WORDS)) return "You Won!";
 
-  if (madeAcorrectGuess(userGuess, SECRET_WORD)) return "You made a correct guess";
-  if (isWrongGuess(userGuess, SECRET_WORD)) {
+  if (madeAcorrectGuess(userGuess, SECRET_WORDS)) {
+    correctGuesses.push(userGuess);
+    return "You made a correct guess";
+  }
+
+  if (isWrongGuess(userGuess, SECRET_WORDS)) {
     flippedCharacters.push(tableFlipCharacters.pop());
     numGuessChancesLeft--;
-    
-    return `You made a wrong guess. \n ${flippedCharacters.join('')}` ;
+    return `You made a wrong guess. \n ${flippedCharacters.join('')}`;
   }
 };
 
