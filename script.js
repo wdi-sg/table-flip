@@ -9,8 +9,6 @@ let correctGuesses = [];
 let flippedCharacters = [];
 let gameBoard = [];
 let gameBoardStr = "";
-let round = 0;
-
 
 const sanitizeInput = input => input.trim();
 const isGameOver = lifePoints => lifePoints === 0;
@@ -45,7 +43,7 @@ const isEndAdminMode = input=> input === "endadmin";
 
 String.prototype.replaceAt=function(index, replacement) {
   return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
-}
+};
 
 // update gamebaord to replace correct guesses with the right letter
 const updateGameBoard = userGuess => {
@@ -73,23 +71,22 @@ const resetInputBox = input => document.getElementById('input').value="";
 
 initGameBoard(secretWordsArr);
 
-
 const inputHappened = function (currentInput) {
   // assumptions:
   // - user types one letter at a time | guess character is always last letter of input
   // - user does not press backspace key to delete a typed character
   // - letters in secret word do not repeat
   let userInput = sanitizeInput(currentInput);
-  if (isEndAdminMode(userInput)) {
-    resetInputBox();
-    return "Existing admin mode."
-  }
+
   if (isAdminMode(userInput)) {
-    secretWordsArr.concat(',', userInput);
-    secretWordsArr = secretWordsStr.split(',');
-    SECRET_WORDS = secretWordsArr.map(word => word.split(''));
-    userInput = "";
-    resetInputBox();
+    while(!isEndAdminMode(userInput)) {
+      secretWordsArr.concat(',', userInput);
+      secretWordsArr = secretWordsStr.split(',');
+      SECRET_WORDS = secretWordsArr.map(word => word.split(''));
+      userInput = "";
+      resetInputBox();
+    }
+  }else {
     return `Admin Mode:\n
             Your current secret words: ${secretWordsArr}\n
             You have added new word: ${userInput}\n`;
