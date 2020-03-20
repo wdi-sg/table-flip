@@ -1,14 +1,26 @@
 document.getElementById("input").setAttribute("maxlength", "1");
 
-var generateSecretWord = (word) => {
-    secretWords.push(word.split(""));
-};
-
 var secretWords = [['c', 'a', 't'], ['d', 'o', 'g', 'g', 'y'], ['r', 'e', 'm', 'o', 't', 'e'], ['n', 'i', 'n', 'c', 'o', 'm', 'p', 'o', 'o', 'p'], ['p', 'o', 'p', 'p', 'y', 'c', 'o', 'c', 'k']];
 
-var secretWord = secretWords[(Math.floor(Math.random() * secretWords.length))];
+generateSecretWord = word => secretWords.push(word.split(""));
 
+var arrayBackup = (arr) => {
+    return arr.map(x => x)
+};
+
+var secretWord  = secretWords[(Math.floor(Math.random() * secretWords.length))]
+var secretWordBackup = arrayBackup(secretWord);
 var tableFlip = ['(', '╯', 'ರ', '~', 'ರ', ')', '╯', '︵', '┻', '━', '┻'];
+var tableFlipBackup = arrayBackup(tableFlip);
+var correctGuessDisplay = new Array(secretWordBackup.length).fill("_");
+
+var pickSecretWord = () => {
+    secretWord = secretWords[(Math.floor(Math.random() * secretWords.length))];
+    secretWordBackup = arrayBackup(secretWord);
+    tableFlipBackup = arrayBackup(tableFlip);
+    correctGuessDisplay = new Array(secretWordBackup.length).fill("_");
+}
+
 var guessValue;
 var refresh = true;
 var gameEnd;
@@ -16,15 +28,6 @@ var correctlyGuessed = [];
 var wronglyGuessed = [];
 
 var regex = RegExp(/[a-z]/i)
-
-var arrayBackup = arr => {
-    return arr.map(x => x);
-}
-
-var secretWordBackup = arrayBackup(secretWord);
-var tableFlipBackup = arrayBackup(tableFlip);
-
-var correctGuessDisplay = new Array(secretWordBackup.length).fill("_");
 
 //
 var inputHappened = function(currentInput){
@@ -48,8 +51,6 @@ var inputHappened = function(currentInput){
             // gameEnd = false;
             correctlyGuessed.length = 0;
             wronglyGuessed.length = 0;
-            secretWordBackup.length = 0
-            correctGuessDisplay.length = 0
         }
 
     var gameHandler = arr => {
@@ -74,7 +75,7 @@ var inputHappened = function(currentInput){
             if (correctGuessDisplay.indexOf("_") === -1) {
                 gameEnd = true;
                 resetUponWinLose(secretWord, tableFlip);
-                return `Congratulations! You've guessed the secret word ${secretWordBackup.join('')}!`;
+                return `Congratulations! You've guessed the secret word ${secretWord.join('')}!`;
             } else {
                 return `Good guess!` +
                 `\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')} `;
@@ -97,9 +98,11 @@ var inputHappened = function(currentInput){
             resetUponWinLose(secretWord, tableFlip);
             return `(╯ರ ~ ರ）╯︵ ┻━┻\nOut of guesses, you suck at this. ` + `\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')} `;
         }
+
     }
     //Validate User Input
     if (gameEnd === true || refresh === true) {
+        pickSecretWord();
         gameEnd = false;
         refresh = false;
         return `Guess the word: ${correctGuessDisplay.join(' ')}`;
@@ -109,6 +112,7 @@ var inputHappened = function(currentInput){
     } else if (correctGuessDisplay.includes(currentInput.toLowerCase()) ||
         wronglyGuessed.includes(currentInput.toLowerCase())) {
         return "You have made this guess before." + `\nCorrect Guesses: ${correctGuessDisplay.join(' ')}\nWrong Guesses: ${wronglyGuessed.join(' ')} `
+
     } else {
         checkInput(secretWord);
         return gameHandler(secretWord)
