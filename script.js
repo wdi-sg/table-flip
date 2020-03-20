@@ -10,11 +10,13 @@ var inputHappened = function(currentInput){
   console.log( currentInput );
 for (var i = 0; i < secretWord.length; i++) {
     if(currentInput === secretWord[i] && secretWord.length > 1) {
-        secretWord.pop();
+        secretWord.splice(i,1);
+        console.log("secretWord left: " + secretWord);
         var wordLeft = secretWord.length;
+        console.log('wordLeft is ' + wordLeft)
         return "One word down, " + wordLeft + " to go!";
     } else if (currentInput === secretWord[i] && secretWord.length <= 1) {
-        secretWord.pop();
+        secretWord.splice(i,1);
         return "You win!";
     }
 }
