@@ -5,8 +5,8 @@ var inputHappened = function(currentInput){
   return output;
 };
 
-var wordsStringRat = 'cat';
-var wordsArrayRat = wordsStringRat.split('');
+var wordsStringCat = 'cat';
+var wordsArrayCat = wordsStringCat.split('');
 
 var wordsStringDoggy = 'doggy';
 var wordsArrayDoggy = wordsStringDoggy.split('');
@@ -14,12 +14,12 @@ var wordsArrayDoggy = wordsStringDoggy.split('');
 var wordsStringAlphabet = 'alphabet';
 var wordsArrayAlphabet = wordsStringAlphabet.split('');
 
-var words = [wordsArrayRat, wordsArrayDoggy, wordsArrayAlphabet];
+var words = [wordsArrayCat, wordsArrayDoggy, wordsArrayAlphabet];
 
 var tableFlip = ['(','╯','ರ',' ~',' ರ','）','╯','︵',' ┻','━','┻'];
-var removedLetterCat = [];
-var removedLetterDoggy = [];
-var removedLetterAlphabet = [];
+var removedLetterCat = ['_ ','_ ','_ '];
+var removedLetterDoggy = ['_ ','_ ','_ ','_ ','_ '];
+var removedLetterAlphabet = ['_ ','_ ','_ ','_ ','_ ','_ ','_ ','_ '];
 var tableFlipCounter = [];
 
 var letterFoundCat = false;
@@ -63,33 +63,68 @@ var letterChecker = function (currentInput) {
     }
 
     if (letterFoundCat == true) {
-        removedLetterCat.push(currentInput);
-        letterFoundCat = false;
 
-        if (wordsCat.length !== 0) {
-            return `You guessed correctly. Here are your letters: ${removedLetterCat}`;
+        if (currentInput == 'c') {
+            removedLetterCat[0] = currentInput;
+            letterFoundCat = false;
+        } else if (currentInput == 'a') {
+            removedLetterCat[1] = currentInput;
+            letterFoundCat = false;
+        } else if (currentInput == 't') {
+            removedLetterCat[2] = currentInput;
+            letterFoundCat = false;
+        }
+
+        if (wordsArrayCat.length !== 0) {
+            return `You guessed correctly. Here are your letters: ${removedLetterCat.join('')}`;
         } else {
-            return `You won! Here are your letters: ${removedLetterCat}`;
+            return `You won! Here are your letters: ${removedLetterCat.join('')}`;
         }
 
     } else if (letterFoundDoggy == true) {
-        removedLetterDoggy.push(currentInput);
         letterFoundDoggy = false;
 
-        if (wordsDoggy.length !== 0) {
-            return `You guessed correctly. Here are your letters: ${removedLetterDoggy}`;
+        if (currentInput == 'd') {
+            removedLetterDoggy[0] = currentInput;
+        } else if (currentInput == 'o') {
+            removedLetterDoggy[1] = currentInput;
+        } else if (currentInput == 'g') {
+            removedLetterDoggy[2] = currentInput;
+            removedLetterDoggy[3] = currentInput;
+        } else if (currentInput == 'y') {
+            removedLetterDoggy[4] = currentInput;
+        }
+
+        if (wordsArrayDoggy.length !== 0) {
+            return `You guessed correctly. Here are your letters: ${removedLetterDoggy.join('')}`;
         } else {
-            return `You won! Here are your letters: ${removedLetterDoggy}`;
+            return `You won! Here are your letters: ${removedLetterDoggy.join('')}`;
         }
 
     } else if (letterFoundAlphabet == true) {
-        removedLetterAlphabet.push(currentInput);
         letterFoundAlphabet = false;
 
-        if (wordsAlphabet.length !== 0) {
-            return `You guessed correctly. Here are your letters: ${removedLetterAlphabet}`;
+        if (currentInput == 'a') {
+            removedLetterAlphabet[0] = currentInput;
+            removedLetterAlphabet[4] = currentInput;
+        } else if (currentInput == 'l') {
+            removedLetterAlphabet[1] = currentInput;
+        } else if (currentInput == 'p') {
+            removedLetterAlphabet[2] = currentInput;
+        } else if (currentInput == 'h') {
+            removedLetterAlphabet[3] = currentInput;
+        } else if (currentInput == 'b') {
+            removedLetterAlphabet[5] = currentInput;
+        } else if (currentInput == 'e') {
+            removedLetterAlphabet[6] = currentInput;
+        } else if (currentInput == 't') {
+            removedLetterAlphabet[7] = currentInput;
+        }
+
+        if (wordsArrayAlphabet.length !== 0) {
+            return `You guessed correctly. Here are your letters: ${removedLetterAlphabet.join('')}`;
         } else {
-            return `You won! Here are your letters: ${removedLetterAlphabet}`;
+            return `You won! Here are your letters: ${removedLetterAlphabet.join('')}`;
         }
 
     } else {
