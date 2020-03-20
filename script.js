@@ -22,6 +22,7 @@ var removedLetterDoggy = ['_ ','_ ','_ ','_ ','_ '];
 var removedLetterAlphabet = ['_ ','_ ','_ ','_ ','_ ','_ ','_ ','_ '];
 var tableFlipCounter = [];
 
+
 var letterFoundCat = false;
 var letterFoundDoggy = false;
 var letterFoundAlphabet = false;
@@ -63,16 +64,14 @@ var letterChecker = function (currentInput) {
     }
 
     if (letterFoundCat == true) {
+        letterFoundCat = false;
 
         if (currentInput == 'c') {
             removedLetterCat[0] = currentInput;
-            letterFoundCat = false;
         } else if (currentInput == 'a') {
             removedLetterCat[1] = currentInput;
-            letterFoundCat = false;
         } else if (currentInput == 't') {
             removedLetterCat[2] = currentInput;
-            letterFoundCat = false;
         }
 
         if (wordsArrayCat.length !== 0) {
@@ -128,15 +127,15 @@ var letterChecker = function (currentInput) {
         }
 
     } else {
-        tableFlipCounter.push(tableFlip.shift());
-        var loseMsg = tableFlipCounter.join('')
+            tableFlipCounter.push(tableFlip.shift());
+            var loseMsg = tableFlipCounter.join('');
 
-        if (tableFlipCounter.length > 10) {
-            return `You lose! ${loseMsg}`;
-        } else {
-            return `You guessed wrongly. ${loseMsg}`;
+            if (tableFlipCounter.length > 10) {
+                return `You lose! ${loseMsg}`;
+            } else {
+                return `You guessed wrongly. ${loseMsg}`;
+            }
         }
-    }
 }
 
 var clearInput = function() {
