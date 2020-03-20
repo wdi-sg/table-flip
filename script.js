@@ -28,6 +28,13 @@ function wordBuilder(array){
     }
     return word;
 }
+function partialWordBuilder(array, index){
+    var word ="";
+    for (i=0; i<=index; i++){
+        word = word + array[i];
+    }
+    return word;
+}
 function uniquePush(char, array){
     if (!array.includes(char)){
         array.push(char);
@@ -43,12 +50,13 @@ function searchArray(enteredChar, array) {
         uniquePush(enteredChar, correctGuesses);
         console.log(`good guess ${correctGuesses}`);
         result = true;
+        outputMsg = (`${enteredChar} is correct.\nCorrect guesses so far: ${correctGuesses}.`)
     } else {
         uniquePush(enteredChar, wrongGuesses);
         console.log(`wrong guess ${wrongGuesses}`);
         incorrectCounter = incorrectCounter + 1;
         if (incorrectCounter <= resultChar.length) {
-            outputMsg += resultChar[incorrectCounter     - 1];
+            outputMsg = partialWordBuilder(resultChar, (incorrectCounter-1));
         } else if (incorrectCounter > resultChar.length) {
             outputMsg = "Game Over!";
         }
