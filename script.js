@@ -19,12 +19,13 @@ let wrongAnswer = function(letterUser) {
 
 let findLetter = function(array, letterUser) {
   for (i = 0; i < array.length; i++) {
+    console.log(array[i] === letterUser);
     if (array[i] === letterUser) {
-      correctLetters.pop();
-      return correctAnswer(letterUser);
+      correctLetters.push();
+     correctAnswer(letterUser);
     }
-    wrongLetters.pop();
-    return wrongAnswer(letterUser);
+    wrongLetters.push();
+    wrongAnswer(letterUser);
   }
 };
 
