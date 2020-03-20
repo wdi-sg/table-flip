@@ -41,6 +41,8 @@ const initGameBoard = secretWordsArr => {
   document.querySelector('#output').innerHTML= gameBoardStr;
 };
 
+String.prototype.replaceAt = (index, replacement) => this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+
 // update gamebaord to replace correct guesses with the right letter
 const updateGameBoard = userGuess => {
   let wordIndex = null;
@@ -49,18 +51,21 @@ const updateGameBoard = userGuess => {
   for (let i = 0; i < secretWordsArr.length; i++) {
     let word = secretWordsArr[i];
     if (word.indexOf(userGuess)!==-1) {
-      console.log(word);
       wordIndex = i;
       letterIndex = word.indexOf(userGuess) ;
     }
   }
   if (wordIndex!==null && letterIndex !== null) {
+    console.log(wordIndex,letterIndex);
     gameBoard[wordIndex][letterIndex] = userGuess;
+    console.log(userGuess);
+    console.log(gameBoard[wordIndex][letterIndex]);
   }
 
+  let pieceToReplace = gameBoard[wordIndex];
+  gameBoard[wordIndex] = pieceToReplace.replaceAt(letterIndex, userGuess);
   gameBoardStr = formatGameBoard(gameBoard);
   gameBoardStr = replaceBrByNewLine(gameBoardStr);
-
 };
 
 initGameBoard(secretWordsArr);
