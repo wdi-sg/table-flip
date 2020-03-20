@@ -1,7 +1,7 @@
 
 let secretWordsStr = "cat,doggy,alphabet";
 let secretWordsArr = secretWordsStr.split(',');
-const SECRET_WORDS = secretWordsArr.map(word => word.split(''));
+let SECRET_WORDS = secretWordsArr.map(word => word.split(''));
 
 let tableFlipCharacters = "(╯ರ ~ ರ）╯︵ ┻━┻".split(' ');
 let numGuessChancesLeft = tableFlipCharacters.length;
@@ -40,8 +40,12 @@ const initGameBoard = secretWordsArr => {
   gameBoardStr = formatGameBoard(gameBoard);
   document.querySelector('#output').innerHTML= gameBoardStr;
 };
+const isAdminMode = input => input === "admin";
+const isEndAdminMode = input=> input === "endadmin";
 
-String.prototype.replaceAt = (index, replacement) => this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+String.prototype.replaceAt=function(index, replacement) {
+  return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+}
 
 // update gamebaord to replace correct guesses with the right letter
 const updateGameBoard = userGuess => {
@@ -58,8 +62,6 @@ const updateGameBoard = userGuess => {
   if (wordIndex!==null && letterIndex !== null) {
     console.log(wordIndex,letterIndex);
     gameBoard[wordIndex][letterIndex] = userGuess;
-    console.log(userGuess);
-    console.log(gameBoard[wordIndex][letterIndex]);
   }
 
   let pieceToReplace = gameBoard[wordIndex];
@@ -67,8 +69,10 @@ const updateGameBoard = userGuess => {
   gameBoardStr = formatGameBoard(gameBoard);
   gameBoardStr = replaceBrByNewLine(gameBoardStr);
 };
+const resetInputBox = input => document.getElementById('input').value="";
 
 initGameBoard(secretWordsArr);
+
 
 const inputHappened = function (currentInput) {
   // assumptions:
@@ -76,6 +80,21 @@ const inputHappened = function (currentInput) {
   // - user does not press backspace key to delete a typed character
   // - letters in secret word do not repeat
   let userInput = sanitizeInput(currentInput);
+  if (isEndAdminMode(userInput)) {
+    resetInputBox();
+    return "Existing admin mode."
+  }
+  if (isAdminMode(userInput)) {
+    secretWordsArr.concat(',', userInput);
+    secretWordsArr = secretWordsStr.split(',');
+    SECRET_WORDS = secretWordsArr.map(word => word.split(''));
+    userInput = "";
+    resetInputBox();
+    return `Admin Mode:\n
+            Your current secret words: ${secretWordsArr}\n
+            You have added new word: ${userInput}\n`;
+  }
+
   let userGuess = getCurrentGuessChar(userInput);
   if (isGameOver(numGuessChancesLeft)) return "Game Over!\n" + gameBoardStr;
   if (isUserWon(correctGuesses, SECRET_WORDS)) return "You Won!\n" + gameBoardStr;
