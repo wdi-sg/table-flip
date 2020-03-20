@@ -34,6 +34,7 @@ const isWrongGuess = (userGuess, secretWords) => !madeAcorrectGuess(userGuess, s
 
 // displays letter place holders at start of game
 const formatGameBoard = gameBoard => gameBoard.join("<br>");
+const replaceBrByNewLine = gameBoardStr => gameBoardStr.replace(/<br>/g,"\n");
 const initGameBoard = secretWordsArr => {
   gameBoard = secretWordsArr.map(word => "_".repeat(word.length) );
   gameBoardStr = formatGameBoard(gameBoard);
@@ -41,10 +42,25 @@ const initGameBoard = secretWordsArr => {
 };
 
 // update gamebaord to replace correct guesses with the right letter
-const updateGameBoard = (correctGuesses, gameBoard) => {
-  console.log(gameBoard);
-  console.log(correctGuesses);
-  console.log(gameBoardStr)
+const updateGameBoard = userGuess => {
+  let wordIndex = null;
+  let letterIndex = null;
+
+  for (let i = 0; i < secretWordsArr.length; i++) {
+    let word = secretWordsArr[i];
+    if (word.indexOf(userGuess)!==-1) {
+      console.log(word);
+      wordIndex = i;
+      letterIndex = word.indexOf(userGuess) ;
+    }
+  }
+  if (wordIndex!==null && letterIndex !== null) {
+    gameBoard[wordIndex][letterIndex] = userGuess;
+  }
+
+  gameBoardStr = formatGameBoard(gameBoard);
+  gameBoardStr = replaceBrByNewLine(gameBoardStr);
+
 };
 
 initGameBoard(secretWordsArr);
@@ -61,14 +77,14 @@ const inputHappened = function (currentInput) {
 
   if (madeAcorrectGuess(userGuess, SECRET_WORDS)) {
     correctGuesses.push(userGuess);
-    updateGameBoard(correctGuesses, gameBoard);
+    updateGameBoard(userGuess);
     return `You made a correct guess\n ${flippedCharacters.join('')} \n ${gameBoardStr}`;
   }
 
   if (isWrongGuess(userGuess, SECRET_WORDS)) {
     flippedCharacters.push(tableFlipCharacters.pop());
     numGuessChancesLeft--;
-    updateGameBoard(gameBoard, userGuess);
+    updateGameBoard(userGuess);
     return `You made a wrong guess. \n ${flippedCharacters.join('')} \n ${gameBoardStr}`;
   }
 };
