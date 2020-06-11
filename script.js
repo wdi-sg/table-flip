@@ -70,6 +70,18 @@ var hasLetterBeenGuessed = function(letter){
 }
 //num is a number
 var generateFlipTableString = function(num){
+
+     //first 10 tries
+     //
+     var tableFlip1 = "(ರ ~ ರ）┳━┳"
+     //subsequent 11th to 24th tries
+     var tableFlip2 = "(╯ರ ~ ರ）╯︵ ┻━┻"
+     if(num<=10){
+        return tableFlip1.substring(0,num);
+     } else {
+        return tableFlip2.substring(0,num-10);
+     }
+
     return tableFlip.substring(0,num);
 };
 
@@ -112,7 +124,7 @@ var inputHappened = function(currentInput){
   else { //guessed wrong
     numWronglyGuessedLetters++;
     msg="WRONG! " + generateFlipTableString(numWronglyGuessedLetters);
-    if(numWronglyGuessedLetters>=tableFlip.length){
+    if(numWronglyGuessedLetters>=24){
         msg+=" GAME OVER!"
         gameOver = true;
     }
