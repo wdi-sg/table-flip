@@ -1,9 +1,11 @@
 const submitButton = document.getElementById("submit");
 submitButton.onclick = buttonClicked;
-var secretWord = "cat";
-var underscoreArray = ["_", "_", "_"];
+var secretWords = ["cat", "pisa", "felix"];
+var secretWord = getSecretWord();
+var underscoreArray = getUnderScoreArray();
 var secretArray = getSecretArray();
-var correctArray = [];
+
+var inputCount = 0;
 var emojiArray = ["(","╯","ರ", "~", "ರ","）","╯","︵","┻","━","┻"];
 var wrongWords = 0;
 overwriteAnswer(underscoreArray.join(" "));
@@ -12,8 +14,8 @@ function buttonClicked() {
   var input = document.getElementById("input").value;
   for (let i = 0; i < secretArray.length; i++) {
     if (input == secretArray[i]) {
-      underscoreArray[i] = secretArray[i];
-      correctArray.push(secretArray[i]);
+      underscoreArray[i] = input;
+      inputCount++;
       overwriteAnswer(underscoreArray.join(" "));
       checkIfHaveWon();
       return;
@@ -22,8 +24,25 @@ function buttonClicked() {
   updateWrongWords();
 }
 
+// Returns a random secret word
+function getSecretWord() {
+  let random = Math.floor(Math.random() * secretWords.length);
+  return secretWords[random];
+}
+
+//
+function getUnderScoreArray() {
+  var underScoreArray = [];
+  for (let i = 0; i < secretWord.length; i++) {
+    underScoreArray.push("_");
+  }
+  return underScoreArray;
+}
+
+// console.log(getUnderScoreArray());
+
 function checkIfHaveWon() {
-  if (secretArray.length == correctArray.length) {
+  if (secretArray.length == inputCount) {
     overwriteOutput("You have won!");
     overwriteAnswer(secretWord);
     return true;
