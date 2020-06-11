@@ -4,6 +4,7 @@ var secretWords = ["cat", "pisa", "felix"];
 var secretWord = getSecretWord();
 var underscoreArray = getUnderScoreArray();
 var secretArray = getSecretArray();
+var inAdminMode = 0; //1 means yes, 0 means no
 
 var inputCount = 0;
 var emojiArray = ["(","╯","ರ", "~", "ರ","）","╯","︵","┻","━","┻"];
@@ -11,26 +12,64 @@ var wrongWords = 0;
 overwriteAnswer(underscoreArray.join(" "));
 
 function buttonClicked() {
+  console.log(secretWords);
   var input = document.getElementById("input").value;
-  for (let i = 0; i < secretArray.length; i++) {
-    if (input == secretArray[i]) {
-      underscoreArray[i] = input;
-      inputCount++;
-      overwriteAnswer(underscoreArray.join(" "));
-      checkIfHaveWon();
-      return;
-    }
+
+  switch(inAdminMode) {
+    case 1: // in admin mode
+      console.log("We are in admin mode..");
+      if (input == "endadmin") {
+        changeAdminMode();
+        buttonClicked();
+      }
+      else {
+        addWord(input);
+      }
+      break;
+    case 0: // playing mode
+      console.log("We are in playing mode..");
+      if (input == "admin") { // admin mode
+        changeAdminMode();
+        buttonClicked();
+      }
+      else { // not in admin mode
+        for (let i = 0; i < secretArray.length; i++) {
+          if (input == secretArray[i]) {
+            underscoreArray[i] = input;
+            inputCount++;
+            overwriteAnswer(underscoreArray.join(" "));
+            checkIfHaveWon();
+            return;
+          }
+        }
+        updateWrongWords();
+      }
+      break;
   }
-  updateWrongWords();
+
 }
 
-// Returns a random secret word
+function addWord(word) {
+  secretWords.push(word);
+  overwriteOutput("New word: " + word + " added!");
+}
+
+function changeAdminMode() {
+  if (inAdminMode == 1) {
+    inAdminMode = 0;
+    overwriteOutput("You are leaving admin mode..");
+  }
+  else if (inAdminMode == 0) {
+    inAdminMode = 1;
+    overwriteOutput("You are entering admin mode..");
+  }
+}
+
 function getSecretWord() {
   let random = Math.floor(Math.random() * secretWords.length);
   return secretWords[random];
 }
 
-//
 function getUnderScoreArray() {
   var underScoreArray = [];
   for (let i = 0; i < secretWord.length; i++) {
@@ -39,15 +78,26 @@ function getUnderScoreArray() {
   return underScoreArray;
 }
 
-// console.log(getUnderScoreArray());
 
 function checkIfHaveWon() {
-  if (secretArray.length == inputCount) {
-    overwriteOutput("You have won!");
-    overwriteAnswer(secretWord);
-    return true;
+  for (let i = 0; i < underscoreArray.length; i++) {
+    if (underscoreArray[i] != secretArray[i]) {
+      return;
+    }
   }
-  return false;
+  overwriteOutput("You have won!");
+  overwriteAnswer(secretWord);
+  secretWord = getSecretWord();
+  resetGame();
+}
+
+function resetGame() {
+  const resetButton = document.createElement('button');
+    resetButton.innerHTML = "Reset";
+    document.body.appendChild(resetButton);
+    resetButton.onclick = function(e) {
+    window.location.reload()
+  }
 }
 
 function updateWrongWords() {
@@ -59,6 +109,7 @@ function updateWrongWords() {
   else {
     overwriteOutput("You lost!");
     overwriteAnswer("You made the cat flip the table!");
+    resetGame();
   }
 }
 
