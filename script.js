@@ -7,7 +7,9 @@ var secretArray = getSecretArray();
 var inAdminMode = 0; //1 means yes, 0 means no
 
 var inputCount = 0;
-var emojiArray = ["(","╯","ರ", "~", "ರ","）","╯","︵","┻","━","┻"];
+var emojiArray = [0x1F600, 0x1F604, 0x1F34A, 0x1F344, 0x1F37F, 0x1F363, 0x1F370, 0x1F355,
+              0x1F354, 0x1F35F];
+// var emojiArray = ["(","╯","ರ", "~", "ರ","）","╯","︵","┻","━","┻"];
 var wrongWords = 0;
 overwriteAnswer(underscoreArray.join(" "));
 
@@ -82,6 +84,7 @@ function getUnderScoreArray() {
 function checkIfHaveWon() {
   for (let i = 0; i < underscoreArray.length; i++) {
     if (underscoreArray[i] != secretArray[i]) {
+      overwriteOutput("Correct!");
       return;
     }
   }
@@ -94,6 +97,7 @@ function checkIfHaveWon() {
 function resetGame() {
   const resetButton = document.createElement('button');
     resetButton.innerHTML = "Reset";
+    resetButton.style.textAlign = "center";
     document.body.appendChild(resetButton);
     resetButton.onclick = function(e) {
     window.location.reload()
@@ -102,13 +106,19 @@ function resetGame() {
 
 function updateWrongWords() {
   if (wrongWords < emojiArray.length) {
-    appendToEmoji(emojiArray[wrongWords]);
+    let displayMessage = "";
     wrongWords++;
+    for (let i = 0; i < wrongWords; i++) {
+        displayMessage += String.fromCodePoint(emojiArray[i]);
+    }
+    displayMessage = displayMessage + "(" + (emojiArray.length - wrongWords) + ")";
+    overwriteEmoji(displayMessage);
+    // appendToEmoji(String.fromCodePoint(emojiArray[wrongWords]) + " (" + (emojiArray.length - wrongWords) + ")");
     overwriteOutput("Wrong answer!");
   }
   else {
     overwriteOutput("You lost!");
-    overwriteAnswer("You made the cat flip the table!");
+    overwriteAnswer(secretWord);
     resetGame();
   }
 }

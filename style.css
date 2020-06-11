@@ -1,11 +1,56 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+
+body {
+  font-family: 'Gloria Hallelujah', cursive;
+  background-color: pink;
+  text-align: center;
 }
 
-#output{
-  background-color:pink;
+p {
+    font-size: 15px;
+}
+
+button, input {
+  font-family: 'Gloria Hallelujah', cursive;
+  border-radius: 10px;
+}
+
+button {
+  background-color: orange;
+  font-size: 20px;
+  width: 100px;
+  margin: 15px;
+}
+
+h1, h2, .row, .starter, p {
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 0px;
+}
+
+.starter{
+  font-size:30px;
+  padding: 10px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.col1, .col2 {
+  border: 3px hotpink solid;
+  border-radius: 10px;
+  width: 48%;
+  padding: 10px;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.col2 {
+  float: right;
+}
+
+.col2 h2, .col1 h2 {
+  margin-top: 0px;
 }
