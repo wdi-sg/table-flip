@@ -1,47 +1,112 @@
 console.log("hello script js");
-
-var secretWord = ['c','a','t'];
-// const tableFlip = "(╯ರ ~ ರ）╯︵ ┻━┻"
-const tableFlip = "_|_"
+const secretWordList = ['cat','doggy','alphabet']
+const tableFlip = "(╯ರ ~ ರ）╯︵ ┻━┻"
 const tableFlipArr = tableFlip.split('');
-var num = 5;
+
+//initialise secretWord to empty array;
+var secretWord = [];
+var secretWordCopy = [];
+//initialise first round game variables
 var correctlyGuessedLetters = [];
 var numWronglyGuessedLetters = 0;
+var gameOver=false;
+
+var resetGameVariables = function(){
+    correctlyGuessedLetters = [];
+    numWronglyGuessedLetters = 0;
+    gameOver=false;
+}
+
+var getWordDisplay = function(){
+
+    var displayArray=[];
+    var correctlyGuessedLettersCopy = correctlyGuessedLetters.slice();
+    var found=false;
+    for(var j=0; j<secretWordCopy.length; j++){
+      found=false;
+        for(var i=0; i<correctlyGuessedLettersCopy.length; i++){
+          console.log(" i: "+correctlyGuessedLettersCopy[i])
+          if(secretWordCopy[j]==correctlyGuessedLettersCopy[i]){
+            displayArray.push(correctlyGuessedLettersCopy[i]);
+            displayArray.push(" ");
+            console.log(displayArray)
+            correctlyGuessedLettersCopy[i]="1"
+            console.log(" length: "+correctlyGuessedLettersCopy.length)
+            console.log(" i= "+i);
+            console.log(correctlyGuessedLettersCopy)
+            found=true;
+            break;
+          }
+        }
+        if(found!=true){
+          displayArray.push("_ ");
+        }
+    }
+    return displayArray.join("");
+}
+
+var updateSecretWord = function(){
+    if(secretWordList.length==0){
+        return null;
+    } else {
+        secretWord = secretWordList.shift().split('');
+        secretWordCopy = secretWord.slice();
+        return secretWord;
+    }
+}
 
 //letter is string of single char, secretWord is array
-var isLetterThere = function(letter,secretWord){
-    //checks if given letter is in secret word
-    //returns true if letter is in secret word
+var isCorrectGuess = function(letter,secretWord){
     return secretWord.includes(letter);
+};
+
+var removeLetter = function(letter){
+    secretWord.splice(secretWord.indexOf(letter),1);
+    console.log("removed: "+ letter + " curr Secret word: " + secretWord)
 };
 
 var hasLetterBeenGuessed = function(letter){
     return correctlyGuessedLetters.includes(letter);
 }
-
 //num is a number
 var generateFlipTableString = function(num){
-    //returns string based on num
     return tableFlip.substring(0,num);
 };
+
+updateSecretWord();
+
 var inputHappened = function(currentInput){
   console.log( currentInput );
+  console.log(secretWord);
   var msg="";
+
+  if(gameOver==true){
+    return "GAME OVER."
+  }
+
   //validation: input must be single char
   if(currentInput.length!=1){
     msg="input must be single character"
     return msg
   }
 
-  if(hasLetterBeenGuessed(currentInput)==true){
-    msg="You've guessed this letter before. Correctly guessed: "+correctlyGuessedLetters;
-  }
-
-  if(isLetterThere(currentInput,secretWord)==true){
+//check if guess is correct
+  if(isCorrectGuess(currentInput,secretWord)==true){
+    //add correctly guessed letters to array
     correctlyGuessedLetters.push(currentInput);
-    msg="You've guessed right "+ correctlyGuessedLetters;
-    if(correctlyGuessedLetters.length==secretWord.length){
-        msg+=" YOU WIN!"
+    //remove letter from secret word
+    removeLetter(currentInput);
+
+    //generate message
+    msg="You've guessed right: "+ getWordDisplay();
+    if(secretWord.length==0){
+        resetGameVariables();
+        if(updateSecretWord()==null){
+            msg+=" YOU WIN!"
+            gameOver = true;
+        }
+        else msg+=" Guess next word."
+
     }
   }
   else { //guessed wrong
@@ -49,6 +114,7 @@ var inputHappened = function(currentInput){
     msg="WRONG! " + generateFlipTableString(numWronglyGuessedLetters);
     if(numWronglyGuessedLetters>=tableFlip.length){
         msg+=" GAME OVER!"
+        gameOver = true;
     }
   }
   //check if letter there
@@ -57,6 +123,3 @@ var inputHappened = function(currentInput){
 
   return msg;
 };
-
-console.log("isletterthere:"+isLetterThere('a',secretWord));
-console.log(num+": "+generateFlipTableString(5));
