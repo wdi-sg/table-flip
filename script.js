@@ -5,36 +5,38 @@ var secretWord = getSecretWord();
 var underscoreArray = getUnderScoreArray();
 var secretArray = getSecretArray();
 var inAdminMode = 0; //1 means yes, 0 means no
-
-var inputCount = 0;
-var emojiArray = [0x1F600, 0x1F604, 0x1F34A, 0x1F344, 0x1F37F, 0x1F363, 0x1F370, 0x1F355,
-              0x1F354, 0x1F35F];
-// var emojiArray = ["(","╯","ರ", "~", "ರ","）","╯","︵","┻","━","┻"];
 var wrongWords = 0;
+var inputCount = 0;
+var emojiArray = [0x1F600, 0x1F604, 0x1F34A, 0x1F344, 0x1F37F, 0x1F363, 0x1F370, 0x1F355,0x1F354, 0x1F35F];
 overwriteAnswer(underscoreArray.join(" "));
 
 function buttonClicked() {
-  console.log(secretWords);
+  console.log(secretWord);
+  console.log("Cookie exists: " + cookieExists());
   var input = document.getElementById("input").value;
 
-  switch(inAdminMode) {
-    case 1: // in admin mode
-      console.log("We are in admin mode..");
-      if (input == "endadmin") {
-        changeAdminMode();
-        buttonClicked();
-      }
-      else {
+  if (cookieExists()) { // cookie exists
+    console.log("Cookie exists");
+    if (input == "endadmin") {
+        changeAdminMode(); // deleting the cookie, updating messages
+    }
+    else if (input == "admin") {
+        console.log("Can't add the word admin");
+        return;
+    }
+    else {
         addWord(input);
-      }
-      break;
-    case 0: // playing mode
-      console.log("We are in playing mode..");
-      if (input == "admin") { // admin mode
+    }
+  }
+  else { // cookie does not exists
+    console.log("Cookie does not exists");
+    if (input == "admin") { // admin mode
         changeAdminMode();
+        // window.location.reload();
         buttonClicked();
       }
-      else { // not in admin mode
+    else { // not in admin mode
+        console.log("This is regular input..");
         for (let i = 0; i < secretArray.length; i++) {
           if (input == secretArray[i]) {
             underscoreArray[i] = input;
@@ -42,13 +44,43 @@ function buttonClicked() {
             overwriteAnswer(underscoreArray.join(" "));
             checkIfHaveWon();
             return;
-          }
+           }
         }
         updateWrongWords();
       }
-      break;
-  }
+    }
+}
 
+function cookieExists() {
+  return getCookie("username") != "";
+}
+
+function deleteCookie() {
+  document.cookie = "mode=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  console.log("Inside set cookie function - cookie exists?: " + getCookie("username"));
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 
 function addWord(word) {
@@ -57,12 +89,18 @@ function addWord(word) {
 }
 
 function changeAdminMode() {
-  if (inAdminMode == 1) {
-    inAdminMode = 0;
+ console.log("Entering changing admin..");
+  if (cookieExists()) {
+    console.log("Checking.. cookie exists");
+    deleteCookie();
+    console.log("Cookie deleted");
     overwriteOutput("You are leaving admin mode..");
   }
-  else if (inAdminMode == 0) {
-    inAdminMode = 1;
+  else {
+    console.log("Checking.. cookie does not exists");
+    setCookie("username","admin",30);
+    console.log("The cookie set is: " + getCookie("username"));
+    console.log("Checking.. Cookie created");
     overwriteOutput("You are entering admin mode..");
   }
 }
@@ -156,3 +194,36 @@ function appendOutput(text) {
     var output = document.querySelector('#output');
     output.innerText += text;
 }
+
+
+  // switch(inAdminMode) {
+  //   case 1: // in admin mode
+  //     console.log("We are in admin mode..");
+  //     if (input == "endadmin") {
+  //       changeAdminMode();
+  //       buttonClicked();
+  //     }
+  //     else {
+  //       addWord(input);
+  //     }
+  //     break;
+  //   case 0: // playing mode
+  //     console.log("We are in playing mode..");
+  //     if (input == "admin") { // admin mode
+  //       changeAdminMode();
+  //       window.location.reload();
+  //     }
+  //     else { // not in admin mode
+  //       for (let i = 0; i < secretArray.length; i++) {
+  //         if (input == secretArray[i]) {
+  //           underscoreArray[i] = input;
+  //           inputCount++;
+  //           overwriteAnswer(underscoreArray.join(" "));
+  //           checkIfHaveWon();
+  //           return;
+  //         }
+  //       }
+  //       updateWrongWords();
+  //     }
+  //     break;
+  // }
