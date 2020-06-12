@@ -8,6 +8,7 @@ var inAdminMode = 0; //1 means yes, 0 means no
 var wrongWords = 0;
 // var inputCount = 0;
 var emojiArray = [0x1F600, 0x1F604, 0x1F34A, 0x1F344, 0x1F37F, 0x1F363, 0x1F370, 0x1F355,0x1F354, 0x1F35F];
+overwriteInput("");
 overwriteAnswer(underscoreArray.join(" "));
 
 function buttonClicked() {
@@ -61,6 +62,10 @@ function changeAdminMode() {
     overwriteHeader("Let's play!");
     console.log("Cookie deleted");
     overwriteOutput("You are leaving admin mode..");
+
+    console.log(document.getElementById("answerh2"));
+    document.getElementById("answerh2").innerHTML = "Answer:";
+    overwriteAnswer(underscoreArray.join(" "));
   }
   else {
     console.log("Checking.. cookie does not exists");
@@ -69,6 +74,11 @@ function changeAdminMode() {
     console.log("Checking.. Cookie created");
     overwriteOutput("You are entering admin mode..");
     overwriteHeader("Add a new word!");
+
+    overwriteAnswer("");
+    overwriteInput("");
+    console.log(document.getElementById("answerh2"));
+    document.getElementById("answerh2").innerHTML = "";
   }
 }
 
@@ -120,8 +130,7 @@ function resetGame() {
     resetButton.style.textAlign = "center";
     document.body.appendChild(resetButton);
     resetButton.onclick = function(e) {
-    window.location.reload()
-    document.getElementById("input").value = "";
+    window.location.reload();
   }
 }
 
@@ -183,6 +192,11 @@ function getCookie(cname) {
 function overwriteHeader(text) {
     const h1 = document.getElementById("header");
     h1.innerText = text;
+}
+
+function overwriteInput(text) {
+    const input = document.getElementById("input");
+    input.value = "";
 }
 
 function overwriteAnswer(text){
