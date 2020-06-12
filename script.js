@@ -6,7 +6,7 @@ var underscoreArray = getUnderScoreArray();
 var secretArray = getSecretArray();
 var inAdminMode = 0; //1 means yes, 0 means no
 var wrongWords = 0;
-var inputCount = 0;
+// var inputCount = 0;
 var emojiArray = [0x1F600, 0x1F604, 0x1F34A, 0x1F344, 0x1F37F, 0x1F363, 0x1F370, 0x1F355,0x1F354, 0x1F35F];
 overwriteAnswer(underscoreArray.join(" "));
 
@@ -40,7 +40,7 @@ function buttonClicked() {
         for (let i = 0; i < secretArray.length; i++) {
           if (input == secretArray[i]) {
             underscoreArray[i] = input;
-            inputCount++;
+            // inputCount++;
             overwriteAnswer(underscoreArray.join(" "));
             checkIfHaveWon();
             return;
@@ -51,47 +51,7 @@ function buttonClicked() {
     }
 }
 
-function cookieExists() {
-  return getCookie("username") != "";
-}
-
-function deleteCookie() {
-  document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-}
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  console.log("Inside set cookie function - cookie exists?: " + getCookie("username"));
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-function addWord(word) {
-  secretWords.push(word);
-  overwriteOutput("New word: " + word + " added!");
-}
-
-function overwriteHeader(text) {
-    const h1 = document.getElementById("header");
-    h1.innerText = text;
-}
+// ---- ADMIN MODE ----//
 
 function changeAdminMode() {
  console.log("Entering changing admin..");
@@ -112,6 +72,22 @@ function changeAdminMode() {
   }
 }
 
+function addWord(word) {
+  secretWords.push(word);
+  overwriteOutput("New word: " + word + " added!");
+}
+
+// ---- VALIDATION MODE ----//
+
+function checkValidation(text) {
+    // No blank space, no symbols, only single letters
+}
+
+// ---- PLAYING MODE ----//
+function getSecretArray() {
+  return secretWord.split("");
+}
+
 function getSecretWord() {
   let random = Math.floor(Math.random() * secretWords.length);
   return secretWords[random];
@@ -124,7 +100,6 @@ function getUnderScoreArray() {
   }
   return underScoreArray;
 }
-
 
 function checkIfHaveWon() {
   for (let i = 0; i < underscoreArray.length; i++) {
@@ -169,8 +144,45 @@ function updateWrongWords() {
   }
 }
 
-function getSecretArray() {
-  return secretWord.split("");
+// ---- COOKIE FUNCTIONS----//
+
+function cookieExists() {
+  return getCookie("username") != "";
+}
+
+function deleteCookie() {
+  document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  console.log("Inside set cookie function - cookie exists?: " + getCookie("username"));
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+// ---- APPENDING/OVERWRITE FUNCTIONS ----//
+
+function overwriteHeader(text) {
+    const h1 = document.getElementById("header");
+    h1.innerText = text;
 }
 
 function overwriteAnswer(text){
@@ -202,36 +214,3 @@ function appendOutput(text) {
     var output = document.querySelector('#output');
     output.innerText += text;
 }
-
-
-  // switch(inAdminMode) {
-  //   case 1: // in admin mode
-  //     console.log("We are in admin mode..");
-  //     if (input == "endadmin") {
-  //       changeAdminMode();
-  //       buttonClicked();
-  //     }
-  //     else {
-  //       addWord(input);
-  //     }
-  //     break;
-  //   case 0: // playing mode
-  //     console.log("We are in playing mode..");
-  //     if (input == "admin") { // admin mode
-  //       changeAdminMode();
-  //       window.location.reload();
-  //     }
-  //     else { // not in admin mode
-  //       for (let i = 0; i < secretArray.length; i++) {
-  //         if (input == secretArray[i]) {
-  //           underscoreArray[i] = input;
-  //           inputCount++;
-  //           overwriteAnswer(underscoreArray.join(" "));
-  //           checkIfHaveWon();
-  //           return;
-  //         }
-  //       }
-  //       updateWrongWords();
-  //     }
-  //     break;
-  // }
