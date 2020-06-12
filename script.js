@@ -11,7 +11,7 @@ var emojiArray = [0x1F600, 0x1F604, 0x1F34A, 0x1F344, 0x1F37F, 0x1F363, 0x1F370,
 overwriteAnswer(underscoreArray.join(" "));
 
 function buttonClicked() {
-  console.log(secretWord);
+  console.log(secretWords);
   console.log("Cookie exists: " + cookieExists());
   var input = document.getElementById("input").value;
 
@@ -56,7 +56,7 @@ function cookieExists() {
 }
 
 function deleteCookie() {
-  document.cookie = "mode=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
 function setCookie(cname, cvalue, exdays) {
@@ -88,11 +88,17 @@ function addWord(word) {
   overwriteOutput("New word: " + word + " added!");
 }
 
+function overwriteHeader(text) {
+    const h1 = document.getElementById("header");
+    h1.innerText = text;
+}
+
 function changeAdminMode() {
  console.log("Entering changing admin..");
   if (cookieExists()) {
     console.log("Checking.. cookie exists");
     deleteCookie();
+    overwriteHeader("Let's play!");
     console.log("Cookie deleted");
     overwriteOutput("You are leaving admin mode..");
   }
@@ -102,6 +108,7 @@ function changeAdminMode() {
     console.log("The cookie set is: " + getCookie("username"));
     console.log("Checking.. Cookie created");
     overwriteOutput("You are entering admin mode..");
+    overwriteHeader("Add a new word!");
   }
 }
 
@@ -139,6 +146,7 @@ function resetGame() {
     document.body.appendChild(resetButton);
     resetButton.onclick = function(e) {
     window.location.reload()
+    document.getElementById("input").value = "";
   }
 }
 
