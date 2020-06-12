@@ -6,6 +6,7 @@
   <body>
     <h3>DOM Manipulation Template</h3>
     <input class="starter" id="input" placeholder="input"/>
+    <button class="btns" id="button" type="button">Execute</button>
     <h2>output:</h2>
     <div class="starter" id="output"></div>
     <script>
@@ -19,10 +20,13 @@
         output.innerText = data;
       }
 
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
+      document.querySelector('#button').addEventListener('click', function(event){
+        var currentInput = document.querySelector('#input').value;
         var result = inputHappened(currentInput)
+        //clear input field
         display( result );
+        document.querySelector('#input').value="";
+        document.querySelector('#input').focus();
       });
     </script>
     <script src="script.js" charset="utf-8"></script>
