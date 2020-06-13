@@ -7,6 +7,7 @@ let words = {
 let punishment = [];
 let tableFlipTemp = '(╯ರ ~ ರ）╯︵ ┻━┻';
 let tableFlip = tableFlipTemp.match(/\s?./g);
+let tableFlipStore = [...tableFlip];
 let chosenWord = null;
 //let tableFlip = ['┳━┳', '(ರ ~ ರ）┳━┳', '(╯ರ ~ ರ）╯︵ ┻━┻'];
 
@@ -25,6 +26,8 @@ difficulty.addEventListener('change', function() {
   enumerateBlanks(difficulty.value);
   enteredLetter.value = '';
   punishmentArea.innerText = '';
+  punishment = [];
+  
 });
 submitButton.addEventListener('click', function() {
   checkLetter(enteredLetter.value);
@@ -32,8 +35,19 @@ submitButton.addEventListener('click', function() {
   checkLose();
   enteredLetter.value = '';
 });
+enteredLetter.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    checkLetter(enteredLetter.value);
+    checkWord();
+    checkLose();
+    enteredLetter.value = '';
+  }
+})
 resetButton.addEventListener('click', function() {
   enumerateBlanks(difficulty.value);
+  punishmentArea.innerText = '';
+  punishment = [];
+  tableFlipStore = [...tableFlip];
 })
 
 
@@ -48,26 +62,26 @@ function enumerateBlanks(diff) {
   }
   guesses.innerText = blanks.join(' ');
   chosenWord = words[diff];
+  tableFlipStore = [...tableFlip];
   //return blanks.join(' ');
   return [chosenWord, blanks.join(' ')];
 }
 
 
 function checkLetter(x) {
-  if (x.toLowerCase().match(/[a-z]/i) && x.length == 1) { //checks if submitted letter is proper
-    if (chosenWord.indexOf(x) !== -1) {
-     //matching letter x, x indexed at 1,2,3, replace all 1,2,3 in arr with x
+  if (x.toLowerCase().match(/[a-z]/) && x.length == 1) {
+    if (chosenWord.indexOf(x.toLowerCase()) !== -1) {
       let indices = [];
       for (let i=0; i<chosenWord.length; i++) {
-        if (chosenWord[i] === x) indices.push(i);
+        if (chosenWord[i] === x.toLowerCase()) indices.push(i);
       }
       for (let i=0; i<indices.length; i++) {
-        blanks[indices[i]] = x;
+        blanks[indices[i]] = x.toLowerCase();
       }
       guesses.innerText = blanks.join(' ');
     }
     else {
-      punishment.push(tableFlip.shift());
+      punishment.push(tableFlipStore.shift());
       punishmentArea.innerText = punishment.join('');
     }
   }
@@ -79,12 +93,14 @@ function checkLetter(x) {
 
 function checkWord() {
   if (guesses.innerText.split('').filter(x => x.match(/\w/)).join('') === chosenWord) {
-    setTimeout(alert('You did it!'), 1000); //this does not work??
+    function alertTemp() {alert('You did it!');}
+    setTimeout(alertTemp, 500);
   }
 }
 
 function checkLose() {
   if (punishmentArea.innerText === tableFlipTemp) {
-    setTimeout(alert('You lost. Better luck next millennium.'), 1000)
+    function alertTemp() {alert('You lost. Better luck next millennium.');}
+    setTimeout(alertTemp, 500)
   }
 }
