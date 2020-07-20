@@ -11,12 +11,12 @@
     <script>
       var display = function(data){
         var displayElement = document.querySelector('#output');
-
-        // get rid of the entire contents
+           // get rid of the entire contents
         displayElement.innerHtml = "";
 
-        // put the data into the div
         output.innerText = data;
+        // put the data into the div
+        displayElement.innerText = data;
       }
 
       document.querySelector('#input').addEventListener('change', function(event){
