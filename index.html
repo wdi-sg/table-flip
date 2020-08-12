@@ -4,16 +4,22 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
+    <h1>table flip game</h1>
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
-    <div class="starter" id="output"></div>
+    <div id="word"></div>
+    <div id="tableFlipper"></div>
+    <div class="starter" id="output">Enter a guess (one letter).</div>
+    <h2>wrong guesses:</h2>
+    <div id="wrong-guesses"></div>
+
+
     <script>
       var display = function(data){
         var displayElement = document.querySelector('#output');
 
         // get rid of the entire contents
-        displayElement.innerHtml = "";
+        displayElement.innerTe = "";
 
         // put the data into the div
         output.innerText = data;
@@ -22,7 +28,8 @@
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
         var result = inputHappened(currentInput)
-        display( result );
+        display( result )
+        event.target.value = "";
       });
     </script>
     <script src="script.js" charset="utf-8"></script>
