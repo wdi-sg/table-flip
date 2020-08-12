@@ -45,5 +45,9 @@ select {
 }
 
 .hidden {
-  display: hidden;
+  display: none;
 }
+.normal{
+  display:block;
+}
+

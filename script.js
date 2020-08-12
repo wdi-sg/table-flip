@@ -6,11 +6,7 @@ let rightLetterCounter = 0;
 let wrongLetterCounter = 0;
 let userRight = [];
 let userWrong = [];
-var words = [
-  ['c','a','t'],
-  ['d','o','g','g','y'],
-  ['a','l','p','h','a','b','e','t']
-];
+var words = ["cat","doggy","alphabet"];
 let word;
 let kaomoji =["(","╯","ರ","~","ರ","）","︵","┻━┻"];
 let hangKao =[];
@@ -22,18 +18,6 @@ let repeatFound;
 
 
 //there will be 3 states: "inGame", "win", "lose"
-
-//helper function to loop thru array and check if input is in array;
-
-// var checker = function(letter) {
-//   for(i=0; i<word.length; i++){
-//   console.log(word[i]);
-//   if(word[i]===letter) {
-//   result = true;
-// } else {
-//   result = false;
-// }
-//   };
 
 //helper function to receive mode 
 
@@ -66,7 +50,8 @@ const gotItWrong =(letter) => {
 
 var toContinue = function(rightLetterCounter, wrongLetterCounter,word) {
   var level = document.getElementById('level').value;
-  if (rightLetterCounter < words[level].length && wrongLetterCounter < 8 ){
+  var word = words[level].split("");
+  if (rightLetterCounter < word.length && wrongLetterCounter < 8 ){
     return state = "in game";
   } else if (rightLetterCounter === 3) {
     return state = "win";
@@ -91,7 +76,9 @@ var playGame = function(input) {
     } else {
     // checker(input);
       var level = document.getElementById('level').value; //gets the level chosen by user
-      result = words[level].includes(input,userRight,userWrong);
+      var word = words[level].split("");//string gets split
+      console.log(word);
+      result = word.includes(input,userRight,userWrong);
       console.log(input); // checks if input is in array
       console.log(result);
       if(result===true) {
@@ -119,6 +106,9 @@ console.log(output);
 var gameresult = document.getElementById('output')
 var go = document.getElementById('play');
 var next = document.getElementById('nextletter');
+var secret = document.getElementById('secret');
+var tip = document.getElementById('tip');
+var kao =document.getElementById('kao');
 
 console.log(input);
 
@@ -132,3 +122,12 @@ next.addEventListener ("click", function(){
   gameresult.innerText ="";
 
 })
+
+secret.addEventListener("click", function (){
+  tip.classList.remove('hidden');
+  tip.classList.add("normal");
+})
+
+// kao.addEventListener("click", function() {
+//   //add in admin function
+// }
