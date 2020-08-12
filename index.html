@@ -5,10 +5,20 @@
   </head>
   <body>
     <header>
-    <h3>EMOJI HANGMAN</h3>
-    <img src="kaomoji.png" alt="">
+      <h4>Guess the secret word to save him!</h4>
+      <h5 id="secret">Hover here for a secret</h5>
+      <h6 class="hidden">click on kaomoji to activate admin. click again to deactivate.</h6>
+    <img id="kaomoji" src="kaomoji.png" alt="">
+    <h3>Only you can save kaomoji!</h3>
   </header>
     <input class="starter" id="input" placeholder="Guess a letter!"/>
+    <p>Please select a level of difficulty:</p>
+    <select name="level" id="level">
+      <option value="0">easy</option>
+      <option value="1">hard</option>
+      <option value="2">god</option>
+    </select>
+    <br/>
     <p id="play">Let's Play!</p>
     <p id="nextletter">Next chance!</p>
     <h2>Result:</h2>

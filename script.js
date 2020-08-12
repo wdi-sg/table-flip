@@ -6,7 +6,12 @@ let rightLetterCounter = 0;
 let wrongLetterCounter = 0;
 let userRight = [];
 let userWrong = [];
-let word = ["c","a","t"];
+var words = [
+  ['c','a','t'],
+  ['d','o','g','g','y'],
+  ['a','l','p','h','a','b','e','t']
+];
+let word;
 let kaomoji =["(","╯","ರ","~","ರ","）","︵","┻━┻"];
 let hangKao =[];
 let hangKaoString = "";
@@ -30,15 +35,19 @@ let repeatFound;
 // }
 //   };
 
-//helper function to check that user doesn't re-enter the same letter thrice
+//helper function to receive mode 
 
-// const checkRepeat = function(input,userRight,userWrong) {
-//   if(userRight.includes(input) || userWrong.includes(input)) {
-//   repeatFound = true;
-// } else {
-//   repeatFound = false;
+// var levelChecker = function(level) {
+//   var level = document.getElementById('level').value;
+//   if(level === 'easy'){
+//     word = words[0]
+//   } else if (level==='hard') {
+//     word = words [1]
+//   } else if (level ==='god') {
+//     word = words[2]
 //   }
 // };
+
 
 //helper function to add to correct user array
 
@@ -55,8 +64,9 @@ const gotItWrong =(letter) => {
 
 //helper function to check if continue playing
 
-var toContinue = function(rightLetterCounter, wrongLetterCounter) {
-  if (rightLetterCounter < 3 && wrongLetterCounter < 8 ){
+var toContinue = function(rightLetterCounter, wrongLetterCounter,word) {
+  var level = document.getElementById('level').value;
+  if (rightLetterCounter < words[level].length && wrongLetterCounter < 8 ){
     return state = "in game";
   } else if (rightLetterCounter === 3) {
     return state = "win";
@@ -80,7 +90,8 @@ var playGame = function(input) {
       output = "you have guessed this already!"
     } else {
     // checker(input);
-      result = word.includes(input,userRight,userWrong);
+      var level = document.getElementById('level').value; //gets the level chosen by user
+      result = words[level].includes(input,userRight,userWrong);
       console.log(input); // checks if input is in array
       console.log(result);
       if(result===true) {
