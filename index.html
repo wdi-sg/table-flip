@@ -5,7 +5,8 @@
   </head>
   <body>
     <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
+    <!-- restricted user to input only 1 char at a time -->
+    <input class="starter" id="input" placeholder="input" maxlength="1"/>
     <h2>output:</h2>
     <div class="starter" id="output"></div>
     <script>
@@ -23,6 +24,7 @@
         var currentInput = event.target.value;
         var result = inputHappened(currentInput)
         display( result );
+        event.target.value = "";
       });
     </script>
     <script src="script.js" charset="utf-8"></script>
