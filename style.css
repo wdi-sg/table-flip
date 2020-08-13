@@ -1,4 +1,4 @@
-.starter{
+.starter, .starter2 {
   font-size:30px;
   padding:10px;
   display:block;
@@ -6,6 +6,6 @@
   border:3px solid blue;
 }
 
-#output{
+#output, #output2 {
   background-color:pink;
 }
