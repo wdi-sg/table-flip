@@ -4,27 +4,23 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
+    <header>
+      <h4>Guess the secret word to save him!</h4>
+      <h5 id="secret">click here for a secret</h5>
+      <h6 id="tip" class="hidden">type admin and click on kao to activate admin mode.to exit, type in exit and click on kao.</h6>
+    <img id="kaomoji" src="kaomoji.png" alt="">
+    <h3>Only you can save kaomoji!</h3>
+  </header>
+    <input class="starter" id="input" placeholder="Guess a letter!"/>
+
+    <br/>
+    <p id="start">start game!</p>
+    <p id="play">submit letter!</p>
+    <p id="nextletter">Next chance!</p>
+    <h2>Result:</h2>
     <div class="starter" id="output"></div>
-    <script>
-      var display = function(data){
-        var displayElement = document.querySelector('#output');
+    
 
-        // get rid of the entire contents
-        displayElement.innerHtml = "";
-
-        // put the data into the div
-        output.innerText = data;
-      }
-
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
-    </script>
     <script src="script.js" charset="utf-8"></script>
   </body>
 </html>
