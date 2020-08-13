@@ -28,7 +28,17 @@ let currentWord;
 //there will be 3 states: "inGame", "win", "lose"
 
 //3 modes, player, admin, null
-
+var modeswitch= function(abc) {
+  if(mode=null && abc==="admin"){
+    mode ==="admin mode";
+    console.log(mode);
+  } else if (mode === "admin mode" && abc !== "exit"){
+    addWords(input);
+    console.log(words);
+  }else if (mode === "admin mode" && abc ==="exit"){
+    mode = "player mode"
+  }
+}
 
 
 //if player is in admin mode, then addwords function. 
@@ -54,9 +64,9 @@ const gotItWrong =(letter) => {
 
 //helper function to check if continue playing
 
-var toContinue = function(rightLetterCounter, wrongLetterCounter,word) {
+var toContinue = function(rightLetterCounter, wrongLetterCounter,currentWord) {
   
-  if (rightLetterCounter < word.length && wrongLetterCounter < 8 ){
+  if (rightLetterCounter < currentWord.length && wrongLetterCounter < 8 ){
     return state = "in game";
   } else if (rightLetterCounter === word.length) {
     return state = "win";
@@ -138,14 +148,9 @@ secret.addEventListener("click", function (){
 })
 
 kao.addEventListener("click", function() {
-  var input = document.getElementById('input').value;
-  if(mode=null && input==="admin"){
-    mode ==="admin mode";
-    console.log(mode);
-  } else if (mode === "admin mode" && input != "exit"){
-    addWords(input);
-    console.log(words);
-  }else if (mode === "admin mode" && input ==="exit"){
-    mode = "player mode"
-  }
+  console.log("hello from kao");
+  var input= document.getElementById('input').value;
+  console.log(input);
+  modeswitch(input);
+  
 })
