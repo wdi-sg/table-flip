@@ -8,6 +8,9 @@
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
     <div class="starter" id="output"></div>
+    <h3 id="correct">Correct Guesses</h3>
+    <h3 id="wrong">Wrong Guesses</h3>
+    <div id="tableFlip"></div>
     <script>
       var display = function(data){
         var displayElement = document.querySelector('#output');
@@ -23,6 +26,7 @@
         var currentInput = event.target.value;
         var result = inputHappened(currentInput)
         display( result );
+        event.target.value = "";
       });
     </script>
     <script src="script.js" charset="utf-8"></script>
