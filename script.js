@@ -28,15 +28,16 @@ let currentWord;
 //there will be 3 states: "inGame", "win", "lose"
 
 //3 modes, player, admin, null
-var modeswitch= function(abc) {
-  if(mode=null && abc==="admin"){
-    mode ==="admin mode";
-    console.log(mode);
+var modeswitch = function(abc) {
+  if(mode===null && abc==="admin"){
+    mode ="admin mode";
+    return mode
   } else if (mode === "admin mode" && abc !== "exit"){
-    addWords(input);
-    console.log(words);
+    addWords(abc);
+    return mode;
   }else if (mode === "admin mode" && abc ==="exit"){
-    mode = "player mode"
+    mode = "player mode";
+    return mode;
   }
 }
 
@@ -45,7 +46,7 @@ var modeswitch= function(abc) {
 //helper function to add words in admin mode
 
  var addWords = function(wordsToadd) {
-   words.push(wordsToadd);
+   return words.push(wordsToadd);
  };
 
 
@@ -127,30 +128,36 @@ var kao =document.getElementById('kaomoji');
 
 console.log(input);
 
+//start game function
+
 start.addEventListener("click", function(){
   currentWord = wordRandomizer();
   
 })
 
+//submit word function
 go.addEventListener("click", function(){
   playGame(input);
   gameresult.innerText= output;
 });
 
+//clear game result
 next.addEventListener ("click", function(){
   gameresult.innerText ="";
 
 })
 
+//show hint
 secret.addEventListener("click", function (){
   tip.classList.remove('hidden');
   tip.classList.add("normal");
 })
 
+//enter or exit admin mode
 kao.addEventListener("click", function() {
   console.log("hello from kao");
   var input= document.getElementById('input').value;
-  console.log(input);
-  modeswitch(input);
-  
+
+  mode = modeswitch(input);
+  console.log(mode);
 })
