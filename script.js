@@ -7,7 +7,6 @@ let wrongLetterCounter = 0;
 let userRight = [];
 let userWrong = [];
 var words = ["cat","doggy","alphabet"];
-let word;
 let kaomoji =["(","╯","ರ","~","ರ","）","︵","┻━┻"];
 let hangKao =[];
 let hangKaoString = "";
@@ -15,22 +14,29 @@ let state = null;
 let output = ""
 let result = null;
 let repeatFound;
+let mode = null;
+let currentWord;
 
+// to randomize word
+ var wordRandomizer = function() {
+  let randomNum = Math.floor(Math.random()*(words.length));
+  let word= words[randomNum].split("");
+  console.log(word);
+  return word;
+ }
 
 //there will be 3 states: "inGame", "win", "lose"
 
-//helper function to receive mode 
+//3 modes, player, admin, null
 
-// var levelChecker = function(level) {
-//   var level = document.getElementById('level').value;
-//   if(level === 'easy'){
-//     word = words[0]
-//   } else if (level==='hard') {
-//     word = words [1]
-//   } else if (level ==='god') {
-//     word = words[2]
-//   }
-// };
+
+
+//if player is in admin mode, then addwords function. 
+//helper function to add words in admin mode
+
+ var addWords = function(wordsToadd) {
+   words.push(wordsToadd);
+ };
 
 
 //helper function to add to correct user array
@@ -49,11 +55,10 @@ const gotItWrong =(letter) => {
 //helper function to check if continue playing
 
 var toContinue = function(rightLetterCounter, wrongLetterCounter,word) {
-  var level = document.getElementById('level').value;
-  var word = words[level].split("");
+  
   if (rightLetterCounter < word.length && wrongLetterCounter < 8 ){
     return state = "in game";
-  } else if (rightLetterCounter === 3) {
+  } else if (rightLetterCounter === word.length) {
     return state = "win";
   } else if (wrongLetterCounter === 8){
     return state = "lose";
@@ -64,21 +69,19 @@ var toContinue = function(rightLetterCounter, wrongLetterCounter,word) {
 //main function
 
 var playGame = function(input) {
-  toContinue(rightLetterCounter, wrongLetterCounter);
+  if(mode="player mode" || null){
+ 
+  toContinue(rightLetterCounter, wrongLetterCounter,currentWord);
   console.log(state);
   var input = document.getElementById('input').value;
   console.log(input);
-  // input = input.toLowerCase();
   if(state ==="in game"){
     if(userRight.includes(input) || userWrong.includes(input)) { //checks for repeat input
       console.log(userRight);
       output = "you have guessed this already!"
     } else {
     // checker(input);
-      var level = document.getElementById('level').value; //gets the level chosen by user
-      var word = words[level].split("");//string gets split
-      console.log(word);
-      result = word.includes(input,userRight,userWrong);
+      result = currentWord.includes(input,userRight,userWrong);
       console.log(input); // checks if input is in array
       console.log(result);
       if(result===true) {
@@ -95,23 +98,29 @@ var playGame = function(input) {
       }
     }
   else if (state=== "win") {
-    output = `You won! the word is ${word}`
+    output = `You won! the word is ${currentWord}`
   } else if(state==="lose")
   output = `You killed the kaomoji! ${hangKaoString}`
 }
+};
 
 console.log(output);
 
 
 var gameresult = document.getElementById('output')
 var go = document.getElementById('play');
+var start = document.getElementById('start');
 var next = document.getElementById('nextletter');
 var secret = document.getElementById('secret');
 var tip = document.getElementById('tip');
-var kao =document.getElementById('kao');
+var kao =document.getElementById('kaomoji');
 
 console.log(input);
 
+start.addEventListener("click", function(){
+  currentWord = wordRandomizer();
+  
+})
 
 go.addEventListener("click", function(){
   playGame(input);
@@ -128,6 +137,15 @@ secret.addEventListener("click", function (){
   tip.classList.add("normal");
 })
 
-// kao.addEventListener("click", function() {
-//   //add in admin function
-// }
+kao.addEventListener("click", function() {
+  var input = document.getElementById('input').value;
+  if(mode=null && input==="admin"){
+    mode ==="admin mode";
+    console.log(mode);
+  } else if (mode === "admin mode" && input != "exit"){
+    addWords(input);
+    console.log(words);
+  }else if (mode === "admin mode" && input ==="exit"){
+    mode = "player mode"
+  }
+})
